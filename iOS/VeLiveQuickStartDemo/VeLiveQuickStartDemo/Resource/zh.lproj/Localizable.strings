@@ -1,0 +1,188 @@
+
+"Camera_Push" = "摄像头推流";
+
+"Camera_Push_Info_Real_Time_Encode_Bitrate" = "实时编码码率";
+
+"Camera_Push_Info_Real_Time_Trans_Bitrate" = "实时传输码率";
+
+"Camera_Push_Info_Real_Time_Trans_FPS" = "实时传输帧率";
+
+"Camera_Push_Info_Url" = "推流地址";
+
+"Camera_Push_Info_Video_Capture_FPS" = "采集帧率";
+
+"Camera_Push_Info_Video_Capture_IO_FPS" = "采集I/O帧率:";
+
+"Camera_Push_Info_Video_Capture_Resolution" = "采集分辨率";
+
+"Camera_Push_Info_Video_Encode_Codec" = "编码格式";
+
+"Camera_Push_Info_Video_MaxBitrate" = "视频最大码率";
+
+"Camera_Push_Info_Video_MinBitrate" = "视频最小码率";
+
+"Camera_Push_Info_Video_Push_Resolution" = "推流分辨率";
+
+"Camera_Push_Info_Video_StartBitrate" = "视频初始码率";
+
+"Home_Advanced_Features" = "高级功能";
+
+"Home_Anchor_And_Audience_Mic" = "主播与观众连麦";
+
+"Home_Anchor_VS_Anchor_Pk" = "主播与主播PK";
+
+"Home_Basic_Features" = "基础功能";
+
+"Home_Camera_Push" = "摄像头推流";
+
+"Home_Custom_Push_Stream" = "自定义采集推流";
+
+"Home_H265_Hardcoded" = "H.265 硬编码";
+
+"Home_Interactive_Features" = "互动功能";
+
+"Home_Live_Beauty_Filter" = "美颜滤镜";
+
+"Home_Live_Pull_Streaming" = "直播拉流";
+
+"Home_Pull_Feed" = "Feed 流";
+
+"Home_Push_Streaming_Bitrate_Adaptive" = "推流码率自适应";
+
+"Home_RTM_Push_Streaming" = "RTM 超低延迟推流";
+
+"Interact_Link" = "观众连麦";
+
+"Interact_Link_Anchor" = "我是主播";
+
+"Interact_Link_Anchor_Title" = "主播";
+
+"Interact_Link_Audience" = "我是观众";
+
+"Interact_Link_Audience_Title" = "观众";
+
+"Interact_Link_Tip" = "请输入SDK和房间信息";
+
+"Interact_PK" = "主播与主播PK";
+
+"Interact_PK_Start" = "开始直播";
+
+"Interact_PK_Tip" = "请输入SDK和房间信息\nOther Token 请使用当前用户 ID 和 Other Room Id 生成";
+
+"Interact_Send_SEI" = "发送SEI";
+
+"Interact_Start_Link" = "开始连麦";
+
+"Interact_Start_PK" = "开始跨房PK";
+
+"Interact_Stop_Link" = "结束连麦";
+
+"Interact_Stop_PK" = "停止跨房PK";
+
+"Pull_Fill_Mode" = "填充模式";
+
+"Pull_Mute" = "静音";
+
+"Pull_Stream" = "直播拉流";
+
+"Pull_Stream_Fill_Mode_Alert_AspectFill" = "裁剪";
+
+"Pull_Stream_Fill_Mode_Alert_AspectFit" = "黑边";
+
+"Pull_Stream_Fill_Mode_Alert_FullFill" = "缩放";
+
+"Pull_Stream_Fill_Mode_Alert_Title" = "填充模式";
+
+"Pull_Stream_Info_Audio_BufferTime" = "音频缓存时长";
+
+"Pull_Stream_Info_Delay_Time" = "端到端延时";
+
+"Pull_Stream_Info_Is_HardWareDecode" = "是否硬件解码";
+
+"Pull_Stream_Info_Is_Mute" = "是否静音";
+
+"Pull_Stream_Info_Is_Playing" = "是否播放中";
+
+"Pull_Stream_Info_Stall_Time" = "总卡顿时长";
+
+"Pull_Stream_Info_Stream_Format" = "直播流格式";
+
+"Pull_Stream_Info_Stream_Protocol" = "直播流协议";
+
+"Pull_Stream_Info_Url" = "播放地址";
+
+"Pull_Stream_Info_Video_Bitrate" = "视频码率";
+
+"Pull_Stream_Info_Video_BufferTime" = "视频缓存时长";
+
+"Pull_Stream_Info_Video_Codec" = "视频编码格式";
+
+"Pull_Stream_Info_Video_FPS" = "视频帧率";
+
+"Pull_Stream_Info_Video_Size" = "视频大小";
+
+"Pull_Stream_Start_Play" = "开始播放";
+
+"Pull_Stream_Stop_Play" = "停止播放";
+
+"Pull_Stream_Url_Tip" = "拉流地址";
+
+"Pull_UnMute" = "取消静音";
+
+"Push_Auto_Bitrate" = "码率自适应";
+
+"Push_Beauty" = "推流+美颜";
+
+"Push_Beauty_Compose" = "美颜、美型";
+
+"Push_Beauty_Filter" = "滤镜";
+
+"Push_Beauty_Sticker" = "贴纸";
+
+"Push_Camera_Back" = "摄像头(后)";
+
+"Push_Camera_Front" = "摄像头(前)";
+
+"Push_Capture_Mirror" = "采集镜像";
+
+"Push_Custom" = "自定义采集推流";
+
+"Push_Info" = "信息";
+
+"Push_Mute" = "静音";
+
+"Push_Preview_Mirror" = "预览镜像";
+
+"Push_Push_Mirror" = "推流镜像";
+
+"Push_RTM" = "RTM 超低延迟推流";
+
+"Push_Start_Push" = "开始推流";
+
+"Push_Stop_Push" = "停止推流";
+
+"Push_UnMute" = "取消静音";
+
+"Push_Url_Tip" = "推流地址";
+
+"app_name" = "veLive快速入门";
+
+"input_url_list" = "请输入多个 URL 地址，用换行符分割";
+
+"other_room_id" = "Other Room ID";
+
+"other_token" = "Other Token";
+
+"pull_url" = "拉流地址";
+
+"push_url" = "推流地址";
+
+"room_id" = "房间 ID";
+
+"rtm_url" = "RTM URL";
+
+"rtmp_url" = "RTMP URL";
+
+"token" = "Token";
+
+"user_id" = "用户 ID";

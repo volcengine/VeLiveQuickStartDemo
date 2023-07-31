@@ -1,0 +1,6 @@
+
+"CFBundleDisplayName" = "VeLiveQuickStartDemo";
+
+"NSCameraUsageDescription" = "VeLiveQuickStartDemo 需要访问你的相机权限，开启后直播中才会有画面";
+
+"NSMicrophoneUsageDescription" = "VeLiveQuickStartDemo 需要访问你的麦克风权限，开启后直播中才会有声音";

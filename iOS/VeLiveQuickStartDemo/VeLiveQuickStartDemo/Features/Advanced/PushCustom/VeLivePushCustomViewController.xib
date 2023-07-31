@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VeLivePushCustomViewController">
+            <connections>
+                <outlet property="infoLabel" destination="fa5-Za-1Pi" id="CRK-6l-IJ3"/>
+                <outlet property="pushControlBtn" destination="FTh-DI-3HT" id="SVh-eG-zdR"/>
+                <outlet property="urlTextField" destination="GkE-x3-HSN" id="l3q-k2-Jry"/>
+                <outlet property="view" destination="xJo-MT-Prk" id="pBi-2C-Wq9"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="xJo-MT-Prk">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="b8f-G9-E2q">
+                    <rect key="frame" x="16" y="119" width="361" height="34"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Push Url" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qvs-om-rNl">
+                            <rect key="frame" x="0.0" y="0.0" width="64.333333333333329" height="34"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GkE-x3-HSN">
+                            <rect key="frame" x="72.333333333333343" y="0.0" width="288.66666666666663" height="34"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.24885569460000001" colorSpace="calibratedRGB"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                        </textField>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="5Z5-Cc-e0R">
+                    <rect key="frame" x="0.0" y="758" width="393" height="30"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="M2H-08-7Ty">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="30"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FTh-DI-3HT">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="30"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="Start Push"/>
+                                    <state key="selected" title="Stop Push"/>
+                                    <connections>
+                                        <action selector="pushControl:" destination="-1" eventType="touchUpInside" id="7Vy-p7-qif"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fa5-Za-1Pi">
+                    <rect key="frame" x="16" y="169" width="361" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="JD1-PU-K4N"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="fa5-Za-1Pi" firstAttribute="top" secondItem="b8f-G9-E2q" secondAttribute="bottom" constant="16" id="6tQ-rb-MN8"/>
+                <constraint firstItem="JD1-PU-K4N" firstAttribute="trailing" secondItem="b8f-G9-E2q" secondAttribute="trailing" constant="16" id="Gzf-uL-RhY"/>
+                <constraint firstItem="JD1-PU-K4N" firstAttribute="trailing" secondItem="fa5-Za-1Pi" secondAttribute="trailing" constant="16" id="NZa-7F-NWI"/>
+                <constraint firstItem="JD1-PU-K4N" firstAttribute="bottom" secondItem="5Z5-Cc-e0R" secondAttribute="bottom" constant="30" id="Vhp-Oc-8ku"/>
+                <constraint firstItem="5Z5-Cc-e0R" firstAttribute="leading" secondItem="JD1-PU-K4N" secondAttribute="leading" id="e3i-Zc-XlA"/>
+                <constraint firstItem="b8f-G9-E2q" firstAttribute="top" secondItem="JD1-PU-K4N" secondAttribute="top" constant="60" id="fVe-iN-4p2"/>
+                <constraint firstItem="b8f-G9-E2q" firstAttribute="leading" secondItem="JD1-PU-K4N" secondAttribute="leading" constant="16" id="llw-79-zOL"/>
+                <constraint firstItem="5Z5-Cc-e0R" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fa5-Za-1Pi" secondAttribute="bottom" constant="16" id="oEF-z2-HKX"/>
+                <constraint firstItem="fa5-Za-1Pi" firstAttribute="leading" secondItem="JD1-PU-K4N" secondAttribute="leading" constant="16" id="oKJ-js-aXR"/>
+                <constraint firstItem="JD1-PU-K4N" firstAttribute="trailing" secondItem="5Z5-Cc-e0R" secondAttribute="trailing" id="qdw-mC-k1q"/>
+            </constraints>
+            <point key="canvasLocation" x="-532" y="-14"/>
+        </view>
+    </objects>
+</document>

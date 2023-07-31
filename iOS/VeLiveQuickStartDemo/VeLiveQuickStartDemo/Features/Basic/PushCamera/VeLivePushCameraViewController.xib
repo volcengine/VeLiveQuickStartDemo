@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VeLivePushCameraViewController">
+            <connections>
+                <outlet property="cameraControlBtn" destination="sxl-UD-aek" id="pTq-HZ-yj6"/>
+                <outlet property="captureMirrorBtn" destination="U4H-Wj-C94" id="MmJ-pM-eyI"/>
+                <outlet property="infoLabel" destination="HVL-U1-7Sp" id="SiR-Nf-JO4"/>
+                <outlet property="muteControlBtn" destination="ABu-D2-3Q9" id="DSP-hp-6uv"/>
+                <outlet property="previewMirrorBtn" destination="9wf-E9-Fbk" id="E6F-kM-sh2"/>
+                <outlet property="pushControlBtn" destination="c8a-O8-eqi" id="aMU-3B-EMc"/>
+                <outlet property="pushMirrorBtn" destination="yss-dX-KRe" id="wmV-jw-k7H"/>
+                <outlet property="urlLabel" destination="z2F-Fs-yUW" id="DPR-hb-Jrj"/>
+                <outlet property="urlTextField" destination="TmV-S3-WNp" id="sGb-M6-JDP"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="h5r-YK-jJ1">
+                    <rect key="frame" x="16" y="119" width="361" height="34"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Push Url" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z2F-Fs-yUW">
+                            <rect key="frame" x="0.0" y="0.0" width="64.333333333333329" height="34"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TmV-S3-WNp">
+                            <rect key="frame" x="72.333333333333343" y="0.0" width="288.66666666666663" height="34"/>
+                            <color key="backgroundColor" white="1" alpha="0.24795158541932397" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" smartInsertDeleteType="no" smartQuotesType="no"/>
+                        </textField>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="oqh-U3-SNp">
+                    <rect key="frame" x="0.0" y="666" width="393" height="122"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="j9l-Zh-kzu">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="30"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c8a-O8-eqi">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="30"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="Start Push"/>
+                                    <state key="selected" title="Stop Push"/>
+                                    <connections>
+                                        <action selector="pushControl:" destination="-1" eventType="touchUpInside" id="dDA-ws-sM0"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WV4-Vg-nws">
+                            <rect key="frame" x="0.0" y="46" width="393" height="30"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxl-UD-aek">
+                                    <rect key="frame" x="0.0" y="0.0" width="192.66666666666666" height="30"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="Camera(Front)"/>
+                                    <state key="selected" title="Camera(Back)"/>
+                                    <connections>
+                                        <action selector="cameraControl:" destination="-1" eventType="touchUpInside" id="zIl-d5-aiJ"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ABu-D2-3Q9">
+                                    <rect key="frame" x="200.66666666666663" y="0.0" width="192.33333333333337" height="30"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="Mute"/>
+                                    <state key="selected" title="UnMute"/>
+                                    <connections>
+                                        <action selector="muteControl:" destination="-1" eventType="touchUpInside" id="H3Q-vf-19p"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FmR-WS-PTr">
+                            <rect key="frame" x="0.0" y="92" width="393" height="30"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U4H-Wj-C94">
+                                    <rect key="frame" x="0.0" y="0.0" width="125.66666666666667" height="30"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="Capture Mirror"/>
+                                    <connections>
+                                        <action selector="captureMirror:" destination="-1" eventType="touchUpInside" id="wEW-H5-GIn"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wf-E9-Fbk">
+                                    <rect key="frame" x="133.66666666666666" y="0.0" width="125.66666666666666" height="30"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="Preview Mirror"/>
+                                    <connections>
+                                        <action selector="previewMirror:" destination="-1" eventType="touchUpInside" id="1HR-cH-CQD"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yss-dX-KRe">
+                                    <rect key="frame" x="267.33333333333331" y="0.0" width="125.66666666666669" height="30"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="Push Mirror"/>
+                                    <connections>
+                                        <action selector="pushMirror:" destination="-1" eventType="touchUpInside" id="tCl-As-N4o"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HVL-U1-7Sp">
+                    <rect key="frame" x="16" y="169" width="361" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="h5r-YK-jJ1" secondAttribute="trailing" constant="16" id="ARI-I1-T5b"/>
+                <constraint firstItem="oqh-U3-SNp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="HVL-U1-7Sp" secondAttribute="bottom" constant="16" id="IKY-v5-rvi"/>
+                <constraint firstItem="oqh-U3-SNp" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="JM6-H6-SNG"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="HVL-U1-7Sp" secondAttribute="trailing" constant="16" id="MMm-W8-7Pb"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="oqh-U3-SNp" secondAttribute="trailing" id="P3O-C6-zaX"/>
+                <constraint firstItem="HVL-U1-7Sp" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="16" id="PLQ-ee-jbk"/>
+                <constraint firstItem="HVL-U1-7Sp" firstAttribute="top" secondItem="h5r-YK-jJ1" secondAttribute="bottom" constant="16" id="Wjt-Qq-0rv"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="oqh-U3-SNp" secondAttribute="bottom" constant="30" id="XGr-Vf-1bd"/>
+                <constraint firstItem="h5r-YK-jJ1" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="60" id="pDs-CQ-VBk"/>
+                <constraint firstItem="h5r-YK-jJ1" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="16" id="yNk-v2-8ql"/>
+            </constraints>
+            <point key="canvasLocation" x="-532" y="-14"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ttsdk.quickstart">
+    <!-- 使用权限 -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application
+        android:name=".app.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Default">
+        <activity
+            android:name=".features.advanced.PullFeedInputActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.advanced.PullFeedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.interact.pk.PKAnchorActivity"
+            android:exported="false"
+            android:label="@string/Interact_PK" />
+        <activity
+            android:name=".features.interact.pk.PKActivity"
+            android:exported="false"
+            android:label="@string/Interact_PK" />
+        <activity
+            android:name=".features.interact.link.LinkAudienceActivity"
+            android:exported="false"
+            android:label="@string/Interact_Link_Audience_Title" />
+        <activity
+            android:name=".features.interact.link.LinkAnchorActivity"
+            android:exported="false"
+            android:label="@string/Interact_Link_Anchor_Title" />
+        <activity
+            android:name=".features.interact.link.LinkActivity"
+            android:exported="false"
+            android:label="@string/Interact_Link" />
+        <activity
+            android:name=".features.advanced.PushH265CodecActivity"
+            android:exported="false"
+            android:label="@string/Home_H265_Hardcoded" />
+        <activity
+            android:name=".features.advanced.PushAutoBitrateActivity"
+            android:exported="false"
+            android:label="@string/Push_Auto_Bitrate" />
+        <activity
+            android:name=".features.advanced.PushCustomActivity"
+            android:exported="false"
+            android:label="@string/Push_Custom" />
+        <activity
+            android:name=".features.advanced.PushRTMActivity"
+            android:exported="false"
+            android:label="@string/Push_RTM" />
+        <activity
+            android:name=".features.advanced.PushBeautyActivity"
+            android:exported="false"
+            android:label="@string/Push_Beauty" />
+        <activity
+            android:name=".features.basic.PullStreamActivity"
+            android:exported="false"
+            android:label="@string/Pull_Stream" />
+        <activity
+            android:name=".features.basic.PushCameraActivity"
+            android:exported="false"
+            android:label="@string/Home_Camera_Push" />
+        <activity
+            android:name=".app.home.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,848 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2B0C29372A6E5CE3007D7C99 /* VeLivePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C29362A6E5CE3007D7C99 /* VeLivePageViewController.m */; };
+		2B162B122A4FD0A2001452BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B162B102A4FD0A2001452BC /* Main.storyboard */; };
+		2B162B132A4FD0A2001452BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B162B112A4FD0A2001452BC /* LaunchScreen.storyboard */; };
+		2B24DD962A6E6B4D008E11F9 /* VeLivePullFeedItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B24DD952A6E6B4D008E11F9 /* VeLivePullFeedItemViewController.m */; };
+		2B24DDAA2A70086E008E11F9 /* VeLivePullFeedInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B24DDA82A70086E008E11F9 /* VeLivePullFeedInputViewController.m */; };
+		2B24DDAB2A70086E008E11F9 /* VeLivePullFeedInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B24DDA92A70086E008E11F9 /* VeLivePullFeedInputViewController.xib */; };
+		2B471CFF2A4AC7A10035AB71 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B471CFE2A4AC7A10035AB71 /* AppDelegate.m */; };
+		2B471D022A4AC7A10035AB71 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B471D012A4AC7A10035AB71 /* SceneDelegate.m */; };
+		2B471D052A4AC7A10035AB71 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B471D042A4AC7A10035AB71 /* ViewController.m */; };
+		2B471D0A2A4AC7A20035AB71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B471D092A4AC7A20035AB71 /* Assets.xcassets */; };
+		2B471D102A4AC7A20035AB71 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B471D0F2A4AC7A20035AB71 /* main.m */; };
+		2B471D2E2A4AC88B0035AB71 /* ttsdk.lic in Resources */ = {isa = PBXBuildFile; fileRef = 2B471D172A4AC88A0035AB71 /* ttsdk.lic */; };
+		2B471D302A4AC88B0035AB71 /* VeLiveAnchorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B471D1E2A4AC88A0035AB71 /* VeLiveAnchorManager.m */; };
+		2B471D322A4AC88B0035AB71 /* VeLiveAudienceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B471D222A4AC88A0035AB71 /* VeLiveAudienceManager.m */; };
+		2B471D352A4AC88B0035AB71 /* VeLiveConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B471D2C2A4AC88B0035AB71 /* VeLiveConfig.m */; };
+		2B8D90902A6E160100938E75 /* VeLivePullFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B8D908E2A6E160100938E75 /* VeLivePullFeedViewController.m */; };
+		2B8D90912A6E160100938E75 /* VeLivePullFeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B8D908F2A6E160100938E75 /* VeLivePullFeedViewController.xib */; };
+		2BE62B642A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62B5D2A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.m */; };
+		2BE62B652A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62B5E2A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.xib */; };
+		2BE62B672A4BE59F002EEEF0 /* VeLiveHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62B622A4BE59F002EEEF0 /* VeLiveHomeTableViewCell.m */; };
+		2BE62B732A4C0B03002EEEF0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62B752A4C0B03002EEEF0 /* Localizable.strings */; };
+		2BE62B822A4C112D002EEEF0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62B842A4C112D002EEEF0 /* InfoPlist.strings */; };
+		2BE62B8A2A4C1771002EEEF0 /* VeLiveSDKHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62B892A4C1771002EEEF0 /* VeLiveSDKHelper.m */; };
+		2BE62B902A4C1839002EEEF0 /* VeLivePushCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62B8E2A4C1839002EEEF0 /* VeLivePushCameraViewController.m */; };
+		2BE62B962A4C1878002EEEF0 /* VeLivePullStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62B942A4C1878002EEEF0 /* VeLivePullStreamViewController.m */; };
+		2BE62B9D2A4C18B7002EEEF0 /* VeLivePushBeautyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62B9B2A4C18B7002EEEF0 /* VeLivePushBeautyViewController.m */; };
+		2BE62BA32A4C18D3002EEEF0 /* VeLivePushRTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62BA12A4C18D3002EEEF0 /* VeLivePushRTMViewController.m */; };
+		2BE62BA42A4C18D3002EEEF0 /* VeLivePushRTMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62BA22A4C18D3002EEEF0 /* VeLivePushRTMViewController.xib */; };
+		2BE62BA92A4C18F5002EEEF0 /* VeLivePushCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62BA72A4C18F5002EEEF0 /* VeLivePushCustomViewController.m */; };
+		2BE62BAA2A4C18F5002EEEF0 /* VeLivePushCustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62BA82A4C18F5002EEEF0 /* VeLivePushCustomViewController.xib */; };
+		2BE62BAF2A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62BAD2A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.m */; };
+		2BE62BB02A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62BAE2A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.xib */; };
+		2BE62BB52A4C1CC0002EEEF0 /* VeLivePush265CodecViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62BB32A4C1CC0002EEEF0 /* VeLivePush265CodecViewController.m */; };
+		2BE62BB62A4C1CC0002EEEF0 /* VeLivePush265CodecViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62BB42A4C1CC0002EEEF0 /* VeLivePush265CodecViewController.xib */; };
+		2BE62BC72A4C1DB3002EEEF0 /* VeLiveLinkAnchorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62BC52A4C1DB3002EEEF0 /* VeLiveLinkAnchorViewController.m */; };
+		2BE62BC82A4C1DB3002EEEF0 /* VeLiveLinkAnchorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62BC62A4C1DB3002EEEF0 /* VeLiveLinkAnchorViewController.xib */; };
+		2BE62BCC2A4C1DCE002EEEF0 /* VeLiveLinkAudienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62BCA2A4C1DCE002EEEF0 /* VeLiveLinkAudienceViewController.m */; };
+		2BE62BCD2A4C1DCE002EEEF0 /* VeLiveLinkAudienceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62BCB2A4C1DCE002EEEF0 /* VeLiveLinkAudienceViewController.xib */; };
+		2BE62BD12A4C1DE1002EEEF0 /* VeLivePKAnchorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62BCF2A4C1DE1002EEEF0 /* VeLivePKAnchorViewController.m */; };
+		2BE62BD22A4C1DE1002EEEF0 /* VeLivePKAnchorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62BD02A4C1DE1002EEEF0 /* VeLivePKAnchorViewController.xib */; };
+		2BE62BE32A4C3D15002EEEF0 /* VeLiveDeviceCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62BE22A4C3D15002EEEF0 /* VeLiveDeviceCapture.m */; };
+		2BE62C002A4D9188002EEEF0 /* VeLivePushCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62BFF2A4D9188002EEEF0 /* VeLivePushCameraViewController.xib */; };
+		2BE62C022A4D9406002EEEF0 /* VeLivePullStreamViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62C012A4D9406002EEEF0 /* VeLivePullStreamViewController.xib */; };
+		2BE62C042A4D95B4002EEEF0 /* VeLivePushBeautyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62C032A4D95B4002EEEF0 /* VeLivePushBeautyViewController.xib */; };
+		2BE62C0A2A4E88F5002EEEF0 /* VeLiveLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62C082A4E88F5002EEEF0 /* VeLiveLinkViewController.m */; };
+		2BE62C0B2A4E88F5002EEEF0 /* VeLiveLinkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62C092A4E88F5002EEEF0 /* VeLiveLinkViewController.xib */; };
+		2BE62C0F2A4E8959002EEEF0 /* VeLivePKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62C0D2A4E8959002EEEF0 /* VeLivePKViewController.m */; };
+		2BE62C102A4E8959002EEEF0 /* VeLivePKViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62C0E2A4E8959002EEEF0 /* VeLivePKViewController.xib */; };
+		CE6247ABF51FDB3A7B0620CD /* libPods-VeLiveQuickStartDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3149E926C3C9F63213B4BEBB /* libPods-VeLiveQuickStartDemo.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2B0C29352A6E5CE3007D7C99 /* VeLivePageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePageViewController.h; sourceTree = "<group>"; };
+		2B0C29362A6E5CE3007D7C99 /* VeLivePageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePageViewController.m; sourceTree = "<group>"; };
+		2B162B102A4FD0A2001452BC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = VeLiveQuickStartDemo/App/Main.storyboard; sourceTree = SOURCE_ROOT; };
+		2B162B112A4FD0A2001452BC /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = VeLiveQuickStartDemo/App/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
+		2B162B142A4FD115001452BC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B24DD942A6E6B4D008E11F9 /* VeLivePullFeedItemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePullFeedItemViewController.h; sourceTree = "<group>"; };
+		2B24DD952A6E6B4D008E11F9 /* VeLivePullFeedItemViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePullFeedItemViewController.m; sourceTree = "<group>"; };
+		2B24DD9F2A6FA34C008E11F9 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		2B24DDA02A6FA34C008E11F9 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		2B24DDA52A6FEFDC008E11F9 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2B24DDA62A6FEFDC008E11F9 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2B24DDA72A70086E008E11F9 /* VeLivePullFeedInputViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePullFeedInputViewController.h; sourceTree = "<group>"; };
+		2B24DDA82A70086E008E11F9 /* VeLivePullFeedInputViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePullFeedInputViewController.m; sourceTree = "<group>"; };
+		2B24DDA92A70086E008E11F9 /* VeLivePullFeedInputViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLivePullFeedInputViewController.xib; sourceTree = "<group>"; };
+		2B471CFA2A4AC7A10035AB71 /* VeLiveQuickStartDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VeLiveQuickStartDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B471CFD2A4AC7A10035AB71 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2B471CFE2A4AC7A10035AB71 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2B471D002A4AC7A10035AB71 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		2B471D012A4AC7A10035AB71 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		2B471D032A4AC7A10035AB71 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2B471D042A4AC7A10035AB71 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2B471D092A4AC7A20035AB71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2B471D0F2A4AC7A20035AB71 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2B471D172A4AC88A0035AB71 /* ttsdk.lic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ttsdk.lic; sourceTree = "<group>"; };
+		2B471D1B2A4AC88A0035AB71 /* VeLiveAnchorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VeLiveAnchorManager.h; sourceTree = "<group>"; };
+		2B471D1E2A4AC88A0035AB71 /* VeLiveAnchorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VeLiveAnchorManager.m; sourceTree = "<group>"; };
+		2B471D202A4AC88A0035AB71 /* VeLiveAudienceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VeLiveAudienceManager.h; sourceTree = "<group>"; };
+		2B471D222A4AC88A0035AB71 /* VeLiveAudienceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VeLiveAudienceManager.m; sourceTree = "<group>"; };
+		2B471D2C2A4AC88B0035AB71 /* VeLiveConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VeLiveConfig.m; sourceTree = "<group>"; };
+		2B471D2D2A4AC88B0035AB71 /* VeLiveConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VeLiveConfig.h; sourceTree = "<group>"; };
+		2B8D908D2A6E160100938E75 /* VeLivePullFeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePullFeedViewController.h; sourceTree = "<group>"; };
+		2B8D908E2A6E160100938E75 /* VeLivePullFeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePullFeedViewController.m; sourceTree = "<group>"; };
+		2B8D908F2A6E160100938E75 /* VeLivePullFeedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLivePullFeedViewController.xib; sourceTree = "<group>"; };
+		2BE62B5D2A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VeLiveHomeTableHeaderView.m; sourceTree = "<group>"; };
+		2BE62B5E2A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VeLiveHomeTableHeaderView.xib; sourceTree = "<group>"; };
+		2BE62B5F2A4BE59F002EEEF0 /* VeLiveHomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VeLiveHomeTableViewCell.h; sourceTree = "<group>"; };
+		2BE62B602A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VeLiveHomeTableHeaderView.h; sourceTree = "<group>"; };
+		2BE62B622A4BE59F002EEEF0 /* VeLiveHomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VeLiveHomeTableViewCell.m; sourceTree = "<group>"; };
+		2BE62B882A4C1771002EEEF0 /* VeLiveSDKHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLiveSDKHelper.h; sourceTree = "<group>"; };
+		2BE62B892A4C1771002EEEF0 /* VeLiveSDKHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLiveSDKHelper.m; sourceTree = "<group>"; };
+		2BE62B8D2A4C1839002EEEF0 /* VeLivePushCameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePushCameraViewController.h; sourceTree = "<group>"; };
+		2BE62B8E2A4C1839002EEEF0 /* VeLivePushCameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePushCameraViewController.m; sourceTree = "<group>"; };
+		2BE62B932A4C1878002EEEF0 /* VeLivePullStreamViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePullStreamViewController.h; sourceTree = "<group>"; };
+		2BE62B942A4C1878002EEEF0 /* VeLivePullStreamViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePullStreamViewController.m; sourceTree = "<group>"; };
+		2BE62B9A2A4C18B7002EEEF0 /* VeLivePushBeautyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePushBeautyViewController.h; sourceTree = "<group>"; };
+		2BE62B9B2A4C18B7002EEEF0 /* VeLivePushBeautyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePushBeautyViewController.m; sourceTree = "<group>"; };
+		2BE62BA02A4C18D3002EEEF0 /* VeLivePushRTMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePushRTMViewController.h; sourceTree = "<group>"; };
+		2BE62BA12A4C18D3002EEEF0 /* VeLivePushRTMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePushRTMViewController.m; sourceTree = "<group>"; };
+		2BE62BA22A4C18D3002EEEF0 /* VeLivePushRTMViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLivePushRTMViewController.xib; sourceTree = "<group>"; };
+		2BE62BA62A4C18F5002EEEF0 /* VeLivePushCustomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePushCustomViewController.h; sourceTree = "<group>"; };
+		2BE62BA72A4C18F5002EEEF0 /* VeLivePushCustomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePushCustomViewController.m; sourceTree = "<group>"; };
+		2BE62BA82A4C18F5002EEEF0 /* VeLivePushCustomViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLivePushCustomViewController.xib; sourceTree = "<group>"; };
+		2BE62BAC2A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePushAutoBitrateViewController.h; sourceTree = "<group>"; };
+		2BE62BAD2A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePushAutoBitrateViewController.m; sourceTree = "<group>"; };
+		2BE62BAE2A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLivePushAutoBitrateViewController.xib; sourceTree = "<group>"; };
+		2BE62BB22A4C1CC0002EEEF0 /* VeLivePush265CodecViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePush265CodecViewController.h; sourceTree = "<group>"; };
+		2BE62BB32A4C1CC0002EEEF0 /* VeLivePush265CodecViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePush265CodecViewController.m; sourceTree = "<group>"; };
+		2BE62BB42A4C1CC0002EEEF0 /* VeLivePush265CodecViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLivePush265CodecViewController.xib; sourceTree = "<group>"; };
+		2BE62BC42A4C1DB3002EEEF0 /* VeLiveLinkAnchorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLiveLinkAnchorViewController.h; sourceTree = "<group>"; };
+		2BE62BC52A4C1DB3002EEEF0 /* VeLiveLinkAnchorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLiveLinkAnchorViewController.m; sourceTree = "<group>"; };
+		2BE62BC62A4C1DB3002EEEF0 /* VeLiveLinkAnchorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLiveLinkAnchorViewController.xib; sourceTree = "<group>"; };
+		2BE62BC92A4C1DCE002EEEF0 /* VeLiveLinkAudienceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLiveLinkAudienceViewController.h; sourceTree = "<group>"; };
+		2BE62BCA2A4C1DCE002EEEF0 /* VeLiveLinkAudienceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLiveLinkAudienceViewController.m; sourceTree = "<group>"; };
+		2BE62BCB2A4C1DCE002EEEF0 /* VeLiveLinkAudienceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLiveLinkAudienceViewController.xib; sourceTree = "<group>"; };
+		2BE62BCE2A4C1DE1002EEEF0 /* VeLivePKAnchorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePKAnchorViewController.h; sourceTree = "<group>"; };
+		2BE62BCF2A4C1DE1002EEEF0 /* VeLivePKAnchorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePKAnchorViewController.m; sourceTree = "<group>"; };
+		2BE62BD02A4C1DE1002EEEF0 /* VeLivePKAnchorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLivePKAnchorViewController.xib; sourceTree = "<group>"; };
+		2BE62BE12A4C3D15002EEEF0 /* VeLiveDeviceCapture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLiveDeviceCapture.h; sourceTree = "<group>"; };
+		2BE62BE22A4C3D15002EEEF0 /* VeLiveDeviceCapture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLiveDeviceCapture.m; sourceTree = "<group>"; };
+		2BE62BFF2A4D9188002EEEF0 /* VeLivePushCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VeLivePushCameraViewController.xib; sourceTree = "<group>"; };
+		2BE62C012A4D9406002EEEF0 /* VeLivePullStreamViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VeLivePullStreamViewController.xib; sourceTree = "<group>"; };
+		2BE62C032A4D95B4002EEEF0 /* VeLivePushBeautyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VeLivePushBeautyViewController.xib; sourceTree = "<group>"; };
+		2BE62C072A4E88F5002EEEF0 /* VeLiveLinkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLiveLinkViewController.h; sourceTree = "<group>"; };
+		2BE62C082A4E88F5002EEEF0 /* VeLiveLinkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLiveLinkViewController.m; sourceTree = "<group>"; };
+		2BE62C092A4E88F5002EEEF0 /* VeLiveLinkViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLiveLinkViewController.xib; sourceTree = "<group>"; };
+		2BE62C0C2A4E8959002EEEF0 /* VeLivePKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePKViewController.h; sourceTree = "<group>"; };
+		2BE62C0D2A4E8959002EEEF0 /* VeLivePKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePKViewController.m; sourceTree = "<group>"; };
+		2BE62C0E2A4E8959002EEEF0 /* VeLivePKViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLivePKViewController.xib; sourceTree = "<group>"; };
+		3149E926C3C9F63213B4BEBB /* libPods-VeLiveQuickStartDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VeLiveQuickStartDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B31797463269B27C2AFCCDF /* Pods-VeLiveQuickStartDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeLiveQuickStartDemo.release.xcconfig"; path = "Target Support Files/Pods-VeLiveQuickStartDemo/Pods-VeLiveQuickStartDemo.release.xcconfig"; sourceTree = "<group>"; };
+		BA54A9DE8E1315CA8F6F7B8E /* Pods-VeLiveQuickStartDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeLiveQuickStartDemo.debug.xcconfig"; path = "Target Support Files/Pods-VeLiveQuickStartDemo/Pods-VeLiveQuickStartDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		BAA3229E8CCAC9BA718A9BBF /* Pods-VeLiveQuickStartDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeLiveQuickStartDemo.release.xcconfig"; path = "Target Support Files/Pods-VeLiveQuickStartDemo/Pods-VeLiveQuickStartDemo.release.xcconfig"; sourceTree = "<group>"; };
+		DB1829D69D31B4526C4E65DC /* Pods-VeLiveQuickStartDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeLiveQuickStartDemo.debug.xcconfig"; path = "Target Support Files/Pods-VeLiveQuickStartDemo/Pods-VeLiveQuickStartDemo.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2B471CF72A4AC7A10035AB71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE6247ABF51FDB3A7B0620CD /* libPods-VeLiveQuickStartDemo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1F222B2F2DD1F36AD21E5716 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3149E926C3C9F63213B4BEBB /* libPods-VeLiveQuickStartDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2B24DD9E2A6FA34C008E11F9 /* XCConfig */ = {
+			isa = PBXGroup;
+			children = (
+				2B24DD9F2A6FA34C008E11F9 /* Debug.xcconfig */,
+				2B24DDA02A6FA34C008E11F9 /* Release.xcconfig */,
+			);
+			path = XCConfig;
+			sourceTree = SOURCE_ROOT;
+		};
+		2B471CF12A4AC7A10035AB71 = {
+			isa = PBXGroup;
+			children = (
+				2B471CFC2A4AC7A10035AB71 /* VeLiveQuickStartDemo */,
+				2B471CFB2A4AC7A10035AB71 /* Products */,
+				B4747D6A3019AF019D76A89E /* Pods */,
+				1F222B2F2DD1F36AD21E5716 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2B471CFB2A4AC7A10035AB71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2B471CFA2A4AC7A10035AB71 /* VeLiveQuickStartDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2B471CFC2A4AC7A10035AB71 /* VeLiveQuickStartDemo */ = {
+			isa = PBXGroup;
+			children = (
+				2BE62B772A4C1096002EEEF0 /* App */,
+				2BE62B862A4C1726002EEEF0 /* Helper */,
+				2B471D182A4AC88A0035AB71 /* Features */,
+				2BE62B792A4C10C6002EEEF0 /* Resource */,
+				2B24DD9E2A6FA34C008E11F9 /* XCConfig */,
+				2B471D0F2A4AC7A20035AB71 /* main.m */,
+				2B162B142A4FD115001452BC /* Info.plist */,
+			);
+			path = VeLiveQuickStartDemo;
+			sourceTree = "<group>";
+		};
+		2B471D182A4AC88A0035AB71 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				2BE62B8B2A4C17E8002EEEF0 /* Basic */,
+				2BE62B982A4C1896002EEEF0 /* Advanced */,
+				2BE62BB72A4C1CCD002EEEF0 /* Interact */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		2B471D2B2A4AC88B0035AB71 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				2B471D2D2A4AC88B0035AB71 /* VeLiveConfig.h */,
+				2B471D2C2A4AC88B0035AB71 /* VeLiveConfig.m */,
+				2B471D1B2A4AC88A0035AB71 /* VeLiveAnchorManager.h */,
+				2B471D1E2A4AC88A0035AB71 /* VeLiveAnchorManager.m */,
+				2B471D202A4AC88A0035AB71 /* VeLiveAudienceManager.h */,
+				2B471D222A4AC88A0035AB71 /* VeLiveAudienceManager.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		2B8D908C2A6E15E300938E75 /* PullFeed */ = {
+			isa = PBXGroup;
+			children = (
+				2B8D908D2A6E160100938E75 /* VeLivePullFeedViewController.h */,
+				2B8D908E2A6E160100938E75 /* VeLivePullFeedViewController.m */,
+				2B8D908F2A6E160100938E75 /* VeLivePullFeedViewController.xib */,
+				2B0C29352A6E5CE3007D7C99 /* VeLivePageViewController.h */,
+				2B0C29362A6E5CE3007D7C99 /* VeLivePageViewController.m */,
+				2B24DD942A6E6B4D008E11F9 /* VeLivePullFeedItemViewController.h */,
+				2B24DD952A6E6B4D008E11F9 /* VeLivePullFeedItemViewController.m */,
+				2B24DDA72A70086E008E11F9 /* VeLivePullFeedInputViewController.h */,
+				2B24DDA82A70086E008E11F9 /* VeLivePullFeedInputViewController.m */,
+				2B24DDA92A70086E008E11F9 /* VeLivePullFeedInputViewController.xib */,
+			);
+			path = PullFeed;
+			sourceTree = "<group>";
+		};
+		2BE62B5C2A4BE59F002EEEF0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2BE62B602A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.h */,
+				2BE62B5D2A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.m */,
+				2BE62B5E2A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.xib */,
+				2BE62B5F2A4BE59F002EEEF0 /* VeLiveHomeTableViewCell.h */,
+				2BE62B622A4BE59F002EEEF0 /* VeLiveHomeTableViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2BE62B772A4C1096002EEEF0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2B471CFD2A4AC7A10035AB71 /* AppDelegate.h */,
+				2B471CFE2A4AC7A10035AB71 /* AppDelegate.m */,
+				2B471D002A4AC7A10035AB71 /* SceneDelegate.h */,
+				2B471D012A4AC7A10035AB71 /* SceneDelegate.m */,
+				2BE62B782A4C109D002EEEF0 /* Home */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		2BE62B782A4C109D002EEEF0 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2BE62B5C2A4BE59F002EEEF0 /* Views */,
+				2B471D032A4AC7A10035AB71 /* ViewController.h */,
+				2B471D042A4AC7A10035AB71 /* ViewController.m */,
+				2B162B112A4FD0A2001452BC /* LaunchScreen.storyboard */,
+				2B162B102A4FD0A2001452BC /* Main.storyboard */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		2BE62B792A4C10C6002EEEF0 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				2B471D172A4AC88A0035AB71 /* ttsdk.lic */,
+				2BE62B752A4C0B03002EEEF0 /* Localizable.strings */,
+				2B471D092A4AC7A20035AB71 /* Assets.xcassets */,
+				2BE62B842A4C112D002EEEF0 /* InfoPlist.strings */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		2BE62B862A4C1726002EEEF0 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				2BE62BE12A4C3D15002EEEF0 /* VeLiveDeviceCapture.h */,
+				2BE62BE22A4C3D15002EEEF0 /* VeLiveDeviceCapture.m */,
+				2BE62B882A4C1771002EEEF0 /* VeLiveSDKHelper.h */,
+				2BE62B892A4C1771002EEEF0 /* VeLiveSDKHelper.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		2BE62B8B2A4C17E8002EEEF0 /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				2BE62B8C2A4C180D002EEEF0 /* PushCamera */,
+				2BE62B922A4C185A002EEEF0 /* PullStream */,
+			);
+			path = Basic;
+			sourceTree = "<group>";
+		};
+		2BE62B8C2A4C180D002EEEF0 /* PushCamera */ = {
+			isa = PBXGroup;
+			children = (
+				2BE62B8D2A4C1839002EEEF0 /* VeLivePushCameraViewController.h */,
+				2BE62B8E2A4C1839002EEEF0 /* VeLivePushCameraViewController.m */,
+				2BE62BFF2A4D9188002EEEF0 /* VeLivePushCameraViewController.xib */,
+			);
+			path = PushCamera;
+			sourceTree = "<group>";
+		};
+		2BE62B922A4C185A002EEEF0 /* PullStream */ = {
+			isa = PBXGroup;
+			children = (
+				2BE62B932A4C1878002EEEF0 /* VeLivePullStreamViewController.h */,
+				2BE62B942A4C1878002EEEF0 /* VeLivePullStreamViewController.m */,
+				2BE62C012A4D9406002EEEF0 /* VeLivePullStreamViewController.xib */,
+			);
+			path = PullStream;
+			sourceTree = "<group>";
+		};
+		2BE62B982A4C1896002EEEF0 /* Advanced */ = {
+			isa = PBXGroup;
+			children = (
+				2B8D908C2A6E15E300938E75 /* PullFeed */,
+				2BE62B992A4C189E002EEEF0 /* PushBeauty */,
+				2BE62B9F2A4C18BD002EEEF0 /* PushRTM */,
+				2BE62BA52A4C18DA002EEEF0 /* PushCustom */,
+				2BE62BAB2A4C1915002EEEF0 /* PushAutoBitrate */,
+				2BE62BB12A4C1CA4002EEEF0 /* PushH265Codec */,
+			);
+			path = Advanced;
+			sourceTree = "<group>";
+		};
+		2BE62B992A4C189E002EEEF0 /* PushBeauty */ = {
+			isa = PBXGroup;
+			children = (
+				2BE62B9A2A4C18B7002EEEF0 /* VeLivePushBeautyViewController.h */,
+				2BE62B9B2A4C18B7002EEEF0 /* VeLivePushBeautyViewController.m */,
+				2BE62C032A4D95B4002EEEF0 /* VeLivePushBeautyViewController.xib */,
+			);
+			path = PushBeauty;
+			sourceTree = "<group>";
+		};
+		2BE62B9F2A4C18BD002EEEF0 /* PushRTM */ = {
+			isa = PBXGroup;
+			children = (
+				2BE62BA02A4C18D3002EEEF0 /* VeLivePushRTMViewController.h */,
+				2BE62BA12A4C18D3002EEEF0 /* VeLivePushRTMViewController.m */,
+				2BE62BA22A4C18D3002EEEF0 /* VeLivePushRTMViewController.xib */,
+			);
+			path = PushRTM;
+			sourceTree = "<group>";
+		};
+		2BE62BA52A4C18DA002EEEF0 /* PushCustom */ = {
+			isa = PBXGroup;
+			children = (
+				2BE62BA62A4C18F5002EEEF0 /* VeLivePushCustomViewController.h */,
+				2BE62BA72A4C18F5002EEEF0 /* VeLivePushCustomViewController.m */,
+				2BE62BA82A4C18F5002EEEF0 /* VeLivePushCustomViewController.xib */,
+			);
+			path = PushCustom;
+			sourceTree = "<group>";
+		};
+		2BE62BAB2A4C1915002EEEF0 /* PushAutoBitrate */ = {
+			isa = PBXGroup;
+			children = (
+				2BE62BAC2A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.h */,
+				2BE62BAD2A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.m */,
+				2BE62BAE2A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.xib */,
+			);
+			path = PushAutoBitrate;
+			sourceTree = "<group>";
+		};
+		2BE62BB12A4C1CA4002EEEF0 /* PushH265Codec */ = {
+			isa = PBXGroup;
+			children = (
+				2BE62BB22A4C1CC0002EEEF0 /* VeLivePush265CodecViewController.h */,
+				2BE62BB32A4C1CC0002EEEF0 /* VeLivePush265CodecViewController.m */,
+				2BE62BB42A4C1CC0002EEEF0 /* VeLivePush265CodecViewController.xib */,
+			);
+			path = PushH265Codec;
+			sourceTree = "<group>";
+		};
+		2BE62BB72A4C1CCD002EEEF0 /* Interact */ = {
+			isa = PBXGroup;
+			children = (
+				2B471D2B2A4AC88B0035AB71 /* Manager */,
+				2BE62BB92A4C1CE6002EEEF0 /* Link */,
+				2BE62BB82A4C1CD6002EEEF0 /* PK */,
+			);
+			path = Interact;
+			sourceTree = "<group>";
+		};
+		2BE62BB82A4C1CD6002EEEF0 /* PK */ = {
+			isa = PBXGroup;
+			children = (
+				2BE62BCE2A4C1DE1002EEEF0 /* VeLivePKAnchorViewController.h */,
+				2BE62BCF2A4C1DE1002EEEF0 /* VeLivePKAnchorViewController.m */,
+				2BE62BD02A4C1DE1002EEEF0 /* VeLivePKAnchorViewController.xib */,
+				2BE62C0C2A4E8959002EEEF0 /* VeLivePKViewController.h */,
+				2BE62C0D2A4E8959002EEEF0 /* VeLivePKViewController.m */,
+				2BE62C0E2A4E8959002EEEF0 /* VeLivePKViewController.xib */,
+			);
+			path = PK;
+			sourceTree = "<group>";
+		};
+		2BE62BB92A4C1CE6002EEEF0 /* Link */ = {
+			isa = PBXGroup;
+			children = (
+				2BE62BC42A4C1DB3002EEEF0 /* VeLiveLinkAnchorViewController.h */,
+				2BE62BC52A4C1DB3002EEEF0 /* VeLiveLinkAnchorViewController.m */,
+				2BE62BC62A4C1DB3002EEEF0 /* VeLiveLinkAnchorViewController.xib */,
+				2BE62BC92A4C1DCE002EEEF0 /* VeLiveLinkAudienceViewController.h */,
+				2BE62BCA2A4C1DCE002EEEF0 /* VeLiveLinkAudienceViewController.m */,
+				2BE62BCB2A4C1DCE002EEEF0 /* VeLiveLinkAudienceViewController.xib */,
+				2BE62C072A4E88F5002EEEF0 /* VeLiveLinkViewController.h */,
+				2BE62C082A4E88F5002EEEF0 /* VeLiveLinkViewController.m */,
+				2BE62C092A4E88F5002EEEF0 /* VeLiveLinkViewController.xib */,
+			);
+			path = Link;
+			sourceTree = "<group>";
+		};
+		B4747D6A3019AF019D76A89E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BA54A9DE8E1315CA8F6F7B8E /* Pods-VeLiveQuickStartDemo.debug.xcconfig */,
+				9B31797463269B27C2AFCCDF /* Pods-VeLiveQuickStartDemo.release.xcconfig */,
+				DB1829D69D31B4526C4E65DC /* Pods-VeLiveQuickStartDemo.debug.xcconfig */,
+				BAA3229E8CCAC9BA718A9BBF /* Pods-VeLiveQuickStartDemo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2B471CF92A4AC7A10035AB71 /* VeLiveQuickStartDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B471D132A4AC7A20035AB71 /* Build configuration list for PBXNativeTarget "VeLiveQuickStartDemo" */;
+			buildPhases = (
+				391BEC13BBB076B74AF47A63 /* [CP] Check Pods Manifest.lock */,
+				2B471CF62A4AC7A10035AB71 /* Sources */,
+				2B471CF72A4AC7A10035AB71 /* Frameworks */,
+				2B471CF82A4AC7A10035AB71 /* Resources */,
+				F86FD6A608DCBE77D6F1894D /* [CP] Embed Pods Frameworks */,
+				CBB5C5DA113B57F513B10D0C /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VeLiveQuickStartDemo;
+			productName = VeLiveQuickStartDemo;
+			productReference = 2B471CFA2A4AC7A10035AB71 /* VeLiveQuickStartDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2B471CF22A4AC7A10035AB71 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					2B471CF92A4AC7A10035AB71 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 2B471CF52A4AC7A10035AB71 /* Build configuration list for PBXProject "VeLiveQuickStartDemo" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				zh,
+			);
+			mainGroup = 2B471CF12A4AC7A10035AB71;
+			productRefGroup = 2B471CFB2A4AC7A10035AB71 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2B471CF92A4AC7A10035AB71 /* VeLiveQuickStartDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2B471CF82A4AC7A10035AB71 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B8D90912A6E160100938E75 /* VeLivePullFeedViewController.xib in Resources */,
+				2BE62BB62A4C1CC0002EEEF0 /* VeLivePush265CodecViewController.xib in Resources */,
+				2BE62C0B2A4E88F5002EEEF0 /* VeLiveLinkViewController.xib in Resources */,
+				2B24DDAB2A70086E008E11F9 /* VeLivePullFeedInputViewController.xib in Resources */,
+				2BE62B822A4C112D002EEEF0 /* InfoPlist.strings in Resources */,
+				2BE62B732A4C0B03002EEEF0 /* Localizable.strings in Resources */,
+				2BE62BB02A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.xib in Resources */,
+				2BE62C002A4D9188002EEEF0 /* VeLivePushCameraViewController.xib in Resources */,
+				2B162B132A4FD0A2001452BC /* LaunchScreen.storyboard in Resources */,
+				2B471D2E2A4AC88B0035AB71 /* ttsdk.lic in Resources */,
+				2BE62C042A4D95B4002EEEF0 /* VeLivePushBeautyViewController.xib in Resources */,
+				2BE62BC82A4C1DB3002EEEF0 /* VeLiveLinkAnchorViewController.xib in Resources */,
+				2BE62C102A4E8959002EEEF0 /* VeLivePKViewController.xib in Resources */,
+				2BE62BCD2A4C1DCE002EEEF0 /* VeLiveLinkAudienceViewController.xib in Resources */,
+				2B471D0A2A4AC7A20035AB71 /* Assets.xcassets in Resources */,
+				2BE62C022A4D9406002EEEF0 /* VeLivePullStreamViewController.xib in Resources */,
+				2BE62BAA2A4C18F5002EEEF0 /* VeLivePushCustomViewController.xib in Resources */,
+				2BE62BA42A4C18D3002EEEF0 /* VeLivePushRTMViewController.xib in Resources */,
+				2B162B122A4FD0A2001452BC /* Main.storyboard in Resources */,
+				2BE62BD22A4C1DE1002EEEF0 /* VeLivePKAnchorViewController.xib in Resources */,
+				2BE62B652A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		391BEC13BBB076B74AF47A63 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VeLiveQuickStartDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CBB5C5DA113B57F513B10D0C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VeLiveQuickStartDemo/Pods-VeLiveQuickStartDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F86FD6A608DCBE77D6F1894D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VeLiveQuickStartDemo/Pods-VeLiveQuickStartDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2B471CF62A4AC7A10035AB71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B471D052A4AC7A10035AB71 /* ViewController.m in Sources */,
+				2BE62BB52A4C1CC0002EEEF0 /* VeLivePush265CodecViewController.m in Sources */,
+				2B471D352A4AC88B0035AB71 /* VeLiveConfig.m in Sources */,
+				2BE62BE32A4C3D15002EEEF0 /* VeLiveDeviceCapture.m in Sources */,
+				2BE62BC72A4C1DB3002EEEF0 /* VeLiveLinkAnchorViewController.m in Sources */,
+				2B24DDAA2A70086E008E11F9 /* VeLivePullFeedInputViewController.m in Sources */,
+				2B471D302A4AC88B0035AB71 /* VeLiveAnchorManager.m in Sources */,
+				2B471CFF2A4AC7A10035AB71 /* AppDelegate.m in Sources */,
+				2BE62B902A4C1839002EEEF0 /* VeLivePushCameraViewController.m in Sources */,
+				2BE62B9D2A4C18B7002EEEF0 /* VeLivePushBeautyViewController.m in Sources */,
+				2BE62BA32A4C18D3002EEEF0 /* VeLivePushRTMViewController.m in Sources */,
+				2B471D102A4AC7A20035AB71 /* main.m in Sources */,
+				2B24DD962A6E6B4D008E11F9 /* VeLivePullFeedItemViewController.m in Sources */,
+				2B0C29372A6E5CE3007D7C99 /* VeLivePageViewController.m in Sources */,
+				2BE62C0A2A4E88F5002EEEF0 /* VeLiveLinkViewController.m in Sources */,
+				2BE62BAF2A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.m in Sources */,
+				2BE62B8A2A4C1771002EEEF0 /* VeLiveSDKHelper.m in Sources */,
+				2B471D322A4AC88B0035AB71 /* VeLiveAudienceManager.m in Sources */,
+				2BE62B962A4C1878002EEEF0 /* VeLivePullStreamViewController.m in Sources */,
+				2BE62B642A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.m in Sources */,
+				2BE62BD12A4C1DE1002EEEF0 /* VeLivePKAnchorViewController.m in Sources */,
+				2BE62C0F2A4E8959002EEEF0 /* VeLivePKViewController.m in Sources */,
+				2B471D022A4AC7A10035AB71 /* SceneDelegate.m in Sources */,
+				2B8D90902A6E160100938E75 /* VeLivePullFeedViewController.m in Sources */,
+				2BE62BA92A4C18F5002EEEF0 /* VeLivePushCustomViewController.m in Sources */,
+				2BE62B672A4BE59F002EEEF0 /* VeLiveHomeTableViewCell.m in Sources */,
+				2BE62BCC2A4C1DCE002EEEF0 /* VeLiveLinkAudienceViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2BE62B752A4C0B03002EEEF0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2B24DDA52A6FEFDC008E11F9 /* zh */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		2BE62B842A4C112D002EEEF0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2B24DDA62A6FEFDC008E11F9 /* zh */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2B471D112A4AC7A20035AB71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		2B471D122A4AC7A20035AB71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2B471D142A4AC7A20035AB71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B24DD9F2A6FA34C008E11F9 /* Debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VeLiveQuickStartDemo/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "使用相机开启直播";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "使用麦克风开启直播";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.volcengine.ttsdk.quickstart.demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2B471D152A4AC7A20035AB71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B24DDA02A6FA34C008E11F9 /* Release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VeLiveQuickStartDemo/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "使用相机开启直播";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "使用麦克风开启直播";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.volcengine.ttsdk.quickstart.demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2B471CF52A4AC7A10035AB71 /* Build configuration list for PBXProject "VeLiveQuickStartDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B471D112A4AC7A20035AB71 /* Debug */,
+				2B471D122A4AC7A20035AB71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2B471D132A4AC7A20035AB71 /* Build configuration list for PBXNativeTarget "VeLiveQuickStartDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B471D142A4AC7A20035AB71 /* Debug */,
+				2B471D152A4AC7A20035AB71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2B471CF22A4AC7A10035AB71 /* Project object */;
+}
