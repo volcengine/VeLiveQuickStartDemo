@@ -4,64 +4,102 @@
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-package com.ttsdk.quickstart.features.basic;
+package com.ttsdk.quickstart.features.advanced;
 
 import static com.ss.videoarch.liveplayer.VeLivePlayerDef.VeLivePlayerFillMode.VeLivePlayerFillModeAspectFill;
-import static com.ss.videoarch.liveplayer.VeLivePlayerDef.VeLivePlayerFillMode.VeLivePlayerFillModeAspectFit;
-import static com.ss.videoarch.liveplayer.VeLivePlayerDef.VeLivePlayerFillMode.VeLivePlayerFillModeFullFill;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Bitmap;
+import android.graphics.PixelFormat;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.ttsdk.quickstart.R;
-import com.ttsdk.quickstart.helper.VeLiveSDKHelper;
 import com.ss.videoarch.liveplayer.VeLivePlayer;
 import com.ss.videoarch.liveplayer.VeLivePlayerAudioFrame;
 import com.ss.videoarch.liveplayer.VeLivePlayerConfiguration;
 import com.ss.videoarch.liveplayer.VeLivePlayerDef;
-import com.ss.videoarch.liveplayer.VeLivePlayerDef.VeLivePlayerFillMode;
 import com.ss.videoarch.liveplayer.VeLivePlayerError;
 import com.ss.videoarch.liveplayer.VeLivePlayerObserver;
 import com.ss.videoarch.liveplayer.VeLivePlayerStatistics;
 import com.ss.videoarch.liveplayer.VeLivePlayerVideoFrame;
 import com.ss.videoarch.liveplayer.VideoLiveManager;
+import com.ttsdk.quickstart.R;
+import com.ttsdk.quickstart.features.advanced.pip.FloatingVideoService;
+import com.ttsdk.quickstart.helper.VeLiveSDKHelper;
 
-/*
-直播拉流
- 本文件展示如何集成直播拉流功能
- 1、初始化推流器 API: mLivePlayer = new VideoLiveManager(this);
- 2、配置推流器 API: mLivePlayer.setConfig(new VeLivePlayerConfiguration());
- 3、配置渲染视图 API：mLivePlayer.setSurfaceHolder(mSurfaceView.getHolder());
- 4、配置播放地址 API: mLivePlayer.setPlayUrl("http://pull.example.com/pull.flv");
- 5、开始播放 API: mLivePlayer.play();
- */
-public class PullStreamActivity extends AppCompatActivity {
-
+public class PictureInPictureActivity extends AppCompatActivity {
     private VeLivePlayer mLivePlayer;
     private TextView mTextView;
 
     private EditText mUrlText;
+    private Button mSwitchPip;
+    private boolean mIsPipOn;
 
     private SurfaceView mSurfaceView;
+    private FrameLayout mViewContainer;
+    private int mOverlayRequestCode = 1001;
+    private FloatingVideoService mFloatingVideoService = null;
+    private boolean mFloatingVideoServiceIsConnected;
+
+    private ServiceConnection mFloatingVideoServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mFloatingVideoServiceIsConnected = true;
+            mFloatingVideoService = ((FloatingVideoService.Binder)service).getService();
+            mViewContainer.removeView(mSurfaceView);
+            mFloatingVideoService.addSurfaceView(mSurfaceView);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mFloatingVideoServiceIsConnected = false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pull_stream);
+        setContentView(R.layout.activity_picture_in_picture);
+
         mTextView = findViewById(R.id.pull_info_text_view);
         mUrlText = findViewById(R.id.url_input_view);
         mUrlText.setText(VeLiveSDKHelper.LIVE_PULL_URL);
-        mSurfaceView = findViewById(R.id.render_view);
+        mSwitchPip = findViewById(R.id.picture_in_picture_control);
+        mSurfaceView = new SurfaceView(this);
+        mSurfaceView.getHolder().setFormat(PixelFormat.RGBA_8888);
+        mViewContainer = findViewById(R.id.surface_container);
+        mViewContainer.addView(mSurfaceView);
         setupLivePlayer();
+    }
+
+    private void requestSettingCanDrawOverlays() {
+        int sdkInt = Build.VERSION.SDK_INT;
+        if (sdkInt >= Build.VERSION_CODES.O) { // 8.0以上
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+            startActivityForResult(intent, mOverlayRequestCode);
+        } else if (sdkInt >= Build.VERSION_CODES.M) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+            intent.setData(Uri.parse("package:" + getPackageName()));
+            startActivityForResult(intent, mOverlayRequestCode);
+        } else {
+        }
     }
 
     @Override
@@ -70,6 +108,19 @@ public class PullStreamActivity extends AppCompatActivity {
         //  销毁直播播放器  
         //  业务处理时，尽量不要放到此处释放，推荐放到退出直播间时释放。  
         mLivePlayer.destroy();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == mOverlayRequestCode) {
+            if (!Settings.canDrawOverlays(this)) {
+                Toast.makeText(this, "授权失败", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "授权成功", Toast.LENGTH_SHORT).show();
+            }
+            return;
+        }
     }
 
     private void setupLivePlayer() {
@@ -100,37 +151,6 @@ public class PullStreamActivity extends AppCompatActivity {
         //  设置播放地址，支持 rtmp、http、https 协议，flv、m3u8 格式的地址  
         mLivePlayer.setPlayUrl(mUrlText.getText().toString());
 
-
-        //  配置 RTM 低延时地址参考以下代码  
-        /*
-        // 配置 RTM 主地址
-        VeLivePlayerStreamData.VeLivePlayerStream playStreamRTM = new VeLivePlayerStreamData.VeLivePlayerStream();
-        playStreamRTM.url = Constant.LIVE_PULL_RTM_URL;
-        playStreamRTM.format = VeLivePlayerFormatRTM;
-        playStreamRTM.resolution = VeLivePlayerResolutionOrigin;
-        playStreamRTM.streamType = VeLivePlayerStreamTypeMain;
-
-        // 配置 Flv 降级地址
-        VeLivePlayerStreamData.VeLivePlayerStream playStreamFLV = new VeLivePlayerStreamData.VeLivePlayerStream();
-        playStreamFLV.url = Constant.LIVE_PULL_URL;
-        playStreamFLV.format = VeLivePlayerFormatFLV;
-        playStreamFLV.resolution = VeLivePlayerResolutionOrigin;
-        playStreamFLV.streamType = VeLivePlayerStreamTypeMain;
-
-        // 创建 VeLivePlayerStreamData
-        VeLivePlayerStreamData streamData = new VeLivePlayerStreamData();
-        List<VeLivePlayerStreamData.VeLivePlayerStream> streamList = new ArrayList<>();
-        // 添加 RTM 主地址
-        streamList.add(playStreamRTM);
-        // 添加 FLV 降级地址
-        streamList.add(playStreamFLV);
-
-        streamData.mainStreamList = streamList;
-        streamData.defaultFormat = VeLivePlayerFormatRTM;
-        streamData.defaultProtocol = VeLivePlayerFormatTLS;
-        mLivePlayer.setPlayStreamData(streamData);
-        */
-
         //  开始播放  
         mLivePlayer.play();
     }
@@ -147,19 +167,25 @@ public class PullStreamActivity extends AppCompatActivity {
         }
     }
 
-    public void fillModeControl(View view) {
-        showFillModeDialog();
-    }
-
-    private void changeFillMode(VeLivePlayerFillMode fillMode) {
-        //  设置填充模式  
-        mLivePlayer.setRenderFillMode(fillMode);
-    }
-
-    public void muteControl(View view) {
-        //  静音/取消静音  
-        ToggleButton toggleButton = (ToggleButton) view;
-        mLivePlayer.setMute(toggleButton.isChecked());
+    public void startPictureInPicture(View view) {
+        if (!mIsPipOn) {
+            if (!Settings.canDrawOverlays(this)) {
+                Toast.makeText(this, "当前无权限，请授权", Toast.LENGTH_SHORT);
+                requestSettingCanDrawOverlays();
+                return;
+            }
+            Intent intent = new Intent(getApplicationContext(), FloatingVideoService.class);
+            bindService(intent, mFloatingVideoServiceConnection, BIND_AUTO_CREATE);
+            mSwitchPip.setText(R.string.Stop_Picture_In_Picture);
+        } else {
+            if (mFloatingVideoServiceIsConnected && mFloatingVideoService != null) {
+                mFloatingVideoService.removeSurfaceView();
+                mViewContainer.addView(mSurfaceView);
+                unbindService(mFloatingVideoServiceConnection);
+            }
+            mSwitchPip.setText(R.string.Start_Picture_In_Picture);
+        }
+        mIsPipOn = !mIsPipOn;
     }
 
     private VeLivePlayerObserver mplayerObserver = new VeLivePlayerObserver() {
@@ -246,24 +272,5 @@ public class PullStreamActivity extends AppCompatActivity {
 
         }
     };
-
-    private void showFillModeDialog() {
-        final String[] items = {
-                getString(R.string.Pull_Stream_Fill_Mode_Alert_AspectFill),
-                getString(R.string.Pull_Stream_Fill_Mode_Alert_AspectFit),
-                getString(R.string.Pull_Stream_Fill_Mode_Alert_FullFill)};
-        AlertDialog.Builder singleChoiceDialog = new AlertDialog.Builder(this);
-        singleChoiceDialog.setTitle(getString(R.string.Pull_Stream_Fill_Mode_Alert_Title));
-        singleChoiceDialog.setItems(items, ((dialog, which) -> {
-            if (which == 0) {
-                changeFillMode(VeLivePlayerFillModeAspectFill);
-            } else if (which == 1) {
-                changeFillMode(VeLivePlayerFillModeAspectFit);
-            } else if (which == 2) {
-                changeFillMode(VeLivePlayerFillModeFullFill);
-            }
-        }));
-        singleChoiceDialog.show();
-    }
 
 }

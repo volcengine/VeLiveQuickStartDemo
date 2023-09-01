@@ -40,7 +40,6 @@ import com.ss.avframework.live.VeLivePusherObserver;
  6、打开麦克风采集 API: mLivePusher.startAudioCapture(VeLiveAudioCaptureMicrophone);
  7、打开摄像头采集 API: mLivePusher.startVideoCapture(VeLiveVideoCaptureFrontCamera);
  8、开始推流 API：mLivePusher.startPush("rtmp://push.example.com/rtmp");
- 参考文档：https://www.volcengine.com/docs/6469/155317
  */
 public class PushH265CodecActivity extends AppCompatActivity {
     private VeLivePusher mLivePusher;

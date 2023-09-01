@@ -74,7 +74,6 @@
     [self.livePlayer setObserver:self];
     
     //  配置播放器  
-    //  更多配置参考：https://www.volcengine.com/docs/6469/97858  
     VeLivePlayerConfiguration *cfg = [[VeLivePlayerConfiguration alloc] init];
     
     //  是否开启周期性信息回调  

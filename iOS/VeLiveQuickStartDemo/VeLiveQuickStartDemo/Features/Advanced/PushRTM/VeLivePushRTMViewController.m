@@ -20,7 +20,6 @@
  3、打开麦克风采集 API:[self.livePusher startAudioCapture:(VeLiveAudioCaptureMicrophone)];
  4、打开摄像头采集 API: [self.livePusher startVideoCapture:(VeLiveVideoCaptureFrontCamera)];
  5、开始推流 API：[self.livePusher startPushWithUrls:@[@"http://push.example.com/rtm.sdp", @"rtmp://push.example.com/rtmp"]];
- 参考文档：https://www.volcengine.com/docs/6469/155317
  */
 #import "VeLivePushRTMViewController.h"
 #import "VeLiveSDKHelper.h"
@@ -49,7 +48,6 @@
 - (void)setupLivePusher {
     
     //  创建推流器  
-    //  更多配置参考：https://www.volcengine.com/docs/6469/155321#velivepusherconfiguration  
     self.livePusher = [[VeLivePusher alloc] initWithConfig:[[VeLivePusherConfiguration alloc] init]];
     
     //  配置预览视图  

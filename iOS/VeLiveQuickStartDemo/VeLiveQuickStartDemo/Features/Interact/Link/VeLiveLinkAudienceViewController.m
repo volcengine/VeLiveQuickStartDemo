@@ -123,6 +123,11 @@
     
     //  特效鉴权License路径，请根据工程配置查找正确的路径  
     NSString *licensePath = [NSBundle.mainBundle pathForResource:@"LicenseBag.bundle/xxx.licbag" ofType:nil];
+    
+    if (![NSFileManager.defaultManager fileExistsAtPath:licensePath]) {
+        return;
+    }
+    
     [rtcVideo checkVideoEffectLicense:licensePath];
     
     //  特效算法资源包路径  
@@ -138,6 +143,9 @@
 - (IBAction)beautyControl:(UIButton *)sender {
     //  根据特效资源包，查找正确的资源路径，一般到 reshape_lite, beauty_IOS_lite 目录  
     NSString *beautyPath = [NSBundle.mainBundle pathForResource:@"ComposeMakeup.bundle/xxx" ofType:nil];
+    if (![NSFileManager.defaultManager fileExistsAtPath:beautyPath]) {
+        return;
+    }
     //  设置美颜美型特效资源包  
     [self.audienceManager.rtcVideo setVideoEffectNodes:@[beautyPath]];
     //  设置美颜美型特效强度, NodeKey 可在 资源包下的 .config_file 中获取，如果没有 .config_file ，请联系商务咨询  
@@ -147,6 +155,9 @@
 - (IBAction)filterControl:(UIButton *)sender {
     //  滤镜资源包，查找正确的资源路径，一般到 Filter_01_xx 目录  
     NSString *filterPath = [NSBundle.mainBundle pathForResource:@"FilterResource.bundle/xxx" ofType:nil];
+    if (![NSFileManager.defaultManager fileExistsAtPath:filterPath]) {
+        return;
+    }
     [self.audienceManager.rtcVideo setVideoEffectColorFilter:filterPath];
     [self.audienceManager.rtcVideo setVideoEffectColorFilterIntensity:0.5];
 }
@@ -154,6 +165,9 @@
 - (IBAction)stickerControl:(UIButton *)sender {
     //  贴纸资源包，查找正确的资源路径，一般到 stickers_xxx 目录  
     NSString *stickerPath = [NSBundle.mainBundle pathForResource:@"StickerResource.bundle/xxx" ofType:nil];
+    if (![NSFileManager.defaultManager fileExistsAtPath:stickerPath]) {
+        return;
+    }
     [self.audienceManager.rtcVideo appendVideoEffectNodes:@[stickerPath]];
 }
 

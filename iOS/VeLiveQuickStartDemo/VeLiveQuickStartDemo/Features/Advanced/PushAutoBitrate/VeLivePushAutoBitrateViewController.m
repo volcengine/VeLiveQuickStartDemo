@@ -27,7 +27,6 @@
  7、打开麦克风采集 API:[self.livePusher startAudioCapture:(VeLiveAudioCaptureMicrophone)];
  8、打开摄像头采集 API: [self.livePusher startVideoCapture:(VeLiveVideoCaptureFrontCamera)];
  9、开始推流 API：[self.livePusher startPush:@"rtmp://push.example.com/rtmp"];
- 参考文档：https://www.volcengine.com/docs/6469/155317
  */
 #import "VeLivePushAutoBitrateViewController.h"
 #import "VeLiveSDKHelper.h"

@@ -400,6 +400,7 @@ public class VeLiveAnchorManager {
             dstBuffer.position(0);
             VeLiveVideoFrame videoFrame1 = new VeLiveVideoFrame(width, height, System.currentTimeMillis() * 1000, dstBuffer);
             mLivePusher.pushExternalVideoFrame(videoFrame1);
+            videoFrame1.release();
         }
     }
 

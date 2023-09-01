@@ -33,6 +33,7 @@ import com.pandora.ttlicense2.LicenseManager;
 import com.ss.avframework.live.VeLivePusherDef;
 import com.ss.videoarch.liveplayer.VeLivePlayerStatistics;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -214,6 +215,18 @@ public class VeLiveSDKHelper {
         infoStr += getInfoString(R.string.Pull_Stream_Info_Stall_Time, statistics.stallTimeMs, " ms\n");
         infoStr += getInfoString(R.string.Pull_Stream_Info_Is_HardWareDecode, statistics.isHardwareDecode, " ");
         return infoStr;
+    }
+
+    static public boolean isFileExists(String filePath) {
+        if (filePath == null) {
+            return false;
+        }
+        try {
+            File file = new File(filePath);
+            return file.exists();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     static public boolean checkPermission(Activity activity, int request) {

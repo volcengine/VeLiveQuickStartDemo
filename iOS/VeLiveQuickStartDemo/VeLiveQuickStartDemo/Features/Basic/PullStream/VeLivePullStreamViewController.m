@@ -19,7 +19,6 @@
  3、配置渲染视图 API：[self.view insertSubview:self.livePlayer.playerView atIndex:0];
  4、配置播放地址 API: [self.livePlayer setPlayUrl:@"http://pull.example.com/pull.flv"];
  5、开始播放 API: [self.livePlayer play];
- 参考文档：https://www.volcengine.com/docs/6469/97858
  */
 #import "VeLivePullStreamViewController.h"
 #import "VeLiveSDKHelper.h"
@@ -55,7 +54,6 @@
     [self.livePlayer setObserver:self];
     
     //  配置播放器  
-    //  更多配置参考：https://www.volcengine.com/docs/6469/97858  
     VeLivePlayerConfiguration *cfg = [[VeLivePlayerConfiguration alloc] init];
     
     //  是否开启周期性信息回调  

@@ -55,6 +55,8 @@
 		2BE62C0B2A4E88F5002EEEF0 /* VeLiveLinkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62C092A4E88F5002EEEF0 /* VeLiveLinkViewController.xib */; };
 		2BE62C0F2A4E8959002EEEF0 /* VeLivePKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62C0D2A4E8959002EEEF0 /* VeLivePKViewController.m */; };
 		2BE62C102A4E8959002EEEF0 /* VeLivePKViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62C0E2A4E8959002EEEF0 /* VeLivePKViewController.xib */; };
+		2BEF7F152A81F22D00C5814F /* VeLivePictureInPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEF7F132A81F22D00C5814F /* VeLivePictureInPictureViewController.m */; };
+		2BEF7F162A81F22D00C5814F /* VeLivePictureInPictureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEF7F142A81F22D00C5814F /* VeLivePictureInPictureViewController.xib */; };
 		CE6247ABF51FDB3A7B0620CD /* libPods-VeLiveQuickStartDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3149E926C3C9F63213B4BEBB /* libPods-VeLiveQuickStartDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -137,6 +139,9 @@
 		2BE62C0C2A4E8959002EEEF0 /* VeLivePKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePKViewController.h; sourceTree = "<group>"; };
 		2BE62C0D2A4E8959002EEEF0 /* VeLivePKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePKViewController.m; sourceTree = "<group>"; };
 		2BE62C0E2A4E8959002EEEF0 /* VeLivePKViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLivePKViewController.xib; sourceTree = "<group>"; };
+		2BEF7F122A81F22D00C5814F /* VeLivePictureInPictureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePictureInPictureViewController.h; sourceTree = "<group>"; };
+		2BEF7F132A81F22D00C5814F /* VeLivePictureInPictureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePictureInPictureViewController.m; sourceTree = "<group>"; };
+		2BEF7F142A81F22D00C5814F /* VeLivePictureInPictureViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLivePictureInPictureViewController.xib; sourceTree = "<group>"; };
 		3149E926C3C9F63213B4BEBB /* libPods-VeLiveQuickStartDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VeLiveQuickStartDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B31797463269B27C2AFCCDF /* Pods-VeLiveQuickStartDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeLiveQuickStartDemo.release.xcconfig"; path = "Target Support Files/Pods-VeLiveQuickStartDemo/Pods-VeLiveQuickStartDemo.release.xcconfig"; sourceTree = "<group>"; };
 		BA54A9DE8E1315CA8F6F7B8E /* Pods-VeLiveQuickStartDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeLiveQuickStartDemo.debug.xcconfig"; path = "Target Support Files/Pods-VeLiveQuickStartDemo/Pods-VeLiveQuickStartDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -335,6 +340,7 @@
 		2BE62B982A4C1896002EEEF0 /* Advanced */ = {
 			isa = PBXGroup;
 			children = (
+				2BEF7F112A81F20500C5814F /* PictureInPicture */,
 				2B8D908C2A6E15E300938E75 /* PullFeed */,
 				2BE62B992A4C189E002EEEF0 /* PushBeauty */,
 				2BE62B9F2A4C18BD002EEEF0 /* PushRTM */,
@@ -434,6 +440,16 @@
 			path = Link;
 			sourceTree = "<group>";
 		};
+		2BEF7F112A81F20500C5814F /* PictureInPicture */ = {
+			isa = PBXGroup;
+			children = (
+				2BEF7F122A81F22D00C5814F /* VeLivePictureInPictureViewController.h */,
+				2BEF7F132A81F22D00C5814F /* VeLivePictureInPictureViewController.m */,
+				2BEF7F142A81F22D00C5814F /* VeLivePictureInPictureViewController.xib */,
+			);
+			path = PictureInPicture;
+			sourceTree = "<group>";
+		};
 		B4747D6A3019AF019D76A89E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -507,6 +523,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B8D90912A6E160100938E75 /* VeLivePullFeedViewController.xib in Resources */,
+				2BEF7F162A81F22D00C5814F /* VeLivePictureInPictureViewController.xib in Resources */,
 				2BE62BB62A4C1CC0002EEEF0 /* VeLivePush265CodecViewController.xib in Resources */,
 				2BE62C0B2A4E88F5002EEEF0 /* VeLiveLinkViewController.xib in Resources */,
 				2B24DDAB2A70086E008E11F9 /* VeLivePullFeedInputViewController.xib in Resources */,
@@ -607,6 +624,7 @@
 				2B24DD962A6E6B4D008E11F9 /* VeLivePullFeedItemViewController.m in Sources */,
 				2B0C29372A6E5CE3007D7C99 /* VeLivePageViewController.m in Sources */,
 				2BE62C0A2A4E88F5002EEEF0 /* VeLiveLinkViewController.m in Sources */,
+				2BEF7F152A81F22D00C5814F /* VeLivePictureInPictureViewController.m in Sources */,
 				2BE62BAF2A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.m in Sources */,
 				2BE62B8A2A4C1771002EEEF0 /* VeLiveSDKHelper.m in Sources */,
 				2B471D322A4AC88B0035AB71 /* VeLiveAudienceManager.m in Sources */,

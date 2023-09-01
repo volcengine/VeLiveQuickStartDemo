@@ -45,6 +45,8 @@
 
 "Home_Live_Pull_Streaming" = "直播拉流";
 
+"Home_Picture_In_Picture" = "画中画";
+
 "Home_Pull_Feed" = "Feed 流";
 
 "Home_Push_Streaming_Bitrate_Adaptive" = "推流码率自适应";
@@ -164,6 +166,10 @@
 "Push_UnMute" = "取消静音";
 
 "Push_Url_Tip" = "推流地址";
+
+"Start_Picture_In_Picture" = "开启画中画";
+
+"Stop_Picture_In_Picture" = "停止画中画";
 
 "app_name" = "veLive快速入门";
 

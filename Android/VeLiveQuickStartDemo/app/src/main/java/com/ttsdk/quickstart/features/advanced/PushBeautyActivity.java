@@ -45,7 +45,6 @@ import com.ss.avframework.live.VeLiveVideoEffectManager;
  9、设置美颜美型 API: mLivePusher.getVideoEffectManager().setComposeNodes(nodes);
  10、设置滤镜 API: mLivePusher.getVideoEffectManager().setFilter("");
  11、设置贴纸 API:  mLivePusher.getVideoEffectManager().setSticker("");
- 参考文档：https://www.volcengine.com/docs/6469/155317
  */
 public class PushBeautyActivity extends AppCompatActivity {
     private VeLivePusher mLivePusher;
@@ -114,6 +113,9 @@ public class PushBeautyActivity extends AppCompatActivity {
         String licPath = VeLiveEffectHelper.getLicensePath("xxx.licbag");
         //  特效模型资源包路径  
         String algoModePath = VeLiveEffectHelper.getModelPath();
+        if (!VeLiveSDKHelper.isFileExists(licPath)) {
+            return;
+        }
         //  创建美颜配置  
         VeLivePusherDef.VeLiveVideoEffectLicenseConfiguration licConfig = VeLivePusherDef.VeLiveVideoEffectLicenseConfiguration.create(licPath);
         //  设置美颜配置  
@@ -134,6 +136,9 @@ public class PushBeautyActivity extends AppCompatActivity {
     public void beautyControl(View view) {
         //  根据特效资源包，查找正确的资源路径，一般到 reshape_lite, beauty_IOS_lite 目录  
         String beautyPath = VeLiveEffectHelper.getBeautyPathByName("xxx");
+        if (!VeLiveSDKHelper.isFileExists(beautyPath)) {
+            return;
+        }
         //  设置美颜美型特效资源包  
         mLivePusher.getVideoEffectManager().setComposeNodes(new String[]{ beautyPath });
         //  设置美颜美型特效强度, NodeKey 可在 资源包下的 .config_file 中获取，如果没有 .config_file ，请联系商务咨询  

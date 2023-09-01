@@ -155,6 +155,9 @@ public class LinkAnchorActivity extends AppCompatActivity {
         String licPath = VeLiveEffectHelper.getLicensePath("xxx.licbag");
         //  特效模型资源包路径  
         String algoModePath = VeLiveEffectHelper.getModelPath();
+        if (!VeLiveSDKHelper.isFileExists(licPath)) {
+            return;
+        }
         //  检查License  
         rtcVideo.checkVideoEffectLicense(Env.getApplicationContext(), licPath);
         //  设置特效算法包  
@@ -167,8 +170,10 @@ public class LinkAnchorActivity extends AppCompatActivity {
     public void beautyControl(View view) {
         //  根据特效资源包，查找正确的资源路径，一般到 reshape_lite, beauty_IOS_lite 目录  
         String beautyPath = VeLiveEffectHelper.getBeautyPathByName("xxx");
+        if (!VeLiveSDKHelper.isFileExists(beautyPath)) {
+            return;
+        }
         //  设置美颜美型特效资源包  
-
         mAnchorManager.getRTCVideo().setVideoEffectNodes(Collections.singletonList(beautyPath));
         //  设置美颜美型特效强度, NodeKey 可在 资源包下的 .config_file 中获取，如果没有 .config_file ，请联系商务咨询  
         mAnchorManager.getRTCVideo().updateVideoEffectNode(beautyPath, "whiten", 0.5F);
@@ -177,6 +182,9 @@ public class LinkAnchorActivity extends AppCompatActivity {
     public void filterControl(View view) {
         //  滤镜资源包，查找正确的资源路径，一般到 Filter_01_xx 目录  
         String filterPath = VeLiveEffectHelper.getFilterPathByName("xxx");;
+        if (!VeLiveSDKHelper.isFileExists(filterPath)) {
+            return;
+        }
         //  设置滤镜资源包路径  
         mAnchorManager.getRTCVideo().setVideoEffectColorFilter(filterPath);
         //  设置滤镜特效强度  
@@ -186,6 +194,9 @@ public class LinkAnchorActivity extends AppCompatActivity {
     public void stickerControl(View view) {
         //  贴纸资源包，查找正确的资源路径，一般到 stickers_xxx 目录  
         String stickerPath = VeLiveEffectHelper.getStickerPathByName("xxx");
+        if (!VeLiveSDKHelper.isFileExists(stickerPath)) {
+            return;
+        }
         //  设置贴纸资源包路径  
         mAnchorManager.getRTCVideo().appendVideoEffectNodes(Collections.singletonList(stickerPath));
     }

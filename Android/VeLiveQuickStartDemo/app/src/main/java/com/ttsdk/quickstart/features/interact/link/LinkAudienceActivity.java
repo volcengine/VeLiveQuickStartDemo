@@ -221,6 +221,9 @@ public class LinkAudienceActivity extends AppCompatActivity {
         String licPath = VeLiveEffectHelper.getLicensePath("xxx.licbag");
         //  特效模型资源包路径  
         String algoModePath = VeLiveEffectHelper.getModelPath();
+        if (!VeLiveSDKHelper.isFileExists(licPath)) {
+            return;
+        }
         //  检查License  
         rtcVideo.checkVideoEffectLicense(Env.getApplicationContext(), licPath);
         //  设置特效算法包  
@@ -236,8 +239,10 @@ public class LinkAudienceActivity extends AppCompatActivity {
         }
         //  根据特效资源包，查找正确的资源路径，一般到 reshape_lite, beauty_IOS_lite 目录  
         String beautyPath = VeLiveEffectHelper.getBeautyPathByName("xxx");
+        if (!VeLiveSDKHelper.isFileExists(beautyPath)) {
+            return;
+        }
         //  设置美颜美型特效资源包  
-
         mAudienceManager.getRTCVideo().setVideoEffectNodes(Collections.singletonList(beautyPath));
         //  设置美颜美型特效强度, NodeKey 可在 资源包下的 .config_file 中获取，如果没有 .config_file ，请联系商务咨询  
         mAudienceManager.getRTCVideo().updateVideoEffectNode(beautyPath, "whiten", 0.5F);
@@ -249,6 +254,9 @@ public class LinkAudienceActivity extends AppCompatActivity {
         }
         //  滤镜资源包，查找正确的资源路径，一般到 Filter_01_xx 目录  
         String filterPath = VeLiveEffectHelper.getFilterPathByName("xxx");;
+        if (!VeLiveSDKHelper.isFileExists(filterPath)) {
+            return;
+        }
         //  设置滤镜资源包路径  
         mAudienceManager.getRTCVideo().setVideoEffectColorFilter(filterPath);
         //  设置滤镜特效强度  

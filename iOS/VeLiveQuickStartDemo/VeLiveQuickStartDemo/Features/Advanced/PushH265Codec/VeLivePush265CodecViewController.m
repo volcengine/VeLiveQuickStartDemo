@@ -23,7 +23,6 @@ H265编码推流
  6、打开麦克风采集 API:[self.livePusher startAudioCapture:(VeLiveAudioCaptureMicrophone)];
  7、打开摄像头采集 API: [self.livePusher startVideoCapture:(VeLiveVideoCaptureFrontCamera)];
  8、开始推流 API：[self.livePusher startPush:@"rtmp://push.example.com/rtmp"];
- 参考文档：https://www.volcengine.com/docs/6469/155317
  */
 #import "VeLivePush265CodecViewController.h"
 #import "VeLiveSDKHelper.h"
@@ -53,7 +52,6 @@ H265编码推流
 - (void)setupLivePusher {
     
     //  创建推流器  
-    //  更多配置参考：https://www.volcengine.com/docs/6469/155321#velivepusherconfiguration  
     self.livePusher = [[VeLivePusher alloc] initWithConfig:[[VeLivePusherConfiguration alloc] init]];
     
     //  视频编码配置  

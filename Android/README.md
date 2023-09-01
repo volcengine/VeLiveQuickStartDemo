@@ -1,6 +1,6 @@
 ## 火山引擎直播 SDK 快速集成 Demo
 
-[![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/volcengine/VeLiveQuickStartDemo/main/Android/LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/volcengine/VeLiveQuickStartDemo/blob/master/Android/LICENSE)
 
 ### VeLiveQuickStartDemo 介绍
 

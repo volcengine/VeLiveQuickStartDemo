@@ -174,6 +174,9 @@ public class PKAnchorActivity extends AppCompatActivity {
         String licPath = VeLiveEffectHelper.getLicensePath("xxx.licbag");
         //  特效模型资源包路径  
         String algoModePath = VeLiveEffectHelper.getModelPath();
+        if (!VeLiveSDKHelper.isFileExists(licPath)) {
+            return;
+        }
         //  检查License  
         rtcVideo.checkVideoEffectLicense(Env.getApplicationContext(), licPath);
         //  设置特效算法包  

@@ -22,7 +22,6 @@
  5、送入外部音频帧数据 API: [self.livePusher pushExternalAudioFrame:[[VeLiveAudioFrame alloc] init]]
  6、送入外部视频帧数据 API: [self.livePusher pushExternalAudioFrame:[[pushExternalVideoFrame alloc] init]]
  7、开始推流 API：[self.livePusher startPush:@"rtmp://push.example.com/rtmp"];
- 参考文档：https://www.volcengine.com/docs/6469/155317
  */
 #import "VeLivePushCustomViewController.h"
 #import "VeLiveSDKHelper.h"

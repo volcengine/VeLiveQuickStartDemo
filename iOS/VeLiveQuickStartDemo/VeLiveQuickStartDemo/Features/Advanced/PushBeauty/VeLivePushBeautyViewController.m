@@ -26,7 +26,6 @@
  9、设置美颜美型 API: [[self.livePusher getVideoEffectManager] setComposeNodes:@[]];
  10、设置滤镜 API: [[self.livePusher getVideoEffectManager] setFilter:@""];
  11、设置贴纸 API: [[self.livePusher getVideoEffectManager] setSticker:@""];
- 参考文档：https://www.volcengine.com/docs/6469/155317
  */
 #import "VeLivePushBeautyViewController.h"
 #import "VeLiveSDKHelper.h"
@@ -59,7 +58,6 @@
 - (void)setupLivePusher {
     
     //  创建推流器  
-    //  更多配置参考：https://www.volcengine.com/docs/6469/155321#velivepusherconfiguration  
     self.livePusher = [[VeLivePusher alloc] initWithConfig:[[VeLivePusherConfiguration alloc] init]];
     
     //  配置预览视图  
@@ -96,7 +94,9 @@
     //  特效模型资源包路径  
     NSString *algoModelPath = [NSBundle.mainBundle pathForResource:@"ModelResource.bundle" ofType:nil];
     
-
+    if (![NSFileManager.defaultManager fileExistsAtPath:licensePath]) {
+        return;
+    }
     //  创建美颜配置  
     VeLiveVideoEffectLicenseConfiguration *licConfig = [[VeLiveVideoEffectLicenseConfiguration alloc] initWithPath:licensePath];
     //  设置美颜配置  
@@ -129,7 +129,9 @@
 - (IBAction)beautyControl:(UIButton *)sender {
     //  根据特效资源包，查找正确的资源路径，一般到 reshape_lite, beauty_IOS_lite 目录  
     NSString *beautyPath = [NSBundle.mainBundle pathForResource:@"ComposeMakeup.bundle/xxx" ofType:nil];
-    
+    if (![NSFileManager.defaultManager fileExistsAtPath:beautyPath]) {
+        return;
+    }
     //  设置美颜美型特效资源包  
     [self.livePusher.getVideoEffectManager setComposeNodes:@[beautyPath]];
     //  设置美颜美型特效强度, NodeKey 可在 资源包下的 .config_file 中获取，如果没有 .config_file ，请联系商务咨询  
@@ -140,6 +142,9 @@
     //  滤镜资源包，查找正确的资源路径，一般到 Filter_01_xx 目录  
     
     NSString *filterPath = [NSBundle.mainBundle pathForResource:@"FilterResource.bundle/xxx" ofType:nil];
+    if (![NSFileManager.defaultManager fileExistsAtPath:filterPath]) {
+        return;
+    }
     //  设置滤镜资源包路径  
     [self.livePusher.getVideoEffectManager setFilter:filterPath];
     //  设置滤镜特效强度  
@@ -150,6 +155,9 @@
     //  贴纸资源包，查找正确的资源路径，一般到 stickers_xxx 目录  
 
     NSString *stickerPath = [NSBundle.mainBundle pathForResource:@"StickerResource.bundle/xxx" ofType:nil];
+    if (![NSFileManager.defaultManager fileExistsAtPath:stickerPath]) {
+        return;
+    }
     //  设置贴纸资源包路径  
     [self.livePusher.getVideoEffectManager setSticker:stickerPath];
 }

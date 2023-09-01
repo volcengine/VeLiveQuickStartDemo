@@ -23,6 +23,7 @@
     <string name="Home_Interactive_Features">互动功能</string>
     <string name="Home_Live_Beauty_Filter">美颜滤镜</string>
     <string name="Home_Live_Pull_Streaming">直播拉流</string>
+    <string name="Home_Picture_In_Picture">画中画</string>
     <string name="Home_Pull_Feed">Feed 流</string>
     <string name="Home_Push_Streaming_Bitrate_Adaptive">推流码率自适应</string>
     <string name="Home_RTM_Push_Streaming">RTM 超低延迟推流</string>
@@ -83,6 +84,8 @@
     <string name="Push_Stop_Push">停止推流</string>
     <string name="Push_UnMute">取消静音</string>
     <string name="Push_Url_Tip">推流地址</string>
+    <string name="Start_Picture_In_Picture">开启画中画</string>
+    <string name="Stop_Picture_In_Picture">停止画中画</string>
     <string name="app_name">veLive快速入门</string>
     <string name="input_url_list">请输入多个 URL 地址，用换行符分割</string>
     <string name="other_room_id">Other Room ID</string>
