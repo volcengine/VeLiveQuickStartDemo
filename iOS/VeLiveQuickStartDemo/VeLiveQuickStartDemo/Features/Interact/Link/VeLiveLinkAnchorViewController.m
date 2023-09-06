@@ -130,17 +130,19 @@
     
     //  特效鉴权License路径，请根据工程配置查找正确的路径  
     NSString *licensePath = [NSBundle.mainBundle pathForResource:@"LicenseBag.bundle/xxx.licbag" ofType:nil];
-    if (![NSFileManager.defaultManager fileExistsAtPath:licensePath]) {
-        return;
-    }
-    [rtcVideo checkVideoEffectLicense:licensePath];
     
     //  特效算法资源包路径  
     NSString *algoModelPath = [NSBundle.mainBundle pathForResource:@"ModelResource.bundle" ofType:nil];
-    [rtcVideo setVideoEffectAlgoModelPath:algoModelPath];
+    
+    if (![NSFileManager.defaultManager fileExistsAtPath:licensePath]) {
+        return;
+    }
+    [rtcVideo.getVideoEffectInterface initCVResource:licensePath withAlgoModelDir:algoModelPath];
+    
+    
     
     //  开启美颜特效处理  
-    if ([rtcVideo enableVideoEffect:YES] != 0) {
+    if ([rtcVideo.getVideoEffectInterface enableVideoEffect] != 0) {
         NSLog(@"VeLiveQuickStartDemo: license unavailabel, please check");
     }
 }
@@ -152,10 +154,10 @@
         return;
     }
     //  设置美颜美型特效资源包  
-    [self.liveAnchorManager.rtcVideo setVideoEffectNodes:@[beautyPath]];
+    [self.liveAnchorManager.rtcVideo.getVideoEffectInterface setEffectNodes:@[beautyPath]];
     
     //  设置美颜美型特效强度, NodeKey 可在 资源包下的 .config_file 中获取，如果没有 .config_file ，请联系商务咨询  
-    [self.liveAnchorManager.rtcVideo updateVideoEffectNode:beautyPath nodeKey:@"whiten" nodeValue:0.5];
+    [self.liveAnchorManager.rtcVideo.getVideoEffectInterface updateEffectNode:beautyPath key:@"whiten" value:0.5];
 }
 
 - (IBAction)filterControl:(UIButton *)sender {
@@ -164,8 +166,8 @@
     if (![NSFileManager.defaultManager fileExistsAtPath:filterPath]) {
         return;
     }
-    [self.liveAnchorManager.rtcVideo setVideoEffectColorFilter:filterPath];
-    [self.liveAnchorManager.rtcVideo setVideoEffectColorFilterIntensity:0.5];
+    [self.liveAnchorManager.rtcVideo.getVideoEffectInterface setColorFilter:filterPath];
+    [self.liveAnchorManager.rtcVideo.getVideoEffectInterface setColorFilterIntensity:0.5];
 }
 
 - (IBAction)stickerControl:(UIButton *)sender {
@@ -174,7 +176,7 @@
     if (![NSFileManager.defaultManager fileExistsAtPath:stickerPath]) {
         return;
     }
-    [self.liveAnchorManager.rtcVideo appendVideoEffectNodes:@[stickerPath]];
+    [self.liveAnchorManager.rtcVideo.getVideoEffectInterface appendEffectNodes:@[stickerPath]];
 }
 
 
@@ -231,9 +233,9 @@
     [manager updateLiveTranscodingLayout:[self rtcLayout]];
 }
 
-- (ByteRTCVideoCompositingLayout *)rtcLayout {
+- (ByteRTCMixedStreamLayoutConfig *)rtcLayout {
     //  初始化布局  
-    ByteRTCVideoCompositingLayout * layout = [[ByteRTCVideoCompositingLayout alloc]init];
+    ByteRTCMixedStreamLayoutConfig * layout = [[ByteRTCMixedStreamLayoutConfig alloc]init];
     
     //  设置背景色  
     layout.backgroundColor = @"#000000"; // 仅供参考 
@@ -246,25 +248,25 @@
     CGFloat guestStartY = (viewHeight - 42) / viewHeight;
     [self.usersInRoom enumerateObjectsUsingBlock:^(NSString * _Nonnull uid, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        ByteRTCVideoCompositingRegion *region = [[ByteRTCVideoCompositingRegion alloc]init];
-        region.uid          = uid;
-        region.roomId       = self.roomID;
-        region.localUser    = [uid isEqualToString:self.userID]; //  判断是否为当前主播  
-        region.renderMode   = ByteRTCRenderModeHidden;
+        ByteRTCMixedStreamLayoutRegionConfig *region = [[ByteRTCMixedStreamLayoutRegionConfig alloc]init];
+        region.userID          = uid;
+        region.roomID       = self.roomID;
+        region.isLocalUser    = [uid isEqualToString:self.userID]; //  判断是否为当前主播  
+        region.renderMode   = ByteRTCMixedStreamRenderModeHidden;
         
-        if (region.localUser) { // 当前主播位置，仅供参考 
-            region.x        = 0.0;
-            region.y        = 0.0;
-            region.width    = 1;
-            region.height   = 1;
+        if (region.isLocalUser) { // 当前主播位置，仅供参考 
+            region.locationX        = 0.0;
+            region.locationY        = 0.0;
+            region.widthProportion    = 1;
+            region.heightProportion   = 1;
             region.zOrder   = 0;
             region.alpha    = 1.0;
         } else { //  远端用户位置，仅供参考  
-            region.x        = guestX;
+            region.locationX        = guestX;
             //  130 是小窗的宽高， 8 是小窗的间距  
-            region.y        = guestStartY - (130.0 * (guestIndex + 1) + guestIndex * 8) / viewHeight;
-            region.width    = (130.0 / viewWidth);
-            region.height   = (130.0 / viewHeight);
+            region.locationY        = guestStartY - (130.0 * (guestIndex + 1) + guestIndex * 8) / viewHeight;
+            region.widthProportion    = (130.0 / viewWidth);
+            region.heightProportion   = (130.0 / viewHeight);
             region.zOrder   = 1;
             region.alpha    = 1;
             guestIndex ++;

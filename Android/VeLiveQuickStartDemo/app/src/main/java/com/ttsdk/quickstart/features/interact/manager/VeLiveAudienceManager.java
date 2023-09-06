@@ -29,6 +29,7 @@ import com.ss.bytertc.engine.UserInfo;
 import com.ss.bytertc.engine.VideoCanvas;
 import com.ss.bytertc.engine.VideoEncoderConfig;
 import com.ss.bytertc.engine.data.MirrorType;
+import com.ss.bytertc.engine.data.RemoteStreamKey;
 import com.ss.bytertc.engine.data.StreamIndex;
 import com.ss.bytertc.engine.handler.IRTCVideoEventHandler;
 import com.ss.bytertc.engine.type.ChannelProfile;
@@ -155,8 +156,6 @@ public class VeLiveAudienceManager {
         }
         VideoCanvas videoCanvas = new VideoCanvas();
         videoCanvas.renderView = renderView;
-        videoCanvas.uid = mUserId;
-        videoCanvas.isScreen = false;
         videoCanvas.renderMode = VideoCanvas.RENDER_MODE_HIDDEN;
         //  设置本地视频渲染视图  
         mRTCVideo.setLocalVideoCanvas(StreamIndex.STREAM_INDEX_MAIN, videoCanvas);
@@ -165,8 +164,11 @@ public class VeLiveAudienceManager {
 
     public void setRemoteVideoView(String uid, TextureView renderView) {
         if (mRTCVideo != null) {
-            VideoCanvas canvas = new VideoCanvas(renderView, RENDER_MODE_HIDDEN, mRoomId, uid, false);
-            mRTCVideo.setRemoteVideoCanvas(uid, StreamIndex.STREAM_INDEX_MAIN, canvas);
+            VideoCanvas canvas = new VideoCanvas();
+            canvas.renderView = renderView;
+            canvas.renderMode = RENDER_MODE_HIDDEN;
+            RemoteStreamKey key = new RemoteStreamKey(mRoomId, uid, StreamIndex.STREAM_INDEX_MAIN);
+            mRTCVideo.setRemoteVideoCanvas(key, canvas);
         }
     }
 
@@ -178,11 +180,11 @@ public class VeLiveAudienceManager {
 
     public void startVideoCapture() {
         if (mRTCVideo != null) {
-            VideoEncoderConfig config = new VideoEncoderConfig(
-                    mConfig.mVideoEncoderWidth,
-                    mConfig.mVideoEncoderHeight,
-                    mConfig.mVideoEncoderFps,
-                    mConfig.mVideoEncoderKBitrate * 1000);
+            VideoEncoderConfig config = new VideoEncoderConfig();
+            config.frameRate = mConfig.mVideoEncoderFps;
+            config.width = mConfig.mVideoEncoderWidth;
+            config.height = mConfig.mVideoEncoderHeight;
+            config.maxBitrate = mConfig.mVideoEncoderKBitrate * 1000;
             mRTCVideo.setVideoEncoderConfig(config);
             mRTCVideo.startVideoCapture();
         }

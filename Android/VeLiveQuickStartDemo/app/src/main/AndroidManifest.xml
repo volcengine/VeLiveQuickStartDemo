@@ -62,6 +62,10 @@
             android:exported="false"
             android:label="@string/Home_H265_Hardcoded" />
         <activity
+            android:name=".features.advanced.PushScreenActivity"
+            android:exported="false"
+            android:label="@string/Home_Screen_Push" />
+        <activity
             android:name=".features.advanced.PushAutoBitrateActivity"
             android:exported="false"
             android:label="@string/Push_Auto_Bitrate" />
@@ -96,6 +100,10 @@
             </intent-filter>
         </activity>
         <service android:name=".features.advanced.pip.FloatingVideoService"></service>
+        <service android:name=".helper.KeepLiveService"
+            android:enabled="true"
+            android:foregroundServiceType="mediaProjection"
+            android:exported="true"></service>
     </application>
 
 </manifest>

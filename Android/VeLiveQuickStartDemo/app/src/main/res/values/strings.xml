@@ -20,6 +20,7 @@
     <string name="Home_Camera_Push">摄像头推流</string>
     <string name="Home_Custom_Push_Stream">自定义采集推流</string>
     <string name="Home_H265_Hardcoded">H.265 硬编码</string>
+    <string name="Home_Screen_Push">屏幕采集推流</string>
     <string name="Home_Interactive_Features">互动功能</string>
     <string name="Home_Live_Beauty_Filter">美颜滤镜</string>
     <string name="Home_Live_Pull_Streaming">直播拉流</string>

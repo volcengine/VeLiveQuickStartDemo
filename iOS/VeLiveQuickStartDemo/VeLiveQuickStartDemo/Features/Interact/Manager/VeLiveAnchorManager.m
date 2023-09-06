@@ -13,7 +13,7 @@
 //
 
 #import "VeLiveAnchorManager.h"
-@interface VeLiveAnchorManager () <ByteRTCRoomDelegate, ByteRTCVideoDelegate, ByteRTCVideoSinkDelegate, ByteRTCAudioFrameObserver, LiveTranscodingDelegate, VeLivePusherObserver>
+@interface VeLiveAnchorManager () <ByteRTCRoomDelegate, ByteRTCVideoDelegate, ByteRTCVideoSinkDelegate, ByteRTCAudioFrameObserver, ByteRTCMixedStreamObserver, VeLivePusherObserver>
 @property (nonatomic, strong, readwrite) ByteRTCVideo *rtcVideo;
 @property (nonatomic, strong, readwrite) ByteRTCRoom *rtcRoom;
 @property (nonatomic, copy, readwrite) NSString *appId;
@@ -22,7 +22,7 @@
 @property (nonatomic, copy, readwrite) NSString *token;
 @property (nonatomic, assign, getter=isInteractive) BOOL interactive;
 @property (nonatomic, strong, readwrite) VeLivePusher *livePusher;
-@property (nonatomic, strong) ByteRTCLiveTranscoding *rtcLiveTranscoding;
+@property (nonatomic, strong) ByteRTCMixedStreamConfig *mixStreamConfig;
 @property (nonatomic, copy) NSString *streamUrl;
 @property (nonatomic, copy) NSString *rtcTaskId;
 @end
@@ -47,12 +47,16 @@
 
 - (void)setRemoteVideoView:(UIView *)view forUid:(NSString *)uid {
     if (self.rtcVideo) {
-        ByteRTCVideoCanvas *canvasView = [[ByteRTCVideoCanvas alloc] init];
-        canvasView.uid = uid;
-        canvasView.view = view;
-        canvasView.roomId = self.roomId;
-        canvasView.renderMode = ByteRTCRenderModeHidden;
-        [self.rtcVideo setRemoteVideoCanvas:uid withIndex:(ByteRTCStreamIndexMain) withCanvas:canvasView];
+        ByteRTCVideoCanvas *canvas = [[ByteRTCVideoCanvas alloc] init];
+        canvas.renderMode = ByteRTCRenderModeHidden;
+        canvas.view.backgroundColor = [UIColor clearColor];
+        canvas.view = view;
+        
+        ByteRTCRemoteStreamKey *streamKey = [[ByteRTCRemoteStreamKey alloc] init];
+        streamKey.userId = uid;
+        streamKey.streamIndex = ByteRTCStreamIndexMain;
+        streamKey.roomId = self.roomId;
+        [self.rtcVideo setRemoteVideoCanvas:streamKey withCanvas:canvas];
     }
 }
 
@@ -115,7 +119,7 @@
     audioFormat.channel = ByteRTCAudioChannelStereo;
     audioFormat.sampleRate = ByteRTCAudioSampleRate44100;
     [self.rtcVideo enableAudioFrameCallback:(ByteRTCAudioFrameCallbackRecord) format:audioFormat];
-    [self.rtcVideo setAudioFrameObserver:self];
+    [self.rtcVideo registerAudioFrameObserver:self];
 }
 
 - (void)stopAudioCapture {
@@ -124,7 +128,7 @@
 
 - (void)unregisterAudioListener {
     [self.rtcVideo disableAudioFrameCallback:(ByteRTCAudioFrameCallbackRecord)];
-    [self.rtcVideo setAudioFrameObserver:nil];
+    [self.rtcVideo registerAudioFrameObserver:nil];
 }
 
 - (void)startInteract:(NSString *)roomId token:(NSString *)token delegate:(id <VeLiveAnchorDelegate>)delegate {
@@ -148,14 +152,14 @@
     
     //  加入RTC房间  
     NSLog(@"VeLiveQuickStartDemo: join room %@ - %@", roomId, self.userId);
-    [self.rtcRoom joinRoomByToken:token userInfo:userInfo roomConfig:config];
+    [self.rtcRoom joinRoom:token userInfo:userInfo roomConfig:config];
     self.interactive = YES;
 }
 
 
 - (void)stopInteract {
-    self.rtcLiveTranscoding = nil;
-    [self.rtcVideo stopLiveTranscoding:self.rtcTaskId];
+    self.mixStreamConfig = nil;
+    [self.rtcVideo stopPushStreamToCDN:self.rtcTaskId];
     [self.rtcRoom leaveRoom];
     self.interactive = NO;
     [self startPushIfNeed];
@@ -175,7 +179,8 @@
 //        [self updateLiveTranscodingLayout:layout];
         [self.rtcVideo sendSEIMessage:(ByteRTCStreamIndexMain)
                            andMessage:[message dataUsingEncoding:NSUTF8StringEncoding]
-                       andRepeatCount:repeat];
+                       andRepeatCount:repeat
+                     andCountPerFrame:kSingleSEIPerFrame];
     }
 }
 
@@ -267,7 +272,7 @@
         solution.frameRate = self.config.captureFps;
         solution.maxBitrate = self.config.videoEncoderKBitrate;
         //  设置编码参数  
-        [self.rtcVideo SetMaxVideoEncoderConfig:solution];
+        [self.rtcVideo setMaxVideoEncoderConfig:solution];
         //  使用前置摄像头，本地预览和推流镜像  
         [self.rtcVideo switchCamera:(ByteRTCCameraIDFront)];
         //  设置镜像  
@@ -283,9 +288,7 @@
     if (_rtcVideo) {
         //  设置本地View  
         ByteRTCVideoCanvas *canvasView = [[ByteRTCVideoCanvas alloc] init];
-        canvasView.uid = self.userId;
         canvasView.view = view;
-        canvasView.roomId = self.roomId;
         canvasView.renderMode = ByteRTCRenderModeHidden;
         [self.rtcVideo setLocalVideoCanvas:ByteRTCStreamIndexMain withCanvas:canvasView];
     }
@@ -340,40 +343,41 @@
     [self startPushIfNeed];
 }
 
-- (void)updateLiveTranscodingLayout:(ByteRTCVideoCompositingLayout *)layout {
-    if (self.rtcLiveTranscoding == nil) {
-        self.rtcLiveTranscoding = [ByteRTCLiveTranscoding defaultTranscoding];
-        self.rtcLiveTranscoding.roomId = self.roomId;
-        self.rtcLiveTranscoding.userId = self.userId;
+- (void)updateLiveTranscodingLayout:(ByteRTCMixedStreamLayoutConfig *)layout {
+    if (self.mixStreamConfig == nil) {
+        self.mixStreamConfig = [ByteRTCMixedStreamConfig defaultMixedStreamConfig];
+        self.mixStreamConfig.roomID = self.roomId;
+        self.mixStreamConfig.userID = self.userId;
+        
         
         //  设置视频编码参数  
-        self.rtcLiveTranscoding.video.width = self.config.videoEncoderWith;
-        self.rtcLiveTranscoding.video.height = self.config.videoEncoderHeight;
-        self.rtcLiveTranscoding.video.fps = self.config.videoEncoderFps;
-        self.rtcLiveTranscoding.video.kBitRate = self.config.videoEncoderKBitrate;
+        self.mixStreamConfig.videoConfig.width = self.config.videoEncoderWith;
+        self.mixStreamConfig.videoConfig.height = self.config.videoEncoderHeight;
+        self.mixStreamConfig.videoConfig.fps = self.config.videoEncoderFps;
+        self.mixStreamConfig.videoConfig.bitrate = self.config.videoEncoderKBitrate;
         
         //  设置音频编码参数  
-        self.rtcLiveTranscoding.audio.sampleRate = self.config.audioEncoderSampleRate;
-        self.rtcLiveTranscoding.audio.channels = self.config.audioEncoderChannel;
-        self.rtcLiveTranscoding.audio.kBitRate = self.config.audioEncoderKBitrate;
+        self.mixStreamConfig.audioConfig = [[ByteRTCMixedStreamAudioConfig alloc] init];
+        self.mixStreamConfig.audioConfig.sampleRate = self.config.audioEncoderSampleRate;
+        self.mixStreamConfig.audioConfig.channels = self.config.audioEncoderChannel;
+        self.mixStreamConfig.audioConfig.bitrate = self.config.audioEncoderKBitrate;
         
         //  设置推流地址  
-        self.rtcLiveTranscoding.url = self.streamUrl;
+        self.mixStreamConfig.pushURL = self.streamUrl;
         //  服务端合流  
-        self.rtcLiveTranscoding.expectedMixingType = ByteRTCStreamMixingTypeByServer;
+        self.mixStreamConfig.expectedMixingType = ByteRTCMixedStreamByServer;
         
         //  设置混流模版  
-        self.rtcLiveTranscoding.layout = layout;
+        self.mixStreamConfig.layoutConfig = layout;
         
         //  设置混流任务Id  
-        self.rtcTaskId = @"";
-        
-        [self.rtcVideo startLiveTranscoding:self.rtcTaskId transcoding:self.rtcLiveTranscoding observer:self];
+        self.rtcTaskId = @"unique_id";
+        [self.rtcVideo startPushMixedStreamToCDN:self.rtcTaskId mixedConfig:self.mixStreamConfig observer:self];
     } else {
         //  设置混流模版  
-        self.rtcLiveTranscoding.layout = layout;
+        self.mixStreamConfig.layoutConfig = layout;
         //  开启RTC 服务端混流  
-        [self.rtcVideo updateLiveTranscoding:self.rtcTaskId transcoding:self.rtcLiveTranscoding];
+        [self.rtcVideo updatePushMixedStreamToCDN:self.rtcTaskId mixedConfig:self.mixStreamConfig];
     }
 }
 
@@ -503,13 +507,13 @@
     return NO;
 }
 
-- (void)onStreamMixingEvent:(ByteRTCStreamMixingEvent)event
+- (void)onMixingEvent:(ByteRTCStreamMixingEvent)event
                   taskId:(NSString *_Nonnull)taskId
-                      error:(ByteRtcTranscoderErrorCode)Code
-                    mixType:(ByteRTCStreamMixingType)mixType {
-    if (Code == ByteRtcTranscoderErrorCodeOK && event == ByteRTCStreamMixingEventStartSuccess) {
+                      error:(ByteRTCStreamMixingErrorCode)Code
+                    mixType:(ByteRTCMixedStreamType)mixType {
+    if (Code == ByteRTCStreamMixingErrorCodeOK && event == ByteRTCStreamMixingEventStartSuccess) {
         //  如果合流降级到了服务端，需要把当前标识置为 NO，并停止 LiveCore 的推流  
-        if (mixType == ByteRTCStreamMixingTypeByServer) {
+        if (mixType == ByteRTCMixedStreamByServer) {
             NSLog(@"VeLiveQuickStartDemo: mix by server success");
         }
     }

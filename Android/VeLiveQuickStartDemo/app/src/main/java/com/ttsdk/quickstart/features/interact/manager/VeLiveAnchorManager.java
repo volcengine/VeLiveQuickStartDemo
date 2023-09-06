@@ -21,7 +21,7 @@ import static com.ss.bytertc.engine.live.ByteRTCStreamMixingType.STREAM_MIXING_B
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.TextureView;
-import org.webrtc.VideoFrame;
+import com.bytedance.realx.video.VideoFrame;
 import com.pandora.common.env.Env;
 import com.ss.avframework.live.VeLiveAudioFrame;
 import com.ss.avframework.live.VeLivePusher;
@@ -166,8 +166,6 @@ public class VeLiveAnchorManager {
         }
         VideoCanvas videoCanvas = new VideoCanvas();
         videoCanvas.renderView = renderView;
-        videoCanvas.uid = mUserId;
-        videoCanvas.isScreen = false;
         videoCanvas.renderMode = VideoCanvas.RENDER_MODE_HIDDEN;
         //  设置本地视频渲染视图  
         mRTCVideo.setLocalVideoCanvas(StreamIndex.STREAM_INDEX_MAIN, videoCanvas);
@@ -176,8 +174,11 @@ public class VeLiveAnchorManager {
 
     public void setRemoteVideoView(String uid, TextureView renderView) {
         if (mRTCVideo != null) {
-            VideoCanvas canvas = new VideoCanvas(renderView, RENDER_MODE_HIDDEN, mRoomId, uid, false);
-            mRTCVideo.setRemoteVideoCanvas(uid, StreamIndex.STREAM_INDEX_MAIN, canvas);
+            VideoCanvas canvas = new VideoCanvas();
+            canvas.renderView = renderView;
+            canvas.renderMode = RENDER_MODE_HIDDEN;
+            RemoteStreamKey key = new RemoteStreamKey(mRoomId, uid, StreamIndex.STREAM_INDEX_MAIN);
+            mRTCVideo.setRemoteVideoCanvas(key, canvas);
         }
     }
 
@@ -196,11 +197,11 @@ public class VeLiveAnchorManager {
             captureConfig.frameRate = mConfig.mVideoCaptureFps;
             mRTCVideo.setVideoCaptureConfig(captureConfig);
 
-            VideoEncoderConfig config = new VideoEncoderConfig(
-                    mConfig.mVideoEncoderWidth,
-                    mConfig.mVideoEncoderHeight,
-                    mConfig.mVideoEncoderFps,
-                    mConfig.mVideoEncoderKBitrate * 1000);
+            VideoEncoderConfig config = new VideoEncoderConfig();
+            config.frameRate = mConfig.mVideoEncoderFps;
+            config.width = mConfig.mVideoEncoderWidth;
+            config.height = mConfig.mVideoEncoderHeight;
+            config.maxBitrate = mConfig.mVideoEncoderKBitrate * 1000;
             mRTCVideo.setVideoEncoderConfig(config);
 
             //  使用前置摄像头，本地预览和推流镜像  
@@ -574,15 +575,25 @@ public class VeLiveAnchorManager {
         }
 
         @Override
-        public void onMixingAudioFrame(String taskId, byte[] audioFrame, int frameNum) {
+        public void onMixingAudioFrame(String taskId, byte[] audioFrame, int frameNum, long timeStampMs) {
+
         }
 
         @Override
         public void onMixingVideoFrame(String taskId, VideoFrame videoFrame) {
+
         }
 
         @Override
-        public void onDataFrame(String taskId, byte[] dataFrame, long time) {}
+        public void onMixingDataFrame(String taskId, byte[] dataFrame, long time) {
+
+        }
+
+        @Override
+        public void onCacheSyncVideoFrames(String taskId, String[] userIds, VideoFrame[] videoFrame, byte[][] dataFrame, int count) {
+
+        }
+
     };
 
     private void startLiveTranscoding(String taskId, LiveTranscoding.Layout layout) {

@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(new HomeItem(getResources().getString(R.string.Home_Custom_Push_Stream), advancedPackage + "PushCustomActivity"));
         list.add(new HomeItem(getResources().getString(R.string.Home_Push_Streaming_Bitrate_Adaptive), advancedPackage + "PushAutoBitrateActivity"));
         list.add(new HomeItem(getResources().getString(R.string.Home_H265_Hardcoded), advancedPackage + "PushH265CodecActivity"));
+        list.add(new HomeItem(getResources().getString(R.string.Home_Screen_Push), advancedPackage + "PushScreenActivity"));
         list.add(new HomeItem(getResources().getString(R.string.Home_Pull_Feed), advancedPackage + "PullFeedInputActivity"));
         list.add(new HomeItem(getResources().getString(R.string.Home_Picture_In_Picture), advancedPackage + "PictureInPictureActivity"));
         list.add(new HomeItem(getResources().getString(R.string.Home_Interactive_Features)));

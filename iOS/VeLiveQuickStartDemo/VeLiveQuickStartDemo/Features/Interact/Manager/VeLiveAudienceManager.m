@@ -46,12 +46,16 @@
 
 - (void)setRemoteVideoView:(UIView *)view forUid:(NSString *)uid {
     if (self.rtcVideo) {
-        ByteRTCVideoCanvas *canvasView = [[ByteRTCVideoCanvas alloc] init];
-        canvasView.uid = uid;
-        canvasView.view = view;
-        canvasView.roomId = self.roomId;
-        canvasView.renderMode = ByteRTCRenderModeHidden;
-        [self.rtcVideo setRemoteVideoCanvas:uid withIndex:(ByteRTCStreamIndexMain) withCanvas:canvasView];
+        ByteRTCVideoCanvas *canvas = [[ByteRTCVideoCanvas alloc] init];
+        canvas.renderMode = ByteRTCRenderModeHidden;
+        canvas.view.backgroundColor = [UIColor clearColor];
+        canvas.view = view;
+        
+        ByteRTCRemoteStreamKey *streamKey = [[ByteRTCRemoteStreamKey alloc] init];
+        streamKey.userId = uid;
+        streamKey.streamIndex = ByteRTCStreamIndexMain;
+        streamKey.roomId = self.roomId;
+        [self.rtcVideo setRemoteVideoCanvas:streamKey withCanvas:canvas];
     }
 }
 
@@ -114,7 +118,7 @@
     
     //  加入RTC房间  
     NSLog(@"VeLiveQuickStartDemo: join room %@ - %@", roomId, self.userId);
-    [self.rtcRoom joinRoomByToken:token userInfo:userInfo roomConfig:config];
+    [self.rtcRoom joinRoom:token userInfo:userInfo roomConfig:config];
     self.interactive = YES;
 }
 
@@ -130,7 +134,8 @@
 - (void)sendSeiMessage:(NSString *)message repeat:(int)repeat {
     [self.rtcVideo sendSEIMessage:(ByteRTCStreamIndexMain)
                        andMessage:[message dataUsingEncoding:NSUTF8StringEncoding]
-                   andRepeatCount:repeat];
+                   andRepeatCount:repeat
+                 andCountPerFrame:(kSingleSEIPerFrame)];
 }
 
 - (void)destory {
@@ -220,7 +225,7 @@
         solution.frameRate = self.config.captureFps;
         solution.maxBitrate = self.config.videoEncoderKBitrate;
         [self.rtcVideo setVideoOrientation:(ByteRTCVideoOrientationPortrait)];
-        [self.rtcVideo SetMaxVideoEncoderConfig:solution];
+        [self.rtcVideo setMaxVideoEncoderConfig:solution];
         [self setupLocalVideoView:_localVideoView];
     }
 }
@@ -229,9 +234,7 @@
     if (_rtcVideo) {
         //  设置本地View  
         ByteRTCVideoCanvas *canvasView = [[ByteRTCVideoCanvas alloc] init];
-        canvasView.uid = self.userId;
         canvasView.view = view;
-        canvasView.roomId = self.roomId;
         canvasView.renderMode = ByteRTCRenderModeHidden;
         [self.rtcVideo setLocalVideoCanvas:ByteRTCStreamIndexMain withCanvas:canvasView];
     }

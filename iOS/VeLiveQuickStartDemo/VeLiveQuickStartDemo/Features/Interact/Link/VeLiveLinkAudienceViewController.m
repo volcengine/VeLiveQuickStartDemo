@@ -124,18 +124,19 @@
     //  特效鉴权License路径，请根据工程配置查找正确的路径  
     NSString *licensePath = [NSBundle.mainBundle pathForResource:@"LicenseBag.bundle/xxx.licbag" ofType:nil];
     
+    //  特效算法资源包路径  
+    NSString *algoModelPath = [NSBundle.mainBundle pathForResource:@"ModelResource.bundle" ofType:nil];
+    
     if (![NSFileManager.defaultManager fileExistsAtPath:licensePath]) {
         return;
     }
     
-    [rtcVideo checkVideoEffectLicense:licensePath];
+    [rtcVideo.getVideoEffectInterface initCVResource:licensePath withAlgoModelDir:algoModelPath];
     
-    //  特效算法资源包路径  
-    NSString *algoModelPath = [NSBundle.mainBundle pathForResource:@"ModelResource.bundle" ofType:nil];
-    [rtcVideo setVideoEffectAlgoModelPath:algoModelPath];
+    
     
     //  开启美颜特效处理  
-    if ([rtcVideo enableVideoEffect:YES] != 0) {
+    if ([rtcVideo.getVideoEffectInterface enableVideoEffect] != 0) {
         NSLog(@"VeLiveQuickStartDemo: license unavailabel, please check");
     }
 }
@@ -147,9 +148,9 @@
         return;
     }
     //  设置美颜美型特效资源包  
-    [self.audienceManager.rtcVideo setVideoEffectNodes:@[beautyPath]];
+    [self.audienceManager.rtcVideo.getVideoEffectInterface setEffectNodes:@[beautyPath]];
     //  设置美颜美型特效强度, NodeKey 可在 资源包下的 .config_file 中获取，如果没有 .config_file ，请联系商务咨询  
-    [self.audienceManager.rtcVideo updateVideoEffectNode:beautyPath nodeKey:@"whiten" nodeValue:0.5];
+    [self.audienceManager.rtcVideo.getVideoEffectInterface updateEffectNode:beautyPath key:@"whiten" value:0.5];
 }
 
 - (IBAction)filterControl:(UIButton *)sender {
@@ -158,8 +159,8 @@
     if (![NSFileManager.defaultManager fileExistsAtPath:filterPath]) {
         return;
     }
-    [self.audienceManager.rtcVideo setVideoEffectColorFilter:filterPath];
-    [self.audienceManager.rtcVideo setVideoEffectColorFilterIntensity:0.5];
+    [self.audienceManager.rtcVideo.getVideoEffectInterface setColorFilter:filterPath];
+    [self.audienceManager.rtcVideo.getVideoEffectInterface setColorFilterIntensity:0.5];
 }
 
 - (IBAction)stickerControl:(UIButton *)sender {
@@ -168,7 +169,7 @@
     if (![NSFileManager.defaultManager fileExistsAtPath:stickerPath]) {
         return;
     }
-    [self.audienceManager.rtcVideo appendVideoEffectNodes:@[stickerPath]];
+    [self.audienceManager.rtcVideo.getVideoEffectInterface appendEffectNodes:@[stickerPath]];
 }
 
 
