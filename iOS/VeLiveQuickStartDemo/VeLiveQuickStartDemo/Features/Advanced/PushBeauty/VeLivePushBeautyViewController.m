@@ -105,7 +105,7 @@
     [effectManager setAlgoModelPath:algoModelPath];
     
     //  开启美颜特效处理  
-    if (![effectManager setEnable:YES]) {
+    if ([effectManager setEnable:YES] != 0) {
         NSLog(@"VeLiveQuickStartDemo: license unavailabel, please check");
     }
 }
