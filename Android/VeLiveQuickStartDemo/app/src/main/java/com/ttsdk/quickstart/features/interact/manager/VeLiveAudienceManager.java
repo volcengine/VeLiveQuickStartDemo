@@ -30,6 +30,7 @@ import com.ss.bytertc.engine.VideoCanvas;
 import com.ss.bytertc.engine.VideoEncoderConfig;
 import com.ss.bytertc.engine.data.MirrorType;
 import com.ss.bytertc.engine.data.RemoteStreamKey;
+import com.ss.bytertc.engine.data.SEICountPerFrame;
 import com.ss.bytertc.engine.data.StreamIndex;
 import com.ss.bytertc.engine.handler.IRTCVideoEventHandler;
 import com.ss.bytertc.engine.type.ChannelProfile;
@@ -238,7 +239,7 @@ public class VeLiveAudienceManager {
 
     public void sendSeiMessage(String msg, int repeat) {
         mRTCVideo.sendSEIMessage(StreamIndex.STREAM_INDEX_MAIN,
-                TextUtils.isEmpty(msg) ? new byte[0] : msg.getBytes(), repeat);
+                TextUtils.isEmpty(msg) ? new byte[0] : msg.getBytes(), repeat, SEICountPerFrame.SEI_COUNT_PER_FRAME_MULTI);
     }
 
     private void releaseLivePlayer() {

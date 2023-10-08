@@ -17,13 +17,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ToggleButton;
 
+import com.ss.bytertc.engine.live.MixedStreamConfig;
+import com.ss.bytertc.engine.video.IVideoEffect;
 import com.ttsdk.quickstart.R;
 import com.ttsdk.quickstart.helper.VeLiveEffectHelper;
 import com.ttsdk.quickstart.helper.VeLiveSDKHelper;
 import com.ttsdk.quickstart.features.interact.manager.VeLiveAnchorManager;
 import com.pandora.common.env.Env;
 import com.ss.bytertc.engine.RTCVideo;
-import com.ss.bytertc.engine.live.LiveTranscoding;
 import com.ss.bytertc.engine.type.MediaStreamType;
 import com.ss.bytertc.engine.type.StreamRemoveReason;
 
@@ -150,19 +151,20 @@ public class LinkAnchorActivity extends AppCompatActivity {
     }
 
     private void setupEffectSDK() {
-        RTCVideo rtcVideo = mAnchorManager.getRTCVideo();
+
         //  特效鉴权License路径，请根据工程配置查找正确的路径  
         String licPath = VeLiveEffectHelper.getLicensePath("xxx.licbag");
         //  特效模型资源包路径  
         String algoModePath = VeLiveEffectHelper.getModelPath();
-        if (!VeLiveSDKHelper.isFileExists(licPath)) {
+        if (!VeLiveSDKHelper.isFileExists(licPath) || !VeLiveSDKHelper.isFileExists(algoModePath)) {
             return;
         }
+        IVideoEffect effect = mAnchorManager.getRTCVideo().getVideoEffectInterface();
         //  检查License  
-        rtcVideo.checkVideoEffectLicense(Env.getApplicationContext(), licPath);
         //  设置特效算法包  
-        rtcVideo.setVideoEffectAlgoModelPath(algoModePath);
-        if (rtcVideo.enableEffectBeauty(true) != 0) {
+        effect.initCVResource(licPath, algoModePath);
+
+        if (effect.enableVideoEffect() != 0) {
             Log.e("VeLiveQuickStartDemo", "enable effect error");
         }
     }
@@ -173,10 +175,11 @@ public class LinkAnchorActivity extends AppCompatActivity {
         if (!VeLiveSDKHelper.isFileExists(beautyPath)) {
             return;
         }
+        IVideoEffect effect = mAnchorManager.getRTCVideo().getVideoEffectInterface();
         //  设置美颜美型特效资源包  
-        mAnchorManager.getRTCVideo().setVideoEffectNodes(Collections.singletonList(beautyPath));
+        effect.setEffectNodes(Collections.singletonList(beautyPath));
         //  设置美颜美型特效强度, NodeKey 可在 资源包下的 .config_file 中获取，如果没有 .config_file ，请联系商务咨询  
-        mAnchorManager.getRTCVideo().updateVideoEffectNode(beautyPath, "whiten", 0.5F);
+        effect.updateEffectNode(beautyPath, "whiten", 0.5F);
     }
 
     public void filterControl(View view) {
@@ -185,10 +188,11 @@ public class LinkAnchorActivity extends AppCompatActivity {
         if (!VeLiveSDKHelper.isFileExists(filterPath)) {
             return;
         }
+        IVideoEffect effect = mAnchorManager.getRTCVideo().getVideoEffectInterface();
         //  设置滤镜资源包路径  
-        mAnchorManager.getRTCVideo().setVideoEffectColorFilter(filterPath);
+        effect.setColorFilter(filterPath);
         //  设置滤镜特效强度  
-        mAnchorManager.getRTCVideo().setVideoEffectColorFilterIntensity(0.5F);
+        effect.setColorFilterIntensity(0.5F);
     }
 
     public void stickerControl(View view) {
@@ -197,14 +201,15 @@ public class LinkAnchorActivity extends AppCompatActivity {
         if (!VeLiveSDKHelper.isFileExists(stickerPath)) {
             return;
         }
+        IVideoEffect effect = mAnchorManager.getRTCVideo().getVideoEffectInterface();
         //  设置贴纸资源包路径  
-        mAnchorManager.getRTCVideo().appendVideoEffectNodes(Collections.singletonList(stickerPath));
+        effect.appendEffectNodes(Collections.singletonList(stickerPath));
     }
 
-    private LiveTranscoding.Layout getTranscodingLayout() {
-        LiveTranscoding.Layout.Builder builder = new LiveTranscoding.Layout.Builder();
+    private MixedStreamConfig.MixedStreamLayoutConfig getTranscodingLayout() {
+        MixedStreamConfig.MixedStreamLayoutConfig layout = new MixedStreamConfig.MixedStreamLayoutConfig();
         //  设置背景色  
-        builder.backgroundColor("#000000");
+        layout.setBackgroundColor("#000000");
         int guestIndex = 0;
         float density = getResources().getDisplayMetrics().density;
         float viewWidth = getResources().getDisplayMetrics().widthPixels / density;
@@ -212,28 +217,35 @@ public class LinkAnchorActivity extends AppCompatActivity {
 
         double guestX = (viewWidth - 130.0) / viewWidth;
         double guestStartY = (viewHeight - 42.0) / viewHeight;
+        MixedStreamConfig.MixedStreamLayoutRegionConfig[] regions = new MixedStreamConfig.MixedStreamLayoutRegionConfig[mUsersInRoom.size()];
+        int pos = 0;
         for (String uid : mUsersInRoom) {
-            LiveTranscoding.Region region = new LiveTranscoding.Region();
-            region.uid(uid);
-            region.roomId(mRoomID);
-            region.renderMode(LiveTranscoding.TranscoderRenderMode.RENDER_HIDDEN);
-            region.setLocalUser(Objects.equals(uid, mUserID));
-            if (region.isLocalUser()) { // 当前主播位置，仅供参考 
-                region.position(0.0, 0.0);
-                region.size(1, 1);
-                region.zorder(0);
-                region.alpha(1);
+            MixedStreamConfig.MixedStreamLayoutRegionConfig region = new MixedStreamConfig.MixedStreamLayoutRegionConfig();
+            region.setUserID(uid);
+            region.setRoomID(mRoomID);
+            region.setRenderMode(MixedStreamConfig.MixedStreamRenderMode.MIXED_STREAM_RENDER_MODE_HIDDEN);
+            region.setIsLocalUser(Objects.equals(uid, mUserID));
+            if (region.getIsLocalUser()) { // 当前主播位置，仅供参考 
+                region.setLocationX(0.0);
+                region.setLocationY(0.0);
+                region.setWidthProportion(1);
+                region.setHeightProportion(1);
+                region.setZOrder(0);
+                region.setAlpha(1);
             } else { //  远端用户位置，仅供参考  
                 //  130 是小窗的宽高， 8 是小窗的间距  
-                region.position(guestX, guestStartY - (130.0 * (guestIndex + 1) + guestIndex * 8) / viewHeight);
-                region.size((130.0 / viewWidth), (130.0 / viewHeight));
-                region.zorder(1);
-                region.alpha(1);
+                region.setLocationX(guestX);
+                region.setLocationY(guestStartY - (130.0 * (guestIndex + 1) + guestIndex * 8) / viewHeight);
+                region.setWidthProportion((130.0 / viewWidth));
+                region.setHeightProportion((130.0 / viewHeight));
+                region.setZOrder(1);
+                region.setAlpha(1);
                 guestIndex ++;
             }
-            builder.addRegion(region);
+            regions[pos++] = region;
         }
-        return builder.builder();
+        layout.setRegions(regions);
+        return layout;
     }
 
     private TextureView getTextureView(String uid) {
@@ -254,13 +266,13 @@ public class LinkAnchorActivity extends AppCompatActivity {
         @Override
         public void onUserJoined(String uid) {
             mUsersInRoom.add(uid);
-            mAnchorManager.updateLiveTranscoding(getTranscodingLayout());
+            mAnchorManager.updatePushMixedStreamToCDN(getTranscodingLayout());
         }
 
         @Override
         public void onUserLeave(String uid) {
             mUsersInRoom.remove(uid);
-            mAnchorManager.updateLiveTranscoding(getTranscodingLayout());
+            mAnchorManager.updatePushMixedStreamToCDN(getTranscodingLayout());
         }
 
         @Override
@@ -270,7 +282,7 @@ public class LinkAnchorActivity extends AppCompatActivity {
                 return;
             }
             mUsersInRoom.add(uid);
-            mAnchorManager.updateLiveTranscoding(getTranscodingLayout());
+            mAnchorManager.updatePushMixedStreamToCDN(getTranscodingLayout());
         }
 
         @Override
@@ -286,7 +298,7 @@ public class LinkAnchorActivity extends AppCompatActivity {
                 //  配置远端视图  
                 mAnchorManager.setRemoteVideoView(uid, textureView);
                 //  更新混流布局  
-                mAnchorManager.updateLiveTranscoding(getTranscodingLayout());
+                mAnchorManager.updatePushMixedStreamToCDN(getTranscodingLayout());
             } catch (Exception e) {
                 Log.e("VeLiveQuickStartDemo", e.toString());
             }
@@ -304,7 +316,7 @@ public class LinkAnchorActivity extends AppCompatActivity {
             //  移除远端视图  
             mAnchorManager.setRemoteVideoView(uid, null);
             //  更新混流布局  
-            mAnchorManager.updateLiveTranscoding(getTranscodingLayout());
+            mAnchorManager.updatePushMixedStreamToCDN(getTranscodingLayout());
         }
     };
 }

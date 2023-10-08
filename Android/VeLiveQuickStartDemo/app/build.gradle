@@ -65,8 +65,8 @@ dependencies {
 
     // 添加 TTSDK 在线集成地址，推荐使用最新稳定版，获取方式请参考[SDK 下载]章节 
 
-    implementation 'com.bytedanceapi:ttsdk-ttlivepush_rtc:1.39.1.18'
-    implementation 'com.bytedanceapi:ttsdk-ttlivepull_rtc:1.39.1.18'
+    implementation 'com.bytedanceapi:ttsdk-ttlivepush_rtc:1.39.2.7'
+    implementation 'com.bytedanceapi:ttsdk-ttlivepull_rtc:1.39.2.7'
 
     implementation 'commons-net:commons-net:3.6'
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'

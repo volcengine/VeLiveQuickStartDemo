@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ToggleButton;
 
+import com.ss.bytertc.engine.video.IVideoEffect;
 import com.ttsdk.quickstart.R;
 import com.ttsdk.quickstart.helper.VeLiveEffectHelper;
 import com.ttsdk.quickstart.helper.VeLiveSDKHelper;
@@ -216,19 +217,19 @@ public class LinkAudienceActivity extends AppCompatActivity {
         if (mAudienceManager.getRTCVideo() == null) {
             return;
         }
-        RTCVideo rtcVideo = mAudienceManager.getRTCVideo();
         //  特效鉴权License路径，请根据工程配置查找正确的路径  
         String licPath = VeLiveEffectHelper.getLicensePath("xxx.licbag");
         //  特效模型资源包路径  
         String algoModePath = VeLiveEffectHelper.getModelPath();
-        if (!VeLiveSDKHelper.isFileExists(licPath)) {
+        if (!VeLiveSDKHelper.isFileExists(licPath) || !VeLiveSDKHelper.isFileExists(algoModePath)) {
             return;
         }
+        IVideoEffect effect = mAudienceManager.getRTCVideo().getVideoEffectInterface();
         //  检查License  
-        rtcVideo.checkVideoEffectLicense(Env.getApplicationContext(), licPath);
         //  设置特效算法包  
-        rtcVideo.setVideoEffectAlgoModelPath(algoModePath);
-        if (rtcVideo.enableEffectBeauty(true) != 0) {
+        effect.initCVResource(licPath, algoModePath);
+
+        if (effect.enableVideoEffect() != 0) {
             Log.e("VeLiveQuickStartDemo", "enable effect error");
         }
     }
@@ -242,10 +243,11 @@ public class LinkAudienceActivity extends AppCompatActivity {
         if (!VeLiveSDKHelper.isFileExists(beautyPath)) {
             return;
         }
+        IVideoEffect effect = mAudienceManager.getRTCVideo().getVideoEffectInterface();
         //  设置美颜美型特效资源包  
-        mAudienceManager.getRTCVideo().setVideoEffectNodes(Collections.singletonList(beautyPath));
+        effect.setEffectNodes(Collections.singletonList(beautyPath));
         //  设置美颜美型特效强度, NodeKey 可在 资源包下的 .config_file 中获取，如果没有 .config_file ，请联系商务咨询  
-        mAudienceManager.getRTCVideo().updateVideoEffectNode(beautyPath, "whiten", 0.5F);
+        effect.updateEffectNode(beautyPath, "whiten", 0.5F);
     }
 
     public void filterControl(View view) {
@@ -257,10 +259,11 @@ public class LinkAudienceActivity extends AppCompatActivity {
         if (!VeLiveSDKHelper.isFileExists(filterPath)) {
             return;
         }
+        IVideoEffect effect = mAudienceManager.getRTCVideo().getVideoEffectInterface();
         //  设置滤镜资源包路径  
-        mAudienceManager.getRTCVideo().setVideoEffectColorFilter(filterPath);
+        effect.setColorFilter(filterPath);
         //  设置滤镜特效强度  
-        mAudienceManager.getRTCVideo().setVideoEffectColorFilterIntensity(0.5F);
+        effect.setColorFilterIntensity(0.5F);
     }
 
     public void stickerControl(View view) {
@@ -269,7 +272,8 @@ public class LinkAudienceActivity extends AppCompatActivity {
         }
         //  贴纸资源包，查找正确的资源路径，一般到 stickers_xxx 目录  
         String stickerPath = VeLiveEffectHelper.getStickerPathByName("xxx");
+        IVideoEffect effect = mAudienceManager.getRTCVideo().getVideoEffectInterface();
         //  设置贴纸资源包路径  
-        mAudienceManager.getRTCVideo().appendVideoEffectNodes(Collections.singletonList(stickerPath));
+        effect.appendEffectNodes(Collections.singletonList(stickerPath));
     }
 }

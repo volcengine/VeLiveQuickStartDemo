@@ -21,7 +21,6 @@ import static com.ss.bytertc.engine.live.ByteRTCStreamMixingType.STREAM_MIXING_B
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.TextureView;
-import com.bytedance.realx.video.VideoFrame;
 import com.pandora.common.env.Env;
 import com.ss.avframework.live.VeLiveAudioFrame;
 import com.ss.avframework.live.VeLivePusher;
@@ -46,14 +45,15 @@ import com.ss.bytertc.engine.data.CameraId;
 import com.ss.bytertc.engine.data.ForwardStreamInfo;
 import com.ss.bytertc.engine.data.MirrorType;
 import com.ss.bytertc.engine.data.RemoteStreamKey;
+import com.ss.bytertc.engine.data.SEICountPerFrame;
 import com.ss.bytertc.engine.data.StreamIndex;
 import com.ss.bytertc.engine.data.VideoOrientation;
 import com.ss.bytertc.engine.handler.IRTCVideoEventHandler;
 import com.ss.bytertc.engine.live.ByteRTCStreamMixingEvent;
-import com.ss.bytertc.engine.live.ByteRTCStreamMixingType;
 import com.ss.bytertc.engine.live.ByteRTCTranscoderErrorCode;
-import com.ss.bytertc.engine.live.ILiveTranscodingObserver;
-import com.ss.bytertc.engine.live.LiveTranscoding;
+import com.ss.bytertc.engine.live.IMixedStreamObserver;
+import com.ss.bytertc.engine.live.MixedStreamConfig;
+import com.ss.bytertc.engine.live.MixedStreamType;
 import com.ss.bytertc.engine.type.ChannelProfile;
 import com.ss.bytertc.engine.type.MediaStreamType;
 import com.ss.bytertc.engine.type.RTCRoomStats;
@@ -87,7 +87,7 @@ public class VeLiveAnchorManager {
     private String mAppId;
     private String mRoomId;
     private boolean mIsTranscoding = false;
-    private LiveTranscoding mLiveTranscoding;
+    private MixedStreamConfig mMixedStreamConfig;
 
     public static class Config {
         //  采集宽度  
@@ -278,25 +278,25 @@ public class VeLiveAnchorManager {
         }
     }
 
-    public void updateLiveTranscoding(LiveTranscoding.Layout layout) {
+    public void updatePushMixedStreamToCDN(MixedStreamConfig.MixedStreamLayoutConfig layout) {
         if (!mIsTranscoding) {
             stopPush();
-            startLiveTranscoding("", layout);
+            startPushMixedStreamToCDN("", layout);
         } else {
-            mLiveTranscoding.setLayout(layout);
-            mRTCVideo.updateLiveTranscoding("", mLiveTranscoding);
+            mMixedStreamConfig.setLayout(layout);
+            mRTCVideo.updatePushMixedStreamToCDN("",mMixedStreamConfig);
         }
     }
 
     public void sendSeiMessage(String msg, int repeat) {
         if (mIsTranscoding) {
             //  合流时发送的SEI，跟随每一帧  
-//            LiveTranscoding.Layout layout = mLiveTranscoding.getLayout();
-//            layout.setAppData(msg);
-//            updateLiveTranscoding(layout);
+//           MixedStreamConfig.MixedStreamLayoutConfig layout = mMixedStreamConfig.getLayout();
+//           layout.setUserConfigExtraInfo(msg);
+//           updatePushMixedStreamToCDN(layout);
             //  直播间普通业务消息  
             mRTCVideo.sendSEIMessage(StreamIndex.STREAM_INDEX_MAIN,
-                    TextUtils.isEmpty(msg) ? new byte[0] : msg.getBytes(), repeat);
+                    TextUtils.isEmpty(msg) ? new byte[0] : msg.getBytes(), repeat, SEICountPerFrame.SEI_COUNT_PER_FRAME_SINGLE);
         } else {
             mLivePusher.sendSeiMessage("live_engine", msg, repeat, true, true);
         }
@@ -364,13 +364,17 @@ public class VeLiveAnchorManager {
         } else {
             audioEncoderCfg.setChannel(VeLiveAudioChannelStereo);
         }
-
-        //  音频编码码率  
-        audioEncoderCfg.setBitrate(mConfig.mAudioEncoderKBitrate);
-        //  配置视频编码  
-        mLivePusher.setVideoEncoderConfiguration(videoEncoderCfg);
-        //  配置音频编码  
-        mLivePusher.setAudioEncoderConfiguration(audioEncoderCfg);
+        
+        try {
+            //  音频编码码率  
+            audioEncoderCfg.setBitrate(mConfig.mAudioEncoderKBitrate);
+            //  配置视频编码  
+            mLivePusher.setVideoEncoderConfiguration(videoEncoderCfg);
+            //  配置音频编码  
+            mLivePusher.setAudioEncoderConfiguration(audioEncoderCfg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void releaseLivePusher() {
@@ -553,21 +557,21 @@ public class VeLiveAnchorManager {
 
     private void leaveRoom() {
         Log.d(TAG, "leaveRoom");
-        stopLiveTranscoding("");
+        stopPushPublicStream("");
         if (mRTCRoom != null) {
             mRTCRoom.leaveRoom();
             mRTCRoom = null;
         }
     }
 
-    private final ILiveTranscodingObserver mILiveTranscodingObserver = new ILiveTranscodingObserver() {
+    private final IMixedStreamObserver mIMixedStreamObserver = new IMixedStreamObserver() {
         @Override
         public boolean isSupportClientPushStream() {
             return false;
         }
 
         @Override
-        public void onStreamMixingEvent(ByteRTCStreamMixingEvent eventType, String taskId, ByteRTCTranscoderErrorCode error, ByteRTCStreamMixingType mixType) {
+        public void onMixingEvent(ByteRTCStreamMixingEvent eventType, String taskId, ByteRTCTranscoderErrorCode error, MixedStreamType mixType) {
             Log.i(TAG, "onStreamMixingEvent" + ", eventType:" + eventType + ", taskId:" + taskId + ", error:" + error + ", mixType:" + mixType);
             if (eventType == STREAM_MIXING_START_FAILED) {
                 startPush(mPushUrl);
@@ -580,7 +584,7 @@ public class VeLiveAnchorManager {
         }
 
         @Override
-        public void onMixingVideoFrame(String taskId, VideoFrame videoFrame) {
+        public void onMixingVideoFrame(String taskId, com.ss.bytertc.engine.video.VideoFrame videoFrame) {
 
         }
 
@@ -590,22 +594,21 @@ public class VeLiveAnchorManager {
         }
 
         @Override
-        public void onCacheSyncVideoFrames(String taskId, String[] userIds, VideoFrame[] videoFrame, byte[][] dataFrame, int count) {
+        public void onCacheSyncVideoFrames(String taskId, String[] userIds, com.ss.bytertc.engine.video.VideoFrame[] videoFrame, byte[][] dataFrame, int count) {
 
         }
-
     };
 
-    private void startLiveTranscoding(String taskId, LiveTranscoding.Layout layout) {
+    private void startPushMixedStreamToCDN(String taskId, MixedStreamConfig.MixedStreamLayoutConfig layout) {
         //  合流转推配置  
-        mLiveTranscoding = LiveTranscoding.getDefualtLiveTranscode();
-        mLiveTranscoding.setRoomId(mRoomId);
-        mLiveTranscoding.setUserId(mUserId);
-        mLiveTranscoding.setUrl(mPushUrl);
-        mLiveTranscoding.setMixType(STREAM_MIXING_BY_SERVER);
+        mMixedStreamConfig = MixedStreamConfig.defaultMixedStreamConfig();
+        mMixedStreamConfig.setRoomID(mRoomId);
+        mMixedStreamConfig.setUserID(mUserId);
+        mMixedStreamConfig.setPushURL(mPushUrl);
+        mMixedStreamConfig.setExpectedMixingType(STREAM_MIXING_BY_SERVER);
 
         //  设置视频编码参数, 必须和直播推流设置保持一致  
-        LiveTranscoding.VideoConfig videoConfig = mLiveTranscoding.getVideo();
+        MixedStreamConfig.MixedStreamVideoConfig videoConfig = mMixedStreamConfig.getVideoConfig();
         //  分辨率宽  
         videoConfig.setWidth(mConfig.mVideoEncoderWidth);
         //  分辨率高  
@@ -613,33 +616,33 @@ public class VeLiveAnchorManager {
         // fps
         videoConfig.setFps(mConfig.mVideoEncoderFps);
         //  比特率  
-        videoConfig.setKBitRate(mConfig.mVideoEncoderKBitrate);
-        mLiveTranscoding.setVideo(videoConfig);
+        videoConfig.setBitrate(mConfig.mVideoEncoderKBitrate);
+        mMixedStreamConfig.setVideoConfig(videoConfig);
 
         //  设置音频编码参数, 必须和on直播推流设置保持一致  
-        LiveTranscoding.AudioConfig audioConfig = mLiveTranscoding.getAudio();
+        MixedStreamConfig.MixedStreamAudioConfig audioConfig = mMixedStreamConfig.getAudioConfig();
         //  音频采样率  
         audioConfig.setSampleRate(mConfig.mAudioEncoderSampleRate);
         //  通道数  
         audioConfig.setChannels(mConfig.mAudioEncoderChannel);
         //  比特率 k  
-        audioConfig.setKBitRate(mConfig.mAudioEncoderKBitrate);
+        audioConfig.setBitrate(mConfig.mAudioEncoderKBitrate);
         //  配置音频参数  
-        mLiveTranscoding.setAudio(audioConfig);
+        mMixedStreamConfig.setAudioConfig(audioConfig);
 
         //  配置信息  
-        mLiveTranscoding.setLayout(layout);
+        mMixedStreamConfig.setLayout(layout);
         mIsTranscoding = true;
         //  开始合流转推  
-        mRTCVideo.startLiveTranscoding(taskId, mLiveTranscoding, mILiveTranscodingObserver);
+        mRTCVideo.startPushMixedStreamToCDN(taskId, mMixedStreamConfig, mIMixedStreamObserver);
     }
 
-    private void stopLiveTranscoding(String taskId) {
-        Log.d(TAG, "stopLiveTranscoding");
+    private void stopPushPublicStream(String taskId) {
+        Log.d(TAG, "stopPushPublicStream");
         mIsTranscoding = false;
-        mLiveTranscoding = null;
+        mMixedStreamConfig = null;
         if (mRTCVideo != null) {
-            mRTCVideo.stopLiveTranscoding(taskId);
+            mRTCVideo.stopPushPublicStream(taskId);
         }
     }
 
