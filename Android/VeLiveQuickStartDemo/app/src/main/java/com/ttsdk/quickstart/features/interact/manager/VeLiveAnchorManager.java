@@ -336,7 +336,7 @@ public class VeLiveAnchorManager {
         //  视频编码配置  
         VeLivePusherDef.VeLiveVideoEncoderConfiguration videoEncoderCfg = new VeLivePusherDef.VeLiveVideoEncoderConfiguration();
         //  设置视频分辨率，内部会根据分辨率设置最佳码率参数  
-        videoEncoderCfg.setResolution(VeLiveVideoResolution720P);
+        videoEncoderCfg.setResolution(getEncodeVideoResolution());
         //  视频编码初始化码率（仅供参考）  
         videoEncoderCfg.setBitrate(mConfig.mVideoEncoderKBitrate);
         //  视频编码最大码率（仅供参考）  
@@ -375,6 +375,18 @@ public class VeLiveAnchorManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    private VeLivePusherDef.VeLiveVideoResolution getEncodeVideoResolution() {
+        if (Integer.max(mConfig.mVideoEncoderWidth, mConfig.mVideoEncoderHeight) >= 1920) {
+            return VeLivePusherDef.VeLiveVideoResolution.VeLiveVideoResolution1080P;
+        } else if (Integer.max(mConfig.mVideoEncoderWidth, mConfig.mVideoEncoderHeight) >= 1280) {
+            return VeLivePusherDef.VeLiveVideoResolution.VeLiveVideoResolution720P;
+        } else if (Integer.max(mConfig.mVideoEncoderWidth, mConfig.mVideoEncoderHeight) >= 960) {
+            return VeLivePusherDef.VeLiveVideoResolution.VeLiveVideoResolution540P;
+        } else if (Integer.max(mConfig.mVideoEncoderWidth, mConfig.mVideoEncoderHeight) >= 640) {
+            return VeLivePusherDef.VeLiveVideoResolution.VeLiveVideoResolution360P;
+        }
+        return VeLivePusherDef.VeLiveVideoResolution.VeLiveVideoResolution720P;
     }
 
     private void releaseLivePusher() {

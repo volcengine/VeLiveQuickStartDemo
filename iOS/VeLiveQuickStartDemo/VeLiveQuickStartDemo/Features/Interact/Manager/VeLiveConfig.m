@@ -18,22 +18,30 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        //  以下默认值，仅供参考  
+        // 以下默认值，仅供参考  
+        // 视频采集配置 
         self.captureWidth = 720;
         self.captureHeight = 1280;
         self.captureFps = 15;
+        
+        // 音频采集配置 
         self.audioCaptureSampleRate = 44100;
         self.audioCaptureChannel = 2;
         
-        self.videoEncoderWith = 720;
-        self.videoEncoderHeight = 1280;
-        self.videoEncoderFps = 15;
-        
+        // 视频编码配置，一般和采集保持一致 
+        self.videoEncoderWith = self.captureWidth;
+        self.videoEncoderHeight = self.captureHeight;
+        self.videoEncoderFps = self.captureFps;
         self.videoEncoderKBitrate = 1600;
         self.videoHardwareEncoder = YES;
+        
+        // 音频编码设置 
         self.audioEncoderSampleRate = 44100;
         self.audioEncoderChannel = 2;
         self.audioEncoderKBitrate = 64;
+        
+        
+        
     }
     return self;
 }

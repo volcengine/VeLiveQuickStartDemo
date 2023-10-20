@@ -193,5 +193,4 @@ public class VeLiveEffectHelper {
             return false;
         }
     }
-
 }

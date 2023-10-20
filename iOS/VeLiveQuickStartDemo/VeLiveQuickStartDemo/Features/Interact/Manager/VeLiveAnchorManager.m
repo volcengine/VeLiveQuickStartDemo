@@ -266,12 +266,18 @@
 - (void)createRTCVideoIfNeed {
     if (self.rtcVideo == nil && self.appId != nil && self.appId.length > 0) {
         self.rtcVideo = [ByteRTCVideo createRTCVideo:self.appId delegate:self parameters:@{}];
-        ByteRTCVideoEncoderConfig *solution = [[ByteRTCVideoEncoderConfig alloc] init];
-        solution.width = self.config.captureWidth;
-        solution.height = self.config.captureHeight;
-        solution.frameRate = self.config.captureFps;
-        solution.maxBitrate = self.config.videoEncoderKBitrate;
+        // 设置采集参数 
+        ByteRTCVideoCaptureConfig *captureConfig = [[ByteRTCVideoCaptureConfig alloc] init];
+        captureConfig.videoSize = CGSizeMake(self.config.captureWidth, self.config.captureHeight);
+        captureConfig.frameRate = self.config.captureFps;
+        captureConfig.preference = ByteRTCVideoCapturePreferenceAutoPerformance;
+        [self.rtcVideo setVideoCaptureConfig:captureConfig];
         //  设置编码参数  
+        ByteRTCVideoEncoderConfig *solution = [[ByteRTCVideoEncoderConfig alloc] init];
+        solution.width = self.config.videoEncoderWith;
+        solution.height = self.config.videoEncoderHeight;
+        solution.frameRate = self.config.videoEncoderFps;
+        solution.maxBitrate = self.config.videoEncoderKBitrate;
         [self.rtcVideo setMaxVideoEncoderConfig:solution];
         //  使用前置摄像头，本地预览和推流镜像  
         [self.rtcVideo switchCamera:(ByteRTCCameraIDFront)];
@@ -399,7 +405,7 @@
         [self.livePusher setObserver:self];
         
         //  视频编码配置  
-        VeLiveVideoEncoderConfiguration *videoEncodeCfg = [[VeLiveVideoEncoderConfiguration alloc] initWithResolution:(VeLiveVideoResolution720P)];
+        VeLiveVideoEncoderConfiguration *videoEncodeCfg = [[VeLiveVideoEncoderConfiguration alloc] initWithResolution:[self getEncodeVideoResolution]];
         
         //  视频编码初始化码率  
         videoEncodeCfg.bitrate = self.config.videoEncoderKBitrate;
@@ -425,6 +431,19 @@
         //  开启外部音频采集  
         [self.livePusher startAudioCapture:(VeLiveAudioCaptureExternal)];
     }
+}
+
+- (VeLiveVideoResolution)getEncodeVideoResolution {
+    if (MAX(self.config.videoEncoderWith, self.config.videoEncoderHeight) >= 1920) {
+        return VeLiveVideoResolution1080P;
+    } else if (MAX(self.config.videoEncoderWith, self.config.videoEncoderHeight) >= 1280) {
+        return VeLiveVideoResolution720P;
+    } else if (MAX(self.config.videoEncoderWith, self.config.videoEncoderHeight) >= 960) {
+        return VeLiveVideoResolution540P;
+    } else if (MAX(self.config.videoEncoderWith, self.config.videoEncoderHeight) >= 640) {
+        return VeLiveVideoResolution360P;
+    }
+    return VeLiveVideoResolution720P;
 }
 
 // MARK: - ByteRTCVideoSinkDelegate
