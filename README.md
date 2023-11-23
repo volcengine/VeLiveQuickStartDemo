@@ -38,5 +38,3 @@
 
 ### 许可证
 VeLiveQuickStartDemo 使用 [MIT 许可证](LICENSE)
-
-

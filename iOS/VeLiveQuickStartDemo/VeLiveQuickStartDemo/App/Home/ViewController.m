@@ -73,10 +73,6 @@
                     @"target" : @"VeLivePush265CodecViewController"
                 },
                 @{
-                    @"title" : NSLocalizedString(@"Home_Pull_Feed", nil),
-                    @"target" : @"VeLivePullFeedInputViewController"
-                },
-                @{
                     @"title" : NSLocalizedString(@"Home_Picture_In_Picture", nil),
                     @"target" : @"VeLivePictureInPictureViewController"
                 }

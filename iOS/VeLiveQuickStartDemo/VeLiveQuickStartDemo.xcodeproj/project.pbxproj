@@ -7,12 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B0C29372A6E5CE3007D7C99 /* VeLivePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C29362A6E5CE3007D7C99 /* VeLivePageViewController.m */; };
 		2B162B122A4FD0A2001452BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B162B102A4FD0A2001452BC /* Main.storyboard */; };
 		2B162B132A4FD0A2001452BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B162B112A4FD0A2001452BC /* LaunchScreen.storyboard */; };
-		2B24DD962A6E6B4D008E11F9 /* VeLivePullFeedItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B24DD952A6E6B4D008E11F9 /* VeLivePullFeedItemViewController.m */; };
-		2B24DDAA2A70086E008E11F9 /* VeLivePullFeedInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B24DDA82A70086E008E11F9 /* VeLivePullFeedInputViewController.m */; };
-		2B24DDAB2A70086E008E11F9 /* VeLivePullFeedInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B24DDA92A70086E008E11F9 /* VeLivePullFeedInputViewController.xib */; };
 		2B471CFF2A4AC7A10035AB71 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B471CFE2A4AC7A10035AB71 /* AppDelegate.m */; };
 		2B471D022A4AC7A10035AB71 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B471D012A4AC7A10035AB71 /* SceneDelegate.m */; };
 		2B471D052A4AC7A10035AB71 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B471D042A4AC7A10035AB71 /* ViewController.m */; };
@@ -22,8 +18,6 @@
 		2B471D302A4AC88B0035AB71 /* VeLiveAnchorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B471D1E2A4AC88A0035AB71 /* VeLiveAnchorManager.m */; };
 		2B471D322A4AC88B0035AB71 /* VeLiveAudienceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B471D222A4AC88A0035AB71 /* VeLiveAudienceManager.m */; };
 		2B471D352A4AC88B0035AB71 /* VeLiveConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B471D2C2A4AC88B0035AB71 /* VeLiveConfig.m */; };
-		2B8D90902A6E160100938E75 /* VeLivePullFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B8D908E2A6E160100938E75 /* VeLivePullFeedViewController.m */; };
-		2B8D90912A6E160100938E75 /* VeLivePullFeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B8D908F2A6E160100938E75 /* VeLivePullFeedViewController.xib */; };
 		2BE62B642A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62B5D2A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.m */; };
 		2BE62B652A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62B5E2A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.xib */; };
 		2BE62B672A4BE59F002EEEF0 /* VeLiveHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62B622A4BE59F002EEEF0 /* VeLiveHomeTableViewCell.m */; };
@@ -522,11 +516,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B8D90912A6E160100938E75 /* VeLivePullFeedViewController.xib in Resources */,
 				2BEF7F162A81F22D00C5814F /* VeLivePictureInPictureViewController.xib in Resources */,
 				2BE62BB62A4C1CC0002EEEF0 /* VeLivePush265CodecViewController.xib in Resources */,
 				2BE62C0B2A4E88F5002EEEF0 /* VeLiveLinkViewController.xib in Resources */,
-				2B24DDAB2A70086E008E11F9 /* VeLivePullFeedInputViewController.xib in Resources */,
 				2BE62B822A4C112D002EEEF0 /* InfoPlist.strings in Resources */,
 				2BE62B732A4C0B03002EEEF0 /* Localizable.strings in Resources */,
 				2BE62BB02A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.xib in Resources */,
@@ -614,15 +606,12 @@
 				2B471D352A4AC88B0035AB71 /* VeLiveConfig.m in Sources */,
 				2BE62BE32A4C3D15002EEEF0 /* VeLiveDeviceCapture.m in Sources */,
 				2BE62BC72A4C1DB3002EEEF0 /* VeLiveLinkAnchorViewController.m in Sources */,
-				2B24DDAA2A70086E008E11F9 /* VeLivePullFeedInputViewController.m in Sources */,
 				2B471D302A4AC88B0035AB71 /* VeLiveAnchorManager.m in Sources */,
 				2B471CFF2A4AC7A10035AB71 /* AppDelegate.m in Sources */,
 				2BE62B902A4C1839002EEEF0 /* VeLivePushCameraViewController.m in Sources */,
 				2BE62B9D2A4C18B7002EEEF0 /* VeLivePushBeautyViewController.m in Sources */,
 				2BE62BA32A4C18D3002EEEF0 /* VeLivePushRTMViewController.m in Sources */,
 				2B471D102A4AC7A20035AB71 /* main.m in Sources */,
-				2B24DD962A6E6B4D008E11F9 /* VeLivePullFeedItemViewController.m in Sources */,
-				2B0C29372A6E5CE3007D7C99 /* VeLivePageViewController.m in Sources */,
 				2BE62C0A2A4E88F5002EEEF0 /* VeLiveLinkViewController.m in Sources */,
 				2BEF7F152A81F22D00C5814F /* VeLivePictureInPictureViewController.m in Sources */,
 				2BE62BAF2A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.m in Sources */,
@@ -633,7 +622,6 @@
 				2BE62BD12A4C1DE1002EEEF0 /* VeLivePKAnchorViewController.m in Sources */,
 				2BE62C0F2A4E8959002EEEF0 /* VeLivePKViewController.m in Sources */,
 				2B471D022A4AC7A10035AB71 /* SceneDelegate.m in Sources */,
-				2B8D90902A6E160100938E75 /* VeLivePullFeedViewController.m in Sources */,
 				2BE62BA92A4C18F5002EEEF0 /* VeLivePushCustomViewController.m in Sources */,
 				2BE62B672A4BE59F002EEEF0 /* VeLiveHomeTableViewCell.m in Sources */,
 				2BE62BCC2A4C1DCE002EEEF0 /* VeLiveLinkAudienceViewController.m in Sources */,

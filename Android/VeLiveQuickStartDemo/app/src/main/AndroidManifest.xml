@@ -31,12 +31,6 @@
             android:name=".features.advanced.PictureInPictureActivity"
             android:exported="false" />
         <activity
-            android:name=".features.advanced.PullFeedInputActivity"
-            android:exported="false" />
-        <activity
-            android:name=".features.advanced.PullFeedActivity"
-            android:exported="false" />
-        <activity
             android:name=".features.interact.pk.PKAnchorActivity"
             android:exported="false"
             android:label="@string/Interact_PK" />
