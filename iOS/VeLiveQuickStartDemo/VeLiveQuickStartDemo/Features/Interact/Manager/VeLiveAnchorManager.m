@@ -284,7 +284,7 @@
         //  设置镜像  
         [self.rtcVideo setLocalVideoMirrorType:(ByteRTCMirrorTypeRenderAndEncoder)];
         //  设置视频方向  
-        [self.rtcVideo setVideoOrientation:(ByteRTCVideoOrientationPortrait)];
+        // [self.rtcVideo setVideoOrientation:(ByteRTCVideoOrientationPortrait)];
         //  设置预览视图  
         [self setupLocalVideoView:_localVideoView];
     }
