@@ -148,6 +148,9 @@ public class PushBeautyActivity extends AppCompatActivity {
     public void filterControl(View view) {
         //  滤镜资源包，查找正确的资源路径，一般到 Filter_01_xx 目录  
         String filterPath = VeLiveEffectHelper.getFilterPathByName("xxx");;
+        if (!VeLiveSDKHelper.isFileExists(filterPath)) {
+            return;
+        }
         //  设置滤镜资源包路径  
         mLivePusher.getVideoEffectManager().setFilter(filterPath);
         //  设置滤镜特效强度  
@@ -157,6 +160,9 @@ public class PushBeautyActivity extends AppCompatActivity {
     public void stickerControl(View view) {
         //  贴纸资源包，查找正确的资源路径，一般到 stickers_xxx 目录  
         String stickerPath = VeLiveEffectHelper.getStickerPathByName("xxx");
+        if (!VeLiveSDKHelper.isFileExists(stickerPath)) {
+            return;
+        }
         //  设置贴纸资源包路径  
         mLivePusher.getVideoEffectManager().setSticker(stickerPath);
     }

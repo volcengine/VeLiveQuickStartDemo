@@ -98,4 +98,7 @@
     <string name="rtmp_url">RTMP URL</string>
     <string name="token">Token</string>
     <string name="user_id">用户 ID</string>
+    <string name="pip_authorization_failed">授权失败</string>
+    <string name="pip_authorization_success">授权成功</string>
+    <string name="pip_require_authorization">当前无权限，请授权</string>
 </resources>

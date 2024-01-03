@@ -272,6 +272,9 @@ public class LinkAudienceActivity extends AppCompatActivity {
         }
         //  贴纸资源包，查找正确的资源路径，一般到 stickers_xxx 目录  
         String stickerPath = VeLiveEffectHelper.getStickerPathByName("xxx");
+        if (!VeLiveSDKHelper.isFileExists(stickerPath)) {
+            return;
+        }
         IVideoEffect effect = mAudienceManager.getRTCVideo().getVideoEffectInterface();
         //  设置贴纸资源包路径  
         effect.appendEffectNodes(Collections.singletonList(stickerPath));

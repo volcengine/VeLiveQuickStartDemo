@@ -76,9 +76,7 @@
  */
 #define RTC_OTHER_ROOM_TOKEN @""
 
-#import <TTSDK/VeLivePusher.h>
-#import <TTSDK/VeLivePlayer.h>
-#import <TTSDK/TTSDKManager.h>
+#import <TTSDKFramework/TTSDKFramework.h>
 #import <VolcEngineRTC/VolcEngineRTC.h>
 
 #import "VeLiveDeviceCapture.h"

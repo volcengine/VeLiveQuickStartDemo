@@ -114,12 +114,13 @@ public class PictureInPictureActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == mOverlayRequestCode) {
-            if (!Settings.canDrawOverlays(this)) {
-                Toast.makeText(this, "授权失败", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "授权成功", Toast.LENGTH_SHORT).show();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (!Settings.canDrawOverlays(this)) {
+                    Toast.makeText(this, R.string.pip_authorization_failed, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, R.string.pip_authorization_success, Toast.LENGTH_SHORT).show();
+                }
             }
-            return;
         }
     }
 
@@ -170,7 +171,7 @@ public class PictureInPictureActivity extends AppCompatActivity {
     public void startPictureInPicture(View view) {
         if (!mIsPipOn) {
             if (!Settings.canDrawOverlays(this)) {
-                Toast.makeText(this, "当前无权限，请授权", Toast.LENGTH_SHORT);
+                Toast.makeText(this, R.string.pip_require_authorization, Toast.LENGTH_SHORT);
                 requestSettingCanDrawOverlays();
                 return;
             }

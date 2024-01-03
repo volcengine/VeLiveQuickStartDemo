@@ -270,7 +270,7 @@
         ByteRTCVideoCaptureConfig *captureConfig = [[ByteRTCVideoCaptureConfig alloc] init];
         captureConfig.videoSize = CGSizeMake(self.config.captureWidth, self.config.captureHeight);
         captureConfig.frameRate = self.config.captureFps;
-        captureConfig.preference = ByteRTCVideoCapturePreferenceAutoPerformance;
+        captureConfig.preference = ByteRTCVideoCapturePreferenceAuto;
         [self.rtcVideo setVideoCaptureConfig:captureConfig];
         //  设置编码参数  
         ByteRTCVideoEncoderConfig *solution = [[ByteRTCVideoEncoderConfig alloc] init];
