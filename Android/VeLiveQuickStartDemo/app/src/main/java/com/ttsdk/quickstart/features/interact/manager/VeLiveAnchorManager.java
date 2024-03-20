@@ -569,7 +569,7 @@ public class VeLiveAnchorManager {
 
     private void leaveRoom() {
         Log.d(TAG, "leaveRoom");
-        stopPushPublicStream("");
+        stopPushStreamToCDN("");
         if (mRTCRoom != null) {
             mRTCRoom.leaveRoom();
             mRTCRoom = null;
@@ -649,12 +649,12 @@ public class VeLiveAnchorManager {
         mRTCVideo.startPushMixedStreamToCDN(taskId, mMixedStreamConfig, mIMixedStreamObserver);
     }
 
-    private void stopPushPublicStream(String taskId) {
-        Log.d(TAG, "stopPushPublicStream");
+    private void stopPushStreamToCDN(String taskId) {
+        Log.d(TAG, "stopPushStreamToCDN");
         mIsTranscoding = false;
         mMixedStreamConfig = null;
         if (mRTCVideo != null) {
-            mRTCVideo.stopPushPublicStream(taskId);
+            mRTCVideo.stopPushStreamToCDN(taskId);
         }
     }
 
