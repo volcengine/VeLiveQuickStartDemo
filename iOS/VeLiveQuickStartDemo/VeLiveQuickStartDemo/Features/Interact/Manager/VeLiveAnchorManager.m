@@ -25,6 +25,7 @@
 @property (nonatomic, strong) ByteRTCMixedStreamConfig *mixStreamConfig;
 @property (nonatomic, copy) NSString *streamUrl;
 @property (nonatomic, copy) NSString *rtcTaskId;
+@property (nonatomic, assign) BOOL isStartPush;
 @end
 @implementation VeLiveAnchorManager
 - (instancetype)initWithAppId:(NSString *)appId userId:(NSString *)userId {
@@ -326,6 +327,10 @@
 }
 
 - (void)startPush:(NSString *)url {
+    if (self.isStartPush) {
+        return;
+    }
+    self.isStartPush = YES;
     self.streamUrl = url;
     [self setupLivePusher];
     [self registerAudioListener];
@@ -334,6 +339,10 @@
 }
 
 - (void)stopPush {
+    if (!self.isStartPush) {
+        return;
+    }
+    self.isStartPush = NO;
     [self unregisterAudioListener];
     [self unregisterVideoListener];
     [self.livePusher stopPush];
