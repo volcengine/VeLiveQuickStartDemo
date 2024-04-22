@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:textColor="@color/whiteColor"
-            android:text="@string/push_url"/>
+            android:text="@string/Pull_Stream_Url_Tip"/>
         <EditText
             android:id="@+id/url_input_view"
             android:background="@drawable/rounded_edittext"
