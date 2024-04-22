@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VeLivePKViewController">
             <connections>
+                <outlet property="otherRoomIdLabel" destination="5Ao-Mw-pSR" id="mKC-kF-yzq"/>
                 <outlet property="otherRoomIdTextField" destination="c3g-kj-w78" id="zEl-4E-soi"/>
-                <outlet property="otherTokenTextField" destination="JPx-pn-Shl" id="AOb-82-eaS"/>
+                <outlet property="roomIdLabel" destination="8KO-FG-aXK" id="JHD-x9-0Yr"/>
                 <outlet property="roomIdTextField" destination="OpW-hq-QuJ" id="Xml-DN-Brz"/>
                 <outlet property="startBtn" destination="Mxn-rg-kiA" id="tsc-U4-Dbs"/>
                 <outlet property="tipLabel" destination="L2X-1R-mhF" id="YU8-45-CvA"/>
-                <outlet property="tokenTextField" destination="tDz-AF-0Kj" id="Wge-sP-uSE"/>
+                <outlet property="userIdLabel" destination="P9q-ex-inJ" id="X0q-lb-xMh"/>
                 <outlet property="userIdTextField" destination="Ptu-CV-wlb" id="2xZ-Ka-i7m"/>
                 <outlet property="view" destination="w0N-lf-ncK" id="qYO-bn-67t"/>
             </connections>
@@ -26,7 +27,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="C9q-RS-Ji7">
-                    <rect key="frame" x="16" y="118.99999999999997" width="361" height="346.33333333333326"/>
+                    <rect key="frame" x="16" y="119.00000000000001" width="361" height="246.33333333333337"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L2X-1R-mhF">
                             <rect key="frame" x="0.0" y="0.0" width="361" height="20.333333333333332"/>
@@ -66,24 +67,8 @@
                                 </textField>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4Fy-AT-gOJ">
-                            <rect key="frame" x="0.0" y="136.33333333333334" width="361" height="34"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Token" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7u5-gL-wvA">
-                                    <rect key="frame" x="0.0" y="0.0" width="45.666666666666664" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.066666666669999999" green="0.070588235289999995" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="tDz-AF-0Kj">
-                                    <rect key="frame" x="53.666666666666657" y="0.0" width="307.33333333333337" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </textField>
-                            </subviews>
-                        </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zfH-fa-2Ug">
-                            <rect key="frame" x="0.0" y="186.33333333333331" width="361" height="34"/>
+                            <rect key="frame" x="0.0" y="136.33333333333334" width="361" height="34"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Other Room Id" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ao-Mw-pSR">
                                     <rect key="frame" x="0.0" y="0.0" width="110.33333333333333" height="34"/>
@@ -98,24 +83,8 @@
                                 </textField>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0Hx-LX-K33">
-                            <rect key="frame" x="0.0" y="236.33333333333331" width="361" height="34"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Other Token" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W4N-sH-opo">
-                                    <rect key="frame" x="0.0" y="0.0" width="93.333333333333329" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.066666666669999999" green="0.070588235289999995" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="JPx-pn-Shl">
-                                    <rect key="frame" x="101.33333333333334" y="0.0" width="259.66666666666663" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </textField>
-                            </subviews>
-                        </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wX9-Wi-geu">
-                            <rect key="frame" x="0.0" y="286.33333333333331" width="361" height="60"/>
+                            <rect key="frame" x="0.0" y="186.33333333333331" width="361" height="60"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mxn-rg-kiA">
                                     <rect key="frame" x="0.0" y="0.0" width="361" height="60"/>

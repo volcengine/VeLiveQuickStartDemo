@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="beautyControlBtn" destination="d6i-yg-YYI" id="Dma-Yn-Qdp"/>
                 <outlet property="filterControlBtn" destination="MsR-lj-lRJ" id="pFm-2c-oLE"/>
+                <outlet property="infoLabel" destination="snJ-Ug-C8B" id="rPn-dV-uo7"/>
                 <outlet property="localView" destination="pJc-CL-ea8" id="NzJ-tQ-947"/>
                 <outlet property="pkControlBtn" destination="3ge-Jd-lcC" id="n9K-IU-hrn"/>
                 <outlet property="pkStackView" destination="5QC-Fh-TdE" id="5hj-Pk-wlg"/>
@@ -20,6 +21,7 @@
                 <outlet property="remoteView" destination="yMx-yx-mxM" id="3IU-xu-t5y"/>
                 <outlet property="seiControlBtn" destination="0UH-b8-5eZ" id="dWs-Xj-cQO"/>
                 <outlet property="stickerControlBtn" destination="oAw-NF-Kgk" id="mxp-BE-G4Y"/>
+                <outlet property="urlLabel" destination="F5l-wS-u1f" id="Lw1-91-bGZ"/>
                 <outlet property="urlTextField" destination="l7p-FA-ssZ" id="4Cf-0U-4nG"/>
                 <outlet property="view" destination="P1Z-6E-Txo" id="fnh-d6-vNw"/>
             </connections>
@@ -29,6 +31,10 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jp4-no-oNk">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OTj-qR-IoJ">
                     <rect key="frame" x="16" y="119" width="361" height="34"/>
                     <subviews>
@@ -53,7 +59,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="O0Q-HM-OhY">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="30"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xM7-Ze-c9d">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xM7-Ze-c9d">
                                     <rect key="frame" x="0.0" y="0.0" width="125.66666666666667" height="30"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" title="Start Push"/>
@@ -119,10 +125,6 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jp4-no-oNk">
-                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </view>
                 <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5QC-Fh-TdE">
                     <rect key="frame" x="0.0" y="209" width="393" height="260"/>
                     <subviews>

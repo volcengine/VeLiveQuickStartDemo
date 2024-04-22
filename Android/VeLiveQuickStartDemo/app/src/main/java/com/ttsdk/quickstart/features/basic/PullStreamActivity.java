@@ -12,6 +12,8 @@ import static com.ss.videoarch.liveplayer.VeLivePlayerDef.VeLivePlayerFillMode.V
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
@@ -19,8 +21,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.ttsdk.quickstart.R;
 import com.ttsdk.quickstart.helper.VeLiveSDKHelper;
@@ -34,6 +34,10 @@ import com.ss.videoarch.liveplayer.VeLivePlayerObserver;
 import com.ss.videoarch.liveplayer.VeLivePlayerStatistics;
 import com.ss.videoarch.liveplayer.VeLivePlayerVideoFrame;
 import com.ss.videoarch.liveplayer.VideoLiveManager;
+import com.ttsdk.quickstart.helper.sign.VeLiveURLGenerator;
+import com.ttsdk.quickstart.helper.sign.model.VeLivePullURLModel;
+import com.ttsdk.quickstart.helper.sign.model.VeLiveURLError;
+import com.ttsdk.quickstart.helper.sign.model.VeLiveURLRootModel;
 
 /*
 直播拉流
@@ -45,9 +49,10 @@ import com.ss.videoarch.liveplayer.VideoLiveManager;
  5、开始播放 API: mLivePlayer.play();
  */
 public class PullStreamActivity extends AppCompatActivity {
+    private final String TAG = "PullStreamActivity";
 
     private VeLivePlayer mLivePlayer;
-    private TextView mTextView;
+    private TextView mInfoView;
 
     private EditText mUrlText;
 
@@ -57,9 +62,8 @@ public class PullStreamActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pull_stream);
-        mTextView = findViewById(R.id.pull_info_text_view);
+        mInfoView = findViewById(R.id.pull_info_text_view);
         mUrlText = findViewById(R.id.url_input_view);
-        mUrlText.setText(VeLiveSDKHelper.LIVE_PULL_URL);
         mSurfaceView = findViewById(R.id.render_view);
         setupLivePlayer();
     }
@@ -96,51 +100,38 @@ public class PullStreamActivity extends AppCompatActivity {
 
         //  设置渲染填充模式  
         mLivePlayer.setRenderFillMode(VeLivePlayerFillModeAspectFill);
-
-        //  设置播放地址，支持 rtmp、http、https 协议，flv、m3u8 格式的地址  
-        mLivePlayer.setPlayUrl(mUrlText.getText().toString());
-
-
-        //  配置 RTM 低延时地址参考以下代码  
-        /*
-        // 配置 RTM 主地址
-        VeLivePlayerStreamData.VeLivePlayerStream playStreamRTM = new VeLivePlayerStreamData.VeLivePlayerStream();
-        playStreamRTM.url = Constant.LIVE_PULL_RTM_URL;
-        playStreamRTM.format = VeLivePlayerFormatRTM;
-        playStreamRTM.resolution = VeLivePlayerResolutionOrigin;
-        playStreamRTM.streamType = VeLivePlayerStreamTypeMain;
-
-        // 配置 Flv 降级地址
-        VeLivePlayerStreamData.VeLivePlayerStream playStreamFLV = new VeLivePlayerStreamData.VeLivePlayerStream();
-        playStreamFLV.url = Constant.LIVE_PULL_URL;
-        playStreamFLV.format = VeLivePlayerFormatFLV;
-        playStreamFLV.resolution = VeLivePlayerResolutionOrigin;
-        playStreamFLV.streamType = VeLivePlayerStreamTypeMain;
-
-        // 创建 VeLivePlayerStreamData
-        VeLivePlayerStreamData streamData = new VeLivePlayerStreamData();
-        List<VeLivePlayerStreamData.VeLivePlayerStream> streamList = new ArrayList<>();
-        // 添加 RTM 主地址
-        streamList.add(playStreamRTM);
-        // 添加 FLV 降级地址
-        streamList.add(playStreamFLV);
-
-        streamData.mainStreamList = streamList;
-        streamData.defaultFormat = VeLivePlayerFormatRTM;
-        streamData.defaultProtocol = VeLivePlayerFormatTLS;
-        mLivePlayer.setPlayStreamData(streamData);
-        */
-
-        //  开始播放  
-        mLivePlayer.play();
     }
 
 
     public void playControl(View view) {
         ToggleButton toggleButton = (ToggleButton) view;
+        if (mUrlText.getText().toString().isEmpty()) {
+            toggleButton.setChecked(false);
+            mInfoView.setText(R.string.config_stream_name_tip);
+            return;
+        }
         if (toggleButton.isChecked()) {
-            //  开始播放  
-            mLivePlayer.play();
+            view.setEnabled(false);
+            mInfoView.setText(R.string.Generate_Pull_Url_Tip);
+            VeLiveURLGenerator.genPullUrl(VeLiveSDKHelper.LIVE_APP_NAME, mUrlText.getText().toString(), new VeLiveURLGenerator.VeLiveURLCallback<VeLivePullURLModel>() {
+                @Override
+                public void onSuccess(VeLiveURLRootModel<VeLivePullURLModel> model) {
+                    view.setEnabled(true);
+                    mInfoView.setText("");
+                    //  设置播放地址，支持 rtmp、http、https 协议，flv、m3u8 格式的地址  
+                    mLivePlayer.setPlayUrl(model.result.getUrl("flv"));
+
+                    //  开始播放  
+                    mLivePlayer.play();
+                }
+
+                @Override
+                public void onFailed(VeLiveURLError error) {
+                    view.setEnabled(true);
+                    mInfoView.setText(error.message);
+                    toggleButton.setChecked(false);
+                }
+            });
         } else {
             //  停止播放  
             mLivePlayer.stop();
@@ -165,11 +156,11 @@ public class PullStreamActivity extends AppCompatActivity {
     private VeLivePlayerObserver mplayerObserver = new VeLivePlayerObserver() {
         @Override
         public void onError(VeLivePlayer veLivePlayer, VeLivePlayerError veLivePlayerError) {
-            Log.e("VeLiveQuickStartDemo", "Player Error" + veLivePlayerError.mErrorMsg);
+            Log.e(TAG, "Player Error" + veLivePlayerError.mErrorMsg);
         }
         @Override
         public void onStatistics(VeLivePlayer veLivePlayer, VeLivePlayerStatistics veLivePlayerStatistics) {
-            runOnUiThread(() -> mTextView.setText(VeLiveSDKHelper.getPlaybackInfoString(veLivePlayerStatistics)));
+            runOnUiThread(() -> mInfoView.setText(VeLiveSDKHelper.getPlaybackInfoString(veLivePlayerStatistics)));
         }
         @Override
         public void onFirstVideoFrameRender(VeLivePlayer veLivePlayer, boolean b) {

@@ -8,8 +8,8 @@ package com.ttsdk.quickstart.features.advanced;
 
 import static com.ss.videoarch.liveplayer.VeLivePlayerDef.VeLivePlayerFillMode.VeLivePlayerFillModeAspectFill;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -43,10 +43,15 @@ import com.ss.videoarch.liveplayer.VideoLiveManager;
 import com.ttsdk.quickstart.R;
 import com.ttsdk.quickstart.features.advanced.pip.FloatingVideoService;
 import com.ttsdk.quickstart.helper.VeLiveSDKHelper;
+import com.ttsdk.quickstart.helper.sign.VeLiveURLGenerator;
+import com.ttsdk.quickstart.helper.sign.model.VeLivePullURLModel;
+import com.ttsdk.quickstart.helper.sign.model.VeLiveURLError;
+import com.ttsdk.quickstart.helper.sign.model.VeLiveURLRootModel;
 
 public class PictureInPictureActivity extends AppCompatActivity {
+    private final String TAG = "PictureInPicture";
     private VeLivePlayer mLivePlayer;
-    private TextView mTextView;
+    private TextView mInfoView;
 
     private EditText mUrlText;
     private Button mSwitchPip;
@@ -54,17 +59,17 @@ public class PictureInPictureActivity extends AppCompatActivity {
 
     private SurfaceView mSurfaceView;
     private FrameLayout mViewContainer;
-    private int mOverlayRequestCode = 1001;
+    private final int mOverlayRequestCode = 1001;
     private FloatingVideoService mFloatingVideoService = null;
     private boolean mFloatingVideoServiceIsConnected;
 
-    private ServiceConnection mFloatingVideoServiceConnection = new ServiceConnection() {
+    private final ServiceConnection mFloatingVideoServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             mFloatingVideoServiceIsConnected = true;
             mFloatingVideoService = ((FloatingVideoService.Binder)service).getService();
             mViewContainer.removeView(mSurfaceView);
-            mFloatingVideoService.addSurfaceView(mSurfaceView);
+            mFloatingVideoService.addSurfaceView(mSurfaceView, v -> startPictureInPicture(mSwitchPip));
         }
 
         @Override
@@ -78,9 +83,8 @@ public class PictureInPictureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_in_picture);
 
-        mTextView = findViewById(R.id.pull_info_text_view);
+        mInfoView = findViewById(R.id.pull_info_text_view);
         mUrlText = findViewById(R.id.url_input_view);
-        mUrlText.setText(VeLiveSDKHelper.LIVE_PULL_URL);
         mSwitchPip = findViewById(R.id.picture_in_picture_control);
         mSurfaceView = new SurfaceView(this);
         mSurfaceView.getHolder().setFormat(PixelFormat.RGBA_8888);
@@ -148,20 +152,39 @@ public class PictureInPictureActivity extends AppCompatActivity {
 
         //  设置渲染填充模式  
         mLivePlayer.setRenderFillMode(VeLivePlayerFillModeAspectFill);
-
-        //  设置播放地址，支持 rtmp、http、https 协议，flv、m3u8 格式的地址  
-        mLivePlayer.setPlayUrl(mUrlText.getText().toString());
-
-        //  开始播放  
-        mLivePlayer.play();
     }
 
 
     public void playControl(View view) {
         ToggleButton toggleButton = (ToggleButton) view;
+        if (mUrlText.getText().toString().isEmpty()) {
+            toggleButton.setChecked(false);
+            mInfoView.setText(R.string.config_stream_name_tip);
+            return;
+        }
         if (toggleButton.isChecked()) {
-            //  开始播放  
-            mLivePlayer.play();
+            view.setEnabled(false);
+            mInfoView.setText(R.string.Generate_Pull_Url_Tip);
+            VeLiveURLGenerator.genPullUrl(VeLiveSDKHelper.LIVE_APP_NAME, mUrlText.getText().toString(), new VeLiveURLGenerator.VeLiveURLCallback<VeLivePullURLModel>() {
+                @Override
+                public void onSuccess(VeLiveURLRootModel<VeLivePullURLModel> model) {
+                    view.setEnabled(true);
+                    mInfoView.setText("");
+                    
+                    //  设置播放地址，支持 rtmp、http、https 协议，flv、m3u8 格式的地址  
+                    mLivePlayer.setPlayUrl(model.result.getUrl("flv"));
+
+                    //  开始播放  
+                    mLivePlayer.play();
+                }
+
+                @Override
+                public void onFailed(VeLiveURLError error) {
+                    view.setEnabled(true);
+                    mInfoView.setText(error.message);
+                    toggleButton.setChecked(false);
+                }
+            });
         } else {
             //  停止播放  
             mLivePlayer.stop();
@@ -170,10 +193,14 @@ public class PictureInPictureActivity extends AppCompatActivity {
 
     public void startPictureInPicture(View view) {
         if (!mIsPipOn) {
-            if (!Settings.canDrawOverlays(this)) {
-                Toast.makeText(this, R.string.pip_require_authorization, Toast.LENGTH_SHORT);
-                requestSettingCanDrawOverlays();
-                return;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (!Settings.canDrawOverlays(this)) {
+                    Toast.makeText(this, R.string.pip_require_authorization, Toast.LENGTH_SHORT).show();
+                    requestSettingCanDrawOverlays();
+                    return;
+                }
+            } else {
+                Toast.makeText(this, R.string.pip_not_support, Toast.LENGTH_SHORT).show();
             }
             Intent intent = new Intent(getApplicationContext(), FloatingVideoService.class);
             bindService(intent, mFloatingVideoServiceConnection, BIND_AUTO_CREATE);
@@ -189,14 +216,14 @@ public class PictureInPictureActivity extends AppCompatActivity {
         mIsPipOn = !mIsPipOn;
     }
 
-    private VeLivePlayerObserver mplayerObserver = new VeLivePlayerObserver() {
+    private final VeLivePlayerObserver mplayerObserver = new VeLivePlayerObserver() {
         @Override
         public void onError(VeLivePlayer veLivePlayer, VeLivePlayerError veLivePlayerError) {
             Log.e("VeLiveQuickStartDemo", "Player Error" + veLivePlayerError.mErrorMsg);
         }
         @Override
         public void onStatistics(VeLivePlayer veLivePlayer, VeLivePlayerStatistics veLivePlayerStatistics) {
-            runOnUiThread(() -> mTextView.setText(VeLiveSDKHelper.getPlaybackInfoString(veLivePlayerStatistics)));
+            runOnUiThread(() -> mInfoView.setText(VeLiveSDKHelper.getPlaybackInfoString(veLivePlayerStatistics)));
         }
         @Override
         public void onFirstVideoFrameRender(VeLivePlayer veLivePlayer, boolean b) {

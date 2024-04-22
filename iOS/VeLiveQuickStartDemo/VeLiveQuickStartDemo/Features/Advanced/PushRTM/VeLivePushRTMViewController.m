@@ -25,8 +25,8 @@
 #import "VeLiveSDKHelper.h"
 @interface VeLivePushRTMViewController () <VeLivePusherObserver, VeLivePusherStatisticsObserver>
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
-@property (weak, nonatomic) IBOutlet UITextField *rtmUrlTextField;
-@property (weak, nonatomic) IBOutlet UITextField *rtmpUrlTextField;
+@property (weak, nonatomic) IBOutlet UILabel *urlLabel;
+@property (weak, nonatomic) IBOutlet UITextField *urlTextField;
 @property (weak, nonatomic) IBOutlet UIButton *pushControlBtn;
 @property (nonatomic, strong) VeLivePusher *livePusher;
 @end
@@ -77,23 +77,30 @@
 }
 
 - (IBAction)pushControl:(UIButton *)sender {
-    if (self.rtmUrlTextField.text.length <= 0) {
-        NSLog(@"VeLiveQuickStartDemo: Please Config RTM Url");
-        return;
-    }
-    if (self.rtmpUrlTextField.text.length <= 0) {
-        NSLog(@"VeLiveQuickStartDemo: Please Config RTMP Url");
+    if (self.urlTextField.text.length <= 0) {
+        self.infoLabel.text = NSLocalizedString(@"config_stream_name_tip", nil);
         return;
     }
     if (!sender.isSelected) {
-        //  开始推流，第一个推流地址填写RTM推流地址，后面填写降级推流地址  
-        [self.livePusher startPushWithUrls:@[self.rtmUrlTextField.text, self.rtmpUrlTextField.text]];
+        self.infoLabel.text = NSLocalizedString(@"Generate_Push_Url_Tip", nil);
+        self.view.userInteractionEnabled = NO;
+        [VeLiveURLGenerator genPushURLForApp:LIVE_APP_NAME
+                                  streamName:self.urlTextField.text
+                                  completion:^(VeLiveURLRootModel<VeLivePushURLModel *> * _Nullable model, NSError * _Nullable error) {
+            self.infoLabel.text = error.localizedDescription;
+            self.view.userInteractionEnabled = YES;
+            if (error != nil) {
+                return;
+            }
+            //  开始推流，推流地址支持： rtmp 协议，http 协议（RTM）  
+            [self.livePusher startPushWithUrls:@[[model.result getRtmPushUrl], [model.result getRtmpPushUrl]]];
+            sender.selected = !sender.isSelected;
+        }];
     } else {
         //  停止推流  
         [self.livePusher stopPush];
+        sender.selected = !sender.isSelected;
     }
-    
-    sender.selected = !sender.isSelected;
 }
 
 // MARK: - VeLivePusherObserver
@@ -116,8 +123,7 @@
     self.title = NSLocalizedString(@"Push_RTM", nil);
     self.navigationItem.backBarButtonItem.title = nil;
     self.navigationItem.backButtonTitle = nil;
-    self.rtmpUrlTextField.text = LIVE_PUSH_URL;
-    self.rtmUrlTextField.text = LIVE_RTM_PUSH_URL;
+    self.urlLabel.text = NSLocalizedString(@"Push_Url_Tip", nil);
     [self.pushControlBtn setTitle:NSLocalizedString(@"Push_Start_Push", nil) forState:(UIControlStateNormal)];
     [self.pushControlBtn setTitle:NSLocalizedString(@"Push_Stop_Push", nil) forState:(UIControlStateSelected)];
 }

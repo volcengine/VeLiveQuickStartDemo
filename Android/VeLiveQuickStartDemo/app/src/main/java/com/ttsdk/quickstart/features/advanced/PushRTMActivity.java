@@ -8,9 +8,7 @@ package com.ttsdk.quickstart.features.advanced;
 
 import static com.ss.avframework.live.VeLivePusherDef.VeLiveAudioCaptureType.VeLiveAudioCaptureMicrophone;
 import static com.ss.avframework.live.VeLivePusherDef.VeLiveVideoCaptureType.VeLiveVideoCaptureFrontCamera;
-
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +23,10 @@ import com.ss.avframework.live.VeLivePusherConfiguration;
 import com.ss.avframework.live.VeLivePusherDef;
 import com.ss.avframework.live.VeLivePusherObserver;
 import com.ss.avframework.live.VeLiveVideoFrame;
+import com.ttsdk.quickstart.helper.sign.VeLiveURLGenerator;
+import com.ttsdk.quickstart.helper.sign.model.VeLivePushURLModel;
+import com.ttsdk.quickstart.helper.sign.model.VeLiveURLError;
+import com.ttsdk.quickstart.helper.sign.model.VeLiveURLRootModel;
 
 /*
 摄像头推流
@@ -40,22 +42,17 @@ import com.ss.avframework.live.VeLiveVideoFrame;
 
  */
 public class PushRTMActivity extends AppCompatActivity {
+    private final String TAG = "PushRTMActivity";
     private VeLivePusher mLivePusher;
-    private EditText mRtmUrlText;
+    private EditText mUrlText;
     private EditText mRtmpUrlText;
     private TextView mInfoView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_push_rtmactivity);
-
         mInfoView = findViewById(R.id.push_info_text_view);
-
-        mRtmUrlText = findViewById(R.id.rtm_url_input_view);
-        mRtmUrlText.setText(VeLiveSDKHelper.LIVE_RTM_PUSH_URL);
-
-        mRtmpUrlText = findViewById(R.id.rtmp_url_input_view);
-        mRtmpUrlText.setText(VeLiveSDKHelper.LIVE_PUSH_URL);
+        mUrlText = findViewById(R.id.url_input_view);
         setupLivePusher();
     }
 
@@ -87,18 +84,34 @@ public class PushRTMActivity extends AppCompatActivity {
         mLivePusher.startVideoCapture(VeLiveVideoCaptureFrontCamera);
         //  开始音频采集  
         mLivePusher.startAudioCapture(VeLiveAudioCaptureMicrophone);
-        VeLiveVideoFrame videoFrame = null;
     }
 
     public void pushControl(View view) {
-        ToggleButton toggleButton = (ToggleButton)view;
-        if (mRtmUrlText.getText().toString().isEmpty() || mRtmpUrlText.getText().toString().isEmpty()) {
-            Log.e("VeLiveQuickStartDemo", "Please Config Url");
+        ToggleButton toggleButton = (ToggleButton) view;
+        if (mUrlText.getText().toString().isEmpty()) {
+            toggleButton.setChecked(false);
+            mInfoView.setText(R.string.config_stream_name_tip);
             return;
         }
         if (toggleButton.isChecked()) {
-            //  开始推流，推流地址支持： rtmp 协议，http 协议（RTM）  
-            mLivePusher.startPushWithUrls(new String[]{mRtmUrlText.getText().toString(), mRtmpUrlText.getText().toString()});
+            view.setEnabled(false);
+            mInfoView.setText(R.string.Generate_Push_Url_Tip);
+            VeLiveURLGenerator.genPushUrl(VeLiveSDKHelper.LIVE_APP_NAME, mUrlText.getText().toString(), new VeLiveURLGenerator.VeLiveURLCallback<VeLivePushURLModel>() {
+                @Override
+                public void onSuccess(VeLiveURLRootModel<VeLivePushURLModel> model) {
+                    view.setEnabled(true);
+                    mInfoView.setText("");
+                    //  开始推流，推流地址支持： rtmp 协议，http 协议（RTM）  
+                    mLivePusher.startPushWithUrls(new String[]{model.result.getRtmPushUrl(), model.result.getRtmpPushUrl()});
+                }
+
+                @Override
+                public void onFailed(VeLiveURLError error) {
+                    view.setEnabled(true);
+                    mInfoView.setText(error.message);
+                    toggleButton.setChecked(false);
+                }
+            });
         } else {
             //  停止推流  
             mLivePusher.stopPush();
@@ -108,12 +121,12 @@ public class PushRTMActivity extends AppCompatActivity {
     private VeLivePusherObserver pusherObserver = new VeLivePusherObserver() {
         @Override
         public void onError(int code, int subCode, String msg) {
-            Log.d("VeLiveQuickStartDemo", "Error" + code + subCode + msg);
+            Log.d(TAG, "Error" + code + subCode + msg);
         }
 
         @Override
         public void onStatusChange(VeLivePusherDef.VeLivePusherStatus status) {
-            Log.d("VeLiveQuickStartDemo", "Status" + status);
+            Log.d(TAG, "Status" + status);
         }
     };
 

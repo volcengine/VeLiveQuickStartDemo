@@ -13,7 +13,6 @@
 //
 
 #import "VeLiveSDKHelper.h"
-
 @implementation VeLiveSDKHelper
 + (void)initTTSDK {
     TTSDKConfiguration *cfg = [TTSDKConfiguration defaultConfigurationWithAppID:TTSDK_APP_ID
@@ -29,7 +28,7 @@
     //  是否默认内部初始化 AppLog  
     cfg.shouldInitAppLog = YES;
     //  配置服务区域，默认CN  
-    cfg.serviceVendor = TTSDKServiceVendorCN;
+    cfg.appRegion = TTSDKServiceVendorCN;
     //  配置当前用户的唯一ID，一般传业务侧用户ID，如果在初始的时候获取不到，可以在获取到用户ID时配置  
     [TTSDKManager setCurrentUserUniqueID:@"VeLiveQuickStartDemo"];
     //  是否上报埋点日志  
@@ -62,7 +61,6 @@
     cfg.logConfiguration = logConfig;
     //  启动 TTSDK  
     [TTSDKManager startWithConfiguration:cfg];
-
 }
 
 
@@ -101,6 +99,7 @@
     [attributedString appendAttributedString:GetInfoAttributeString(@"Camera_Push_Info_Real_Time_Trans_FPS", @(statistics.transportFps), @"\n")];
     [attributedString appendAttributedString:GetInfoAttributeString(@"Camera_Push_Info_Real_Time_Encode_Bitrate", @(statistics.encodeVideoBitrate), @" kbps")];
     [attributedString appendAttributedString:GetInfoAttributeString(@"Camera_Push_Info_Real_Time_Trans_Bitrate", @(statistics.transportVideoBitrate), @" kbps")];
+    NSLog(@"%@", attributedString.string);
     return attributedString;
 }
 
@@ -139,6 +138,7 @@
     [attributedString appendAttributedString:GetInfoAttributeString(@"Pull_Stream_Info_Delay_Time", @(statistics.delayMs), @"ms ")];
     [attributedString appendAttributedString:GetInfoAttributeString(@"Pull_Stream_Info_Stall_Time", @(statistics.stallTimeMs), @" ms\n")];
     [attributedString appendAttributedString:GetInfoAttributeString(@"Pull_Stream_Info_Is_HardWareDecode", @(statistics.isHardWareDecode), @"")];
+    NSLog(@"%@", attributedString.string);
     return attributedString;
 }
 

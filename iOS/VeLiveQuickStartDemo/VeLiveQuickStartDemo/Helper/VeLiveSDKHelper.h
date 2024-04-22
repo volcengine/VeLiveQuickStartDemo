@@ -13,7 +13,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 /*
  本文件存放 SDK 基础配置信息，不分信息在进入相应页面是可以在界面上进行修改
  本文件存放SDK基础配置信息，包含 SDK AppID， License 文件名，推拉流地址，连麦互动房间ID、主播/观众 UID及临时Token
@@ -29,19 +28,33 @@
 #define TTSDK_LICENSE_NAME @"ttsdk.lic"
 
 /*
- rtmp, RTM, Quic 推流地址
- 生成方式：通过控制台生成 https://console.volcengine.com/live/main/locationGenerate
+ *  API访问密钥 https://console.volcengine.com/iam/keymanage/
  */
-#define LIVE_PUSH_URL @""
-#define LIVE_RTM_PUSH_URL @""
+#define ACCESS_KEY_ID @""
+#define SECRET_ACCESS_KEY @""
 
 /*
- RTM, rtmp、flv、m3u8 拉流地址
- 生成方式：通过控制台生成 https://console.volcengine.com/live/main/locationGenerate
+ * 直播推拉流 VHOST
+ * https://console.volcengine.com/iam/resourcemanage/project/default/
  */
-#define LIVE_PULL_URL @""
-#define LIVE_RTM_PULL_URL @""
+#define LIVE_VHOST @""
 
+/*
+ * 生成直播推拉流地址时使用
+ * 举例: https://pull.example.com/live/abc.flv
+ */
+#define LIVE_APP_NAME @"live"
+
+
+/*
+ * 直播推流域名 https://console.volcengine.com/live/main/domain/list
+ */
+#define LIVE_PUSH_DOMAIN @""
+
+/*
+ * 直播拉流域名 https://console.volcengine.com/live/main/domain/list
+ */
+#define LIVE_PULL_DOMAIN @""
 
 /*
  互动直播AppID
@@ -49,37 +62,24 @@
 #define RTC_APPID @""
 
 /*
- 互动直播主播房间ID
+ 互动直播 AppKey
  */
-#define RTC_ROOM_ID @""
+#define RTC_APPKEY @""
 
 /*
- 互动直播主播用户ID
+ * CV License 名称，必须放到 App 的根目录下
  */
-#define RTC_USER_ID @""
-
 /*
- 互动直播主播用户 Token
- 生成方式：使用主播房间ID和主播用户ID在RTC控制台生成
- https://console.volcengine.com/rtc/listRTC
+ * CV License name，Must be placed in the root directory of the App
  */
-#define RTC_USER_TOKEN @""
-
-/*
- 主播与主播PK时，对方主播的房间ID
- */
-#define RTC_OTHER_ROOM_ID @""
-
-/*
- 主播与主播PK时，当前主播加入对方主播房间内的Token
- 生成方式：使用当前主播的用户ID和对方主播的房间ID在控制台生成
- */
-#define RTC_OTHER_ROOM_TOKEN @""
+#define EFFECT_LICENSE_NAME @""
 
 #import <TTSDKFramework/TTSDKFramework.h>
 #import <VolcEngineRTC/VolcEngineRTC.h>
 
 #import "VeLiveDeviceCapture.h"
+#import "VeLiveURLGenerator.h"
+#import "VeLiveRTCTokenMaker.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @class VeLivePlayerStatistics;

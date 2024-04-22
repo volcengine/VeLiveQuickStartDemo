@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ttsdk.quickstart">
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -26,7 +27,15 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Default">
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:theme="@style/Theme.Default"
+        tools:ignore="UnusedAttribute">
+        <activity
+            android:name=".features.advanced.PullRTMActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.advanced.PullRTMActivity"
+            android:exported="false" />
         <activity
             android:name=".features.advanced.PictureInPictureActivity"
             android:exported="false" />
@@ -92,11 +101,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".features.advanced.pip.FloatingVideoService"></service>
-        <service android:name=".helper.KeepLiveService"
+
+        <service android:name=".features.advanced.pip.FloatingVideoService" />
+        <service android:name=".helper.VeLiveKeepLiveService"
             android:enabled="true"
-            android:foregroundServiceType="mediaProjection"
-            android:exported="true"></service>
+            android:exported="true"
+            android:foregroundServiceType="mediaProjection" />
     </application>
 
 </manifest>

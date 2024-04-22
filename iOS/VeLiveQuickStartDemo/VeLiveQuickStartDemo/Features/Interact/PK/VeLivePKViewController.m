@@ -17,11 +17,12 @@
 #import "VeLivePKAnchorViewController.h"
 @interface VeLivePKViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
+@property (weak, nonatomic) IBOutlet UILabel *roomIdLabel;
 @property (weak, nonatomic) IBOutlet UITextField *roomIdTextField;
+@property (weak, nonatomic) IBOutlet UILabel *userIdLabel;
 @property (weak, nonatomic) IBOutlet UITextField *userIdTextField;
-@property (weak, nonatomic) IBOutlet UITextField *tokenTextField;
+@property (weak, nonatomic) IBOutlet UILabel *otherRoomIdLabel;
 @property (weak, nonatomic) IBOutlet UITextField *otherRoomIdTextField;
-@property (weak, nonatomic) IBOutlet UITextField *otherTokenTextField;
 @property (weak, nonatomic) IBOutlet UIButton *startBtn;
 @end
 
@@ -40,18 +41,16 @@
     VeLivePKAnchorViewController *vc = [[VeLivePKAnchorViewController alloc] initWithNibName:@"VeLivePKAnchorViewController" bundle:nil];
     vc.roomID = self.roomIdTextField.text;
     vc.userID = self.userIdTextField.text;
-    vc.token = self.tokenTextField.text;
+    vc.token = [[VeLiveRTCTokenMaker shareMaker] genDefaultTokenWithRoomID:vc.roomID userId:vc.userID];
     vc.otherRoomID = self.otherRoomIdTextField.text;
-    vc.otherRoomToken = self.otherTokenTextField.text;
+    vc.otherRoomToken = [[VeLiveRTCTokenMaker shareMaker] genDefaultTokenWithRoomID:vc.otherRoomID userId:vc.userID];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (BOOL)checkParams {
     if (self.roomIdTextField.text <= 0
         || self.userIdTextField.text <= 0
-        || self.tokenTextField.text <= 0
-        || self.otherRoomIdTextField.text <= 0
-        || self.otherTokenTextField.text <= 0) {
+        || self.otherRoomIdTextField.text <= 0) {
         NSLog(@"VeLiveQuickStartDemo: Please Check Params");
         return NO;
     }
@@ -62,14 +61,10 @@
     self.title = NSLocalizedString(@"Interact_PK", nil);
     self.navigationItem.backBarButtonItem.title = nil;
     self.navigationItem.backButtonTitle = nil;
-    
+    self.roomIdLabel.text = NSLocalizedString(@"room_id", nil);
+    self.userIdLabel.text = NSLocalizedString(@"user_id", nil);
+    self.otherRoomIdLabel.text = NSLocalizedString(@"other_room_id", nil);
     self.tipLabel.text = NSLocalizedString(@"Interact_Link_Tip", nil);
-    self.roomIdTextField.text = RTC_ROOM_ID;
-    self.userIdTextField.text = RTC_USER_ID;
-    self.tokenTextField.text = RTC_USER_TOKEN;
-    self.otherRoomIdTextField.text = RTC_OTHER_ROOM_ID;
-    self.otherTokenTextField.text = RTC_OTHER_ROOM_TOKEN;
-    
     [self.startBtn setTitle:NSLocalizedString(@"Interact_PK_Start", nil) forState:(UIControlStateNormal)];
 }
 

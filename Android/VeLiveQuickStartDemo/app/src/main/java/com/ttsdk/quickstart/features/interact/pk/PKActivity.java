@@ -8,15 +8,18 @@ package com.ttsdk.quickstart.features.interact.pk;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.ttsdk.quickstart.R;
 import com.ttsdk.quickstart.helper.VeLiveSDKHelper;
+import com.ttsdk.quickstart.helper.sign.VeLiveRTCTokenMaker;
 
 public class PKActivity extends AppCompatActivity {
+    private final String LOG_TAG = "PKActivity";
 
     private EditText mRoomIDText;
     private EditText mUserIDText;
@@ -31,35 +34,37 @@ public class PKActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pkactivity);
         mRoomIDText = findViewById(R.id.room_id_text_view);
-        mRoomIDText.setText(VeLiveSDKHelper.RTC_ROOM_ID);
         mUserIDText = findViewById(R.id.user_id_text_view);
-        mUserIDText.setText(VeLiveSDKHelper.RTC_USER_ID);
-        mTokenText = findViewById(R.id.token_text_view);
-        mTokenText.setText(VeLiveSDKHelper.RTC_USER_TOKEN);
         mOtherRoomIDText = findViewById(R.id.other_room_id_text_view);
-        mOtherRoomIDText.setText(VeLiveSDKHelper.RTC_OTHER_ROOM_ID);
-        mOtherTokenText = findViewById(R.id.other_token_text_view);
-        mOtherTokenText.setText(VeLiveSDKHelper.RTC_OTHER_ROOM_TOKEN);
     }
 
     public void startControl(View view) {
         if (!checkParams()) {
             return;
         }
+        String roomId = mRoomIDText.getText().toString();
+        String userId = mUserIDText.getText().toString();
+        String otherRoomId = mOtherRoomIDText.getText().toString();
         Intent intent = new Intent(PKActivity.this, PKAnchorActivity.class);
-        intent.putExtra(PKAnchorActivity.ROOM_ID, mRoomIDText.getText().toString());
-        intent.putExtra(PKAnchorActivity.USER_ID, mUserIDText.getText().toString());
-        intent.putExtra(PKAnchorActivity.TOKEN, mTokenText.getText().toString());
-        intent.putExtra(PKAnchorActivity.OTHER_ROOM_ID, mOtherRoomIDText.getText().toString());
-        intent.putExtra(PKAnchorActivity.OTHER_TOKEN, mOtherTokenText.getText().toString());
+        intent.putExtra(PKAnchorActivity.ROOM_ID, roomId);
+        intent.putExtra(PKAnchorActivity.USER_ID, userId);
+
+        String roomToken = VeLiveRTCTokenMaker.shareMaker().genDefaultToken(roomId, userId);
+        intent.putExtra(PKAnchorActivity.TOKEN, roomToken);
+        intent.putExtra(PKAnchorActivity.OTHER_ROOM_ID, otherRoomId);
+
+        String otherRoomToken = VeLiveRTCTokenMaker.shareMaker().genDefaultToken(otherRoomId, userId);
+        intent.putExtra(PKAnchorActivity.OTHER_TOKEN, otherRoomToken);
         startActivity(intent);
     }
 
     private boolean checkParams() {
-        return !mRoomIDText.getText().toString().isEmpty()
+        if (!mRoomIDText.getText().toString().isEmpty()
                 && !mUserIDText.getText().toString().isEmpty()
-                && !mTokenText.getText().toString().isEmpty()
-                && !mOtherRoomIDText.getText().toString().isEmpty()
-                && !mOtherTokenText.getText().toString().isEmpty();
+                && !mOtherRoomIDText.getText().toString().isEmpty()) {
+            return true;
+        }
+        Log.e(LOG_TAG, "Please Check Params");
+        return false;
     }
 }

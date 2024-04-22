@@ -18,9 +18,10 @@ import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
-import androidx.annotation.Nullable;
+import android.support.annotation.Nullable;
 
 import com.ttsdk.quickstart.R;
 
@@ -39,6 +40,7 @@ public class FloatingVideoService extends Service {
     private SurfaceView mSurfaceView;
     private FrameLayout mSurfaceContainer;
     private View mSmallWindowView;
+    private Button mCloseBtn;
 
     @Override
     public void onCreate() {
@@ -58,12 +60,15 @@ public class FloatingVideoService extends Service {
         layoutParams.x = 300;
         layoutParams.y = 300;
 
-        if (Settings.canDrawOverlays(this)) {
-            LayoutInflater layoutInflater = LayoutInflater.from(this);
-            mSmallWindowView = layoutInflater.inflate(R.layout.floating_window, null);
-            mSurfaceContainer = mSmallWindowView.findViewById(R.id.surface_container);
-            mSmallWindowView.setOnTouchListener(new FloatingOnTouchListener());
-            windowManager.addView(mSmallWindowView, layoutParams);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (Settings.canDrawOverlays(this)) {
+                LayoutInflater layoutInflater = LayoutInflater.from(this);
+                mSmallWindowView = layoutInflater.inflate(R.layout.floating_window, null);
+                mSurfaceContainer = mSmallWindowView.findViewById(R.id.surface_container);
+                mSmallWindowView.setOnTouchListener(new FloatingOnTouchListener());
+                windowManager.addView(mSmallWindowView, layoutParams);
+                mCloseBtn = mSmallWindowView.findViewById(R.id.surface_close_btn);
+            }
         }
     }
 
@@ -98,9 +103,10 @@ public class FloatingVideoService extends Service {
         }
     }
 
-    public void addSurfaceView(SurfaceView view) {
+    public void addSurfaceView(SurfaceView view, View.OnClickListener onCLose) {
         mSurfaceView = view;
         mSurfaceContainer.addView(view);
+        mCloseBtn.setOnClickListener(onCLose);
     }
 
     public void removeSurfaceView() {
@@ -108,6 +114,7 @@ public class FloatingVideoService extends Service {
             mSurfaceContainer.removeView(mSurfaceView);
             mSurfaceView = null;
         }
+        mCloseBtn.setOnClickListener(null);
     }
 
     private class FloatingOnTouchListener implements View.OnTouchListener {

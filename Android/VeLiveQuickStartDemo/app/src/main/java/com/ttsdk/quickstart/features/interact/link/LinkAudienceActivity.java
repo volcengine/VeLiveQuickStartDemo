@@ -8,7 +8,7 @@ package com.ttsdk.quickstart.features.interact.link;
 
 import static com.ss.bytertc.engine.type.MediaStreamType.RTC_MEDIA_STREAM_TYPE_AUDIO;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import android.graphics.PixelFormat;
 import android.os.Bundle;
@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.ss.bytertc.engine.video.IVideoEffect;
@@ -30,18 +31,23 @@ import com.pandora.common.env.Env;
 import com.ss.bytertc.engine.RTCVideo;
 import com.ss.bytertc.engine.type.MediaStreamType;
 import com.ss.bytertc.engine.type.StreamRemoveReason;
+import com.ttsdk.quickstart.helper.sign.VeLiveURLGenerator;
+import com.ttsdk.quickstart.helper.sign.model.VeLivePullURLModel;
+import com.ttsdk.quickstart.helper.sign.model.VeLiveURLError;
+import com.ttsdk.quickstart.helper.sign.model.VeLiveURLRootModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
 public class LinkAudienceActivity extends AppCompatActivity {
-
+    private final String TAG = "LinkAudienceActivity";
     public static final String ROOM_ID = "LinkAudienceActivity_ROOM_ID";
     public static final String USER_ID = "LinkAudienceActivity_USER_ID";
     public static final String TOKEN = "LinkAudienceActivity_TOKEN";
     private LinearLayout mRemoteLinearLayout;
     private EditText mUrlText;
+    private TextView mInfoView;
     private String mRoomID;
     private String mUserID;
     private String mToken;
@@ -61,7 +67,7 @@ public class LinkAudienceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_link_audience);
         mUrlText = findViewById(R.id.url_input_view);
-        mUrlText.setText(VeLiveSDKHelper.LIVE_PULL_URL);
+        mInfoView = findViewById(R.id.pull_info_text_view);
         mLocalView = findViewById(R.id.render_view);
         mPreviewView = findViewById(R.id.player_view);
         mRemoteLinearLayout = findViewById(R.id.guest_linear_layout);
@@ -84,18 +90,16 @@ public class LinkAudienceActivity extends AppCompatActivity {
         mUsersInRoom = new ArrayList<>();
         mRemoteUserViews = new HashMap<>();
         mAudienceManager = VeLiveAudienceManager.create(VeLiveSDKHelper.RTC_APPID, mUserID);
-        //  开始推流  
-        startPlay();
     }
 
-    private void startPlay() {
-        if (mUrlText.getText().toString().isEmpty()) {
-            Log.e("VeLiveQuickStartDemo", "Please config push url");
+    private void startPlay(String url) {
+        if (url == null || url.isEmpty()) {
+            Log.e(TAG, "Please config pull url");
             return;
         }
         mPreviewView.getHolder().setFormat(PixelFormat.RGBA_8888);
         mAudienceManager.setPlayerVideoView(mPreviewView.getHolder());
-        mAudienceManager.startPlay(mUrlText.getText().toString());
+        mAudienceManager.startPlay(url);
     }
 
     private void stopPlay() {
@@ -192,8 +196,29 @@ public class LinkAudienceActivity extends AppCompatActivity {
 
     public void playControl(View view) {
         ToggleButton toggleButton = (ToggleButton) view;
+        if (mUrlText.getText().toString().isEmpty()) {
+            toggleButton.setChecked(false);
+            mInfoView.setText(R.string.config_stream_name_tip);
+            return;
+        }
         if (toggleButton.isChecked()) {
-            startPlay();
+            view.setEnabled(false);
+            mInfoView.setText(R.string.Generate_Pull_Url_Tip);
+            VeLiveURLGenerator.genPullUrl(VeLiveSDKHelper.LIVE_APP_NAME, mUrlText.getText().toString(), new VeLiveURLGenerator.VeLiveURLCallback<VeLivePullURLModel>() {
+                @Override
+                public void onSuccess(VeLiveURLRootModel<VeLivePullURLModel> model) {
+                    view.setEnabled(true);
+                    mInfoView.setText("");
+                    startPlay(model.result.getUrl("flv"));
+                }
+
+                @Override
+                public void onFailed(VeLiveURLError error) {
+                    view.setEnabled(true);
+                    mInfoView.setText(error.message);
+                    toggleButton.setChecked(false);
+                }
+            });
         } else {
             stopPlay();
         }
@@ -230,7 +255,7 @@ public class LinkAudienceActivity extends AppCompatActivity {
         effect.initCVResource(licPath, algoModePath);
 
         if (effect.enableVideoEffect() != 0) {
-            Log.e("VeLiveQuickStartDemo", "enable effect error");
+            Log.e(TAG, "enable effect error");
         }
     }
 

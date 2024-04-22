@@ -6,7 +6,7 @@
  */
 
 //
-//  VELiveConfig.h
+//  VeLiveiveConfig.h
 //  VeLiveQuickStartDemo
 //
 //  Created by Volcano Engine Team on 2023/3/2.

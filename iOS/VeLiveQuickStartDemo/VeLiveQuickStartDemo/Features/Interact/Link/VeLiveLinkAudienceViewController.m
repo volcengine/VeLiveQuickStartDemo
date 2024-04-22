@@ -16,7 +16,9 @@
 #import "VeLiveAudienceManager.h"
 @interface VeLiveLinkAudienceViewController () <VeLiveAudienceDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *urlTextField;
+@property (weak, nonatomic) IBOutlet UILabel *urlLabel;
 @property (weak, nonatomic) IBOutlet UIButton *interactControlBtn;
+@property (weak, nonatomic) IBOutlet UILabel *infoLabel;
 @property (weak, nonatomic) IBOutlet UIButton *beautyControlBtn;
 @property (weak, nonatomic) IBOutlet UIButton *filterControlBtn;
 @property (weak, nonatomic) IBOutlet UIButton *seiControlBtn;
@@ -91,12 +93,28 @@
 }
 
 - (IBAction)playControl:(UIButton *)sender {
-    if (sender.isSelected) {
-        [self.audienceManager stopPlay];
-    } else {
-        [self.audienceManager startPlay:self.urlTextField.text];
+    if (self.urlTextField.text.length <= 0) {
+        self.infoLabel.text = NSLocalizedString(@"config_stream_name_tip", nil);
+        return;
     }
-    sender.selected = !sender.isSelected;
+    if (sender.isSelected) {
+        //  停止播放  
+        [self.audienceManager stopPlay];
+        sender.selected = !sender.isSelected;
+    } else {
+        self.infoLabel.text = NSLocalizedString(@"Generate_Pull_Url_Tip", nil);
+        self.view.userInteractionEnabled = NO;
+        [VeLiveURLGenerator genPullURLForApp:LIVE_APP_NAME streamName:self.urlTextField.text completion:^(VeLiveURLRootModel<VeLivePullURLModel *> * _Nullable model, NSError * _Nullable error) {
+            self.infoLabel.text = error.localizedDescription;
+            self.view.userInteractionEnabled = YES;
+            if (error != nil) {
+                return;
+            }
+            // 开始播放 
+            [self.audienceManager startPlay:[model.result getUrlWithProtocol:@"flv"]];
+            sender.selected = !sender.isSelected;
+        }];
+    }
 }
 
 - (IBAction)interactControl:(UIButton *)sender {
@@ -122,7 +140,8 @@
     ByteRTCVideo *rtcVideo = self.audienceManager.rtcVideo;
     
     //  特效鉴权License路径，请根据工程配置查找正确的路径  
-    NSString *licensePath = [NSBundle.mainBundle pathForResource:@"LicenseBag.bundle/xxx.licbag" ofType:nil];
+    NSString *licensePath = [NSString stringWithFormat:@"LicenseBag.bundle/%@", EFFECT_LICENSE_NAME];
+    licensePath = [NSBundle.mainBundle pathForResource:licensePath ofType:nil];
     
     //  特效算法资源包路径  
     NSString *algoModelPath = [NSBundle.mainBundle pathForResource:@"ModelResource.bundle" ofType:nil];
@@ -132,8 +151,6 @@
     }
     
     [rtcVideo.getVideoEffectInterface initCVResource:licensePath withAlgoModelDir:algoModelPath];
-    
-    
     
     //  开启美颜特效处理  
     if ([rtcVideo.getVideoEffectInterface enableVideoEffect] != 0) {
@@ -217,7 +234,7 @@
     self.title = NSLocalizedString(@"Interact_Link_Audience_Title", nil);
     self.navigationItem.backBarButtonItem.title = nil;
     self.navigationItem.backButtonTitle = nil;
-    self.urlTextField.text = LIVE_PULL_URL;
+    self.urlLabel.text = NSLocalizedString(@"Pull_Stream_Url_Tip", nil);
     [self.playControlBtn setTitle:NSLocalizedString(@"Pull_Stream_Start_Play", nil) forState:(UIControlStateNormal)];
     [self.playControlBtn setTitle:NSLocalizedString(@"Pull_Stream_Stop_Play", nil) forState:(UIControlStateSelected)];
     

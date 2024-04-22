@@ -25,9 +25,9 @@
     <string name="Home_Live_Beauty_Filter">美颜滤镜</string>
     <string name="Home_Live_Pull_Streaming">直播拉流</string>
     <string name="Home_Picture_In_Picture">画中画</string>
-    <string name="Home_Pull_Feed">Feed 流</string>
     <string name="Home_Push_Streaming_Bitrate_Adaptive">推流码率自适应</string>
     <string name="Home_RTM_Push_Streaming">RTM 超低延迟推流</string>
+    <string name="Home_RTM_Pull_Streaming">RTM 超低延迟拉流</string>
     <string name="Interact_Link">观众连麦</string>
     <string name="Interact_Link_Anchor">我是主播</string>
     <string name="Interact_Link_Anchor_Title">主播</string>
@@ -65,7 +65,7 @@
     <string name="Pull_Stream_Info_Video_Size">视频大小</string>
     <string name="Pull_Stream_Start_Play">开始播放</string>
     <string name="Pull_Stream_Stop_Play">停止播放</string>
-    <string name="Pull_Stream_Url_Tip">拉流地址</string>
+    <string name="Pull_Stream_Url_Tip">流名</string>
     <string name="Pull_UnMute">取消静音</string>
     <string name="Push_Auto_Bitrate">码率自适应</string>
     <string name="Push_Beauty">推流+美颜</string>
@@ -84,12 +84,13 @@
     <string name="Push_Start_Push">开始推流</string>
     <string name="Push_Stop_Push">停止推流</string>
     <string name="Push_UnMute">取消静音</string>
-    <string name="Push_Url_Tip">推流地址</string>
+    <string name="Push_Url_Tip">流名</string>
+    <string name="Generate_Push_Url_Tip">正在生成推流地址…</string>
+    <string name="Generate_Pull_Url_Tip">正在生成拉流地址…</string>
     <string name="Start_Picture_In_Picture">开启画中画</string>
     <string name="Stop_Picture_In_Picture">停止画中画</string>
     <string name="app_name">veLive快速入门</string>
-    <string name="input_url_list">请输入多个 URL 地址，用换行符分割</string>
-    <string name="other_room_id">Other Room ID</string>
+    <string name="other_room_id">对方主播房间 ID</string>
     <string name="other_token">Other Token</string>
     <string name="pull_url">拉流地址</string>
     <string name="push_url">推流地址</string>
@@ -101,4 +102,7 @@
     <string name="pip_authorization_failed">授权失败</string>
     <string name="pip_authorization_success">授权成功</string>
     <string name="pip_require_authorization">当前无权限，请授权</string>
+    <string name="pip_running_in_background">后台运行中</string>
+    <string name="pip_not_support">不支持画中画</string>
+    <string name="config_stream_name_tip">请配置流名</string>
 </resources>

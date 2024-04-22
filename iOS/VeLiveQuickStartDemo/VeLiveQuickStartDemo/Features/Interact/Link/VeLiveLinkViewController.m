@@ -40,7 +40,7 @@
     VeLiveLinkAnchorViewController *vc = [[VeLiveLinkAnchorViewController alloc] initWithNibName:@"VeLiveLinkAnchorViewController" bundle:nil];
     vc.roomID = self.roomIdTextField.text;
     vc.userID = self.userIdTextField.text;
-    vc.token = self.tokenTextField.text;
+    vc.token = [[VeLiveRTCTokenMaker shareMaker] genDefaultTokenWithRoomID:vc.roomID userId:vc.userID];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -51,14 +51,13 @@
     VeLiveLinkAudienceViewController *vc = [[VeLiveLinkAudienceViewController alloc] initWithNibName:@"VeLiveLinkAudienceViewController" bundle:nil];
     vc.roomID = self.roomIdTextField.text;
     vc.userID = self.userIdTextField.text;
-    vc.token = self.tokenTextField.text;
+    vc.token = [[VeLiveRTCTokenMaker shareMaker] genDefaultTokenWithRoomID:vc.roomID userId:vc.userID];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (BOOL)checkParams {
     if (self.roomIdTextField.text <= 0
-        || self.userIdTextField.text <= 0
-        || self.tokenTextField.text <= 0) {
+        || self.userIdTextField.text <= 0) {
         NSLog(@"VeLiveQuickStartDemo: Please Check Params");
         return NO;
     }
@@ -71,9 +70,6 @@
     self.navigationItem.backButtonTitle = nil;
     
     self.tipLabel.text = NSLocalizedString(@"Interact_Link_Tip", nil);
-    self.roomIdTextField.text = RTC_ROOM_ID;
-    self.userIdTextField.text = RTC_USER_ID;
-    self.tokenTextField.text = RTC_USER_TOKEN;
     
     [self.archorBtn setTitle:NSLocalizedString(@"Interact_Link_Anchor", nil) forState:(UIControlStateNormal)];
     [self.audienceBtn setTitle:NSLocalizedString(@"Interact_Link_Audience", nil) forState:(UIControlStateNormal)];

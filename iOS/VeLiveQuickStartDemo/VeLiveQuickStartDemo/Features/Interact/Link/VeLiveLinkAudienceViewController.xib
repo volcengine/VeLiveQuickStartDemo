@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,12 +12,14 @@
             <connections>
                 <outlet property="beautyControlBtn" destination="4nx-i8-sUB" id="0uv-8f-jWV"/>
                 <outlet property="filterControlBtn" destination="FUr-6h-O81" id="FXb-TA-eDv"/>
+                <outlet property="infoLabel" destination="EEY-QM-R5i" id="f91-Zm-H3X"/>
                 <outlet property="interactControlBtn" destination="7Sl-TX-vjY" id="1ob-y2-AAV"/>
                 <outlet property="localView" destination="fxb-RK-tDl" id="g0N-XN-yaj"/>
                 <outlet property="playControlBtn" destination="Qqy-iW-gSa" id="olO-Q6-7O6"/>
                 <outlet property="remoteStackView" destination="pEL-BL-RLq" id="RvD-7D-vUb"/>
                 <outlet property="seiControlBtn" destination="wL7-CG-sfO" id="A8i-q1-7X9"/>
                 <outlet property="stickerControlBtn" destination="aah-Lc-SZV" id="jZ7-kI-JZA"/>
+                <outlet property="urlLabel" destination="mbY-8y-9ZE" id="0bh-lN-MMA"/>
                 <outlet property="urlTextField" destination="fus-id-ppq" id="yh2-DY-ioY"/>
                 <outlet property="view" destination="pzL-c9-Tka" id="KaB-b6-Z0g"/>
             </connections>
@@ -62,7 +64,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jFd-Wg-3cc">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="30"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qqy-iW-gSa">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qqy-iW-gSa">
                                     <rect key="frame" x="0.0" y="0.0" width="125.66666666666667" height="30"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" title="Stop Play"/>
@@ -120,15 +122,23 @@
                         </stackView>
                     </subviews>
                 </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEY-QM-R5i">
+                    <rect key="frame" x="16" y="169" width="361" height="20.333333333333343"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="eCW-ac-YUX"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="eCW-ac-YUX" firstAttribute="trailing" secondItem="pEL-BL-RLq" secondAttribute="trailing" id="7dR-g3-x6X"/>
+                <constraint firstItem="EEY-QM-R5i" firstAttribute="leading" secondItem="eCW-ac-YUX" secondAttribute="leading" constant="16" id="ARi-FA-e0Q"/>
                 <constraint firstItem="fxb-RK-tDl" firstAttribute="trailing" secondItem="pzL-c9-Tka" secondAttribute="trailing" id="DQc-Xc-KAe"/>
                 <constraint firstItem="fxb-RK-tDl" firstAttribute="top" secondItem="pzL-c9-Tka" secondAttribute="top" id="Hx9-ZP-lIX"/>
                 <constraint firstItem="ztW-Bx-6EZ" firstAttribute="leading" secondItem="eCW-ac-YUX" secondAttribute="leading" constant="16" id="Q1Q-Wd-Lug"/>
                 <constraint firstItem="eCW-ac-YUX" firstAttribute="bottom" secondItem="eVy-Gd-hmn" secondAttribute="bottom" constant="30" id="SJW-Vn-HVc"/>
+                <constraint firstItem="eCW-ac-YUX" firstAttribute="trailing" secondItem="EEY-QM-R5i" secondAttribute="trailing" constant="16" id="SdI-xG-m91"/>
                 <constraint firstAttribute="bottom" secondItem="fxb-RK-tDl" secondAttribute="bottom" id="YxI-r3-5KM"/>
                 <constraint firstItem="eVy-Gd-hmn" firstAttribute="leading" secondItem="eCW-ac-YUX" secondAttribute="leading" id="eJ3-uf-Nl6"/>
                 <constraint firstItem="fxb-RK-tDl" firstAttribute="leading" secondItem="pzL-c9-Tka" secondAttribute="leading" id="fRP-B7-ere"/>
@@ -136,8 +146,18 @@
                 <constraint firstItem="eCW-ac-YUX" firstAttribute="trailing" secondItem="eVy-Gd-hmn" secondAttribute="trailing" id="nbW-5j-h4k"/>
                 <constraint firstItem="ztW-Bx-6EZ" firstAttribute="top" secondItem="eCW-ac-YUX" secondAttribute="top" constant="60" id="sAS-Th-cjh"/>
                 <constraint firstAttribute="bottom" secondItem="pEL-BL-RLq" secondAttribute="bottom" constant="42" id="uwy-RK-NeJ"/>
+                <constraint firstItem="eVy-Gd-hmn" firstAttribute="top" relation="greaterThanOrEqual" secondItem="EEY-QM-R5i" secondAttribute="bottom" constant="16" id="wob-yo-rNI"/>
+                <constraint firstItem="EEY-QM-R5i" firstAttribute="top" secondItem="ztW-Bx-6EZ" secondAttribute="bottom" constant="16" id="z2d-AW-qmz"/>
             </constraints>
             <point key="canvasLocation" x="-592" y="-11"/>
         </view>
+        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="V5b-Co-bR4">
+            <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+            <nil key="textColor"/>
+            <nil key="highlightedColor"/>
+            <point key="canvasLocation" x="-1029" y="-108"/>
+        </label>
     </objects>
 </document>

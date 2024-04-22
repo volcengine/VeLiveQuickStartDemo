@@ -9,12 +9,11 @@ package com.ttsdk.quickstart.app.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.ttsdk.quickstart.R;
 import com.ttsdk.quickstart.app.home.adapter.HomeListAdapter;
@@ -31,14 +30,13 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private HomeListAdapter mListAdapter;
-    private TextView mVersionView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupListView();
-        mVersionView = findViewById(R.id.version_textview);
+        TextView mVersionView = findViewById(R.id.version_textview);
         mVersionView.setText(Env.getVersion());
         VeLiveSDKHelper.checkPermission(this, 10010);
     }
@@ -54,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         String advancedPackage = "com.ttsdk.quickstart.features.advanced.";
         list.add(new HomeItem(getResources().getString(R.string.Home_Live_Beauty_Filter), advancedPackage + "PushBeautyActivity"));
         list.add(new HomeItem(getResources().getString(R.string.Home_RTM_Push_Streaming), advancedPackage + "PushRTMActivity"));
+        list.add(new HomeItem(getResources().getString(R.string.Home_RTM_Pull_Streaming), advancedPackage + "PullRTMActivity"));
         list.add(new HomeItem(getResources().getString(R.string.Home_Custom_Push_Stream), advancedPackage + "PushCustomActivity"));
         list.add(new HomeItem(getResources().getString(R.string.Home_Push_Streaming_Bitrate_Adaptive), advancedPackage + "PushAutoBitrateActivity"));
         list.add(new HomeItem(getResources().getString(R.string.Home_H265_Hardcoded), advancedPackage + "PushH265CodecActivity"));
@@ -66,18 +65,15 @@ public class MainActivity extends AppCompatActivity {
         mListAdapter = new HomeListAdapter(this, list);
         mListView.setAdapter(mListAdapter);
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                HomeItem item = mListAdapter.mList.get(position);
-                if (item.target != null) {
-                    try {
-                        Class<?> cls = Class.forName(item.target);
-                        Intent intent = new Intent(MainActivity.this, cls);
-                        startActivity(intent);
-                    } catch (ClassNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
+        mListView.setOnItemClickListener((parent, view, position, id) -> {
+            HomeItem item = mListAdapter.mList.get(position);
+            if (item.target != null) {
+                try {
+                    Class<?> cls = Class.forName(item.target);
+                    Intent intent = new Intent(MainActivity.this, cls);
+                    startActivity(intent);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
                 }
             }
         });

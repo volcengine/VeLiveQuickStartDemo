@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.ttsdk.quickstart.R;
 import com.ttsdk.quickstart.helper.VeLiveSDKHelper;
@@ -26,6 +26,10 @@ import com.ss.avframework.live.VeLivePusher;
 import com.ss.avframework.live.VeLivePusherConfiguration;
 import com.ss.avframework.live.VeLivePusherDef;
 import com.ss.avframework.live.VeLivePusherObserver;
+import com.ttsdk.quickstart.helper.sign.VeLiveURLGenerator;
+import com.ttsdk.quickstart.helper.sign.model.VeLivePushURLModel;
+import com.ttsdk.quickstart.helper.sign.model.VeLiveURLError;
+import com.ttsdk.quickstart.helper.sign.model.VeLiveURLRootModel;
 
 /*
 摄像头推流
@@ -40,6 +44,7 @@ import com.ss.avframework.live.VeLivePusherObserver;
  5、开始推流 API：mLivePusher.startPush("rtmp://push.example.com/rtmp");
  */
 public class PushCameraActivity extends AppCompatActivity {
+    private final String TAG = "PushCameraActivity";
     private VeLivePusher mLivePusher;
     private EditText mUrlText;
     private TextView mInfoView;
@@ -50,7 +55,6 @@ public class PushCameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_push_camera);
         mInfoView = findViewById(R.id.push_info_text_view);
         mUrlText = findViewById(R.id.url_input_view);
-        mUrlText.setText(VeLiveSDKHelper.LIVE_PUSH_URL);
         setupLivePusher();
     }
 
@@ -86,12 +90,29 @@ public class PushCameraActivity extends AppCompatActivity {
     public void pushControl(View view) {
         ToggleButton toggleButton = (ToggleButton)view;
         if (mUrlText.getText().toString().isEmpty()) {
-            Log.e("VeLiveQuickStartDemo", "Please Config Url");
+            toggleButton.setChecked(false);
+            mInfoView.setText(R.string.config_stream_name_tip);
             return;
         }
         if (toggleButton.isChecked()) {
-            //  开始推流，推流地址支持： rtmp 协议，http 协议（RTM）  
-            mLivePusher.startPush(mUrlText.getText().toString());
+            view.setEnabled(false);
+            mInfoView.setText(R.string.Generate_Push_Url_Tip);
+            VeLiveURLGenerator.genPushUrl(VeLiveSDKHelper.LIVE_APP_NAME, mUrlText.getText().toString(), new VeLiveURLGenerator.VeLiveURLCallback<VeLivePushURLModel>() {
+                @Override
+                public void onSuccess(VeLiveURLRootModel<VeLivePushURLModel> model) {
+                    view.setEnabled(true);
+                    mInfoView.setText("");
+                    //  开始推流，推流地址支持： rtmp 协议，http 协议（RTM）  
+                    mLivePusher.startPush(model.result.getRtmpPushUrl());
+                }
+
+                @Override
+                public void onFailed(VeLiveURLError error) {
+                    view.setEnabled(true);
+                    mInfoView.setText(error.message);
+                    toggleButton.setChecked(false);
+                }
+            });
         } else {
             //  停止推流  
             mLivePusher.stopPush();
@@ -132,19 +153,19 @@ public class PushCameraActivity extends AppCompatActivity {
         //  开启/关闭推流镜像  
         mLivePusher.setVideoMirror(VeLiveVideoMirrorCapture, toggleButton.isChecked());
     }
-    private VeLivePusherObserver pusherObserver = new VeLivePusherObserver() {
+    private final VeLivePusherObserver pusherObserver = new VeLivePusherObserver() {
         @Override
         public void onError(int code, int subCode, String msg) {
-            Log.d("VeLiveQuickStartDemo", "Error" + code + subCode + msg);
+            Log.d(TAG, "Error" + code + subCode + msg);
         }
 
         @Override
         public void onStatusChange(VeLivePusherDef.VeLivePusherStatus status) {
-            Log.d("VeLiveQuickStartDemo", "Status" + status);
+            Log.d(TAG, "Status" + status);
         }
     };
 
-    private VeLivePusherDef.VeLivePusherStatisticsObserver statisticsObserver = new VeLivePusherDef.VeLivePusherStatisticsObserver() {
+    private final VeLivePusherDef.VeLivePusherStatisticsObserver statisticsObserver = new VeLivePusherDef.VeLivePusherStatisticsObserver() {
         @Override
         public void onStatistics(VeLivePusherDef.VeLivePusherStatistics statistics) {
             runOnUiThread(() -> mInfoView.setText(VeLiveSDKHelper.getPushInfoString(statistics)));

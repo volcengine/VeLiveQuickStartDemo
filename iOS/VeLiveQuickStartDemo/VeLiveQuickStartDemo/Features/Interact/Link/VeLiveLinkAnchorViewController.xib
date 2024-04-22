@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,12 +12,14 @@
             <connections>
                 <outlet property="beautyControlBtn" destination="fe7-ki-hff" id="eeW-zZ-22N"/>
                 <outlet property="filterControlBtn" destination="LI9-Ee-FFC" id="NtA-EW-S5T"/>
+                <outlet property="infoLabel" destination="0ww-uN-V3k" id="fJ5-Wi-mcP"/>
                 <outlet property="interactControlBtn" destination="bgw-HP-2R9" id="Hsu-sC-tGQ"/>
                 <outlet property="previewView" destination="1A1-lU-qxo" id="KNc-69-WUW"/>
                 <outlet property="pushControlBtn" destination="QAm-eh-SEx" id="uBL-5R-vdJ"/>
                 <outlet property="remoteStackView" destination="7e1-vr-549" id="KNA-G5-wiT"/>
                 <outlet property="seiControlBtn" destination="AHY-ue-mQ0" id="SnD-DM-c4U"/>
                 <outlet property="stickerControlBtn" destination="oaY-gt-Sut" id="aYK-qy-uv6"/>
+                <outlet property="urlLabel" destination="3nb-ei-jDQ" id="S5u-jX-ivZ"/>
                 <outlet property="urlTextField" destination="Xdw-dO-Kmd" id="Egc-6P-UAG"/>
                 <outlet property="view" destination="lyS-Oc-Pyo" id="TZv-zo-Wvm"/>
             </connections>
@@ -62,7 +64,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Iep-qS-nrj">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="30"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAm-eh-SEx">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAm-eh-SEx">
                                     <rect key="frame" x="0.0" y="0.0" width="125.66666666666667" height="30"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" title="Start Push"/>

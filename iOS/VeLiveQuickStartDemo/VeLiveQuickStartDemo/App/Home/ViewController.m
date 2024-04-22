@@ -61,6 +61,10 @@
                     @"target" : @"VeLivePushRTMViewController"
                 },
                 @{
+                    @"title" : NSLocalizedString(@"Home_RTM_Pull_Streaming", nil),
+                    @"target" : @"VeLivePullRTMViewController"
+                },
+                @{
                     @"title" : NSLocalizedString(@"Home_Custom_Push_Stream", nil),
                     @"target" : @"VeLivePushCustomViewController"
                 },
@@ -75,7 +79,7 @@
                 @{
                     @"title" : NSLocalizedString(@"Home_Picture_In_Picture", nil),
                     @"target" : @"VeLivePictureInPictureViewController"
-                }
+                },
             ]
         },
         @{

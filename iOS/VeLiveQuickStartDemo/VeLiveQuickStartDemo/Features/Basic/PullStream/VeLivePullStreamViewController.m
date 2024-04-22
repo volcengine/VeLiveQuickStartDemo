@@ -74,41 +74,33 @@
     
     //  设置渲染填充模式  
     [self.livePlayer setRenderFillMode:(VeLivePlayerFillModeAspectFill)];
-    
-    //  设置播放地址，支持 rtmp、http、https 协议，flv、m3u8 格式的地址  
-    [self.livePlayer setPlayUrl:self.urlTextField.text];
-    
-    //  RTM 拉流参考  
-    /*
-    // main rtm url
-    VeLivePlayerStream *playStreamRTM = [[VeLivePlayerStream alloc]init];
-    playStreamRTM.url = @"https://www.example.com/live/rtm_pull.sdp";
-    playStreamRTM.format = VeLivePlayerFormatRTM;
-    
-    // backup flv url
-    VeLivePlayerStream *playStreamFLV = [[VeLivePlayerStream alloc]init];
-    playStreamFLV.url = @"https://www.example.com/live/rtm_pull.flv";
-    playStreamFLV.format = VeLivePlayerFormatFLV;
-    
-    // Create VeLivePlayerStreamData
-    VeLivePlayerStreamData *streamData = [[VeLivePlayerStreamData alloc]init];
-    streamData.mainStream = @[playStreamRTM, playStreamFLV];
-    streamData.defaultFormat = VeLivePlayerFormatRTM;
-    streamData.defaultProtocol = VeLivePlayerProtocolTLS;
-    [self.livePlayer setPlayStreamData:streamData];
-     */
-    [self.livePlayer play];
 }
 
 - (IBAction)playControl:(UIButton *)sender {
+    if (self.urlTextField.text.length <= 0) {
+        self.infoLabel.text = NSLocalizedString(@"config_stream_name_tip", nil);
+        return;
+    }
     if (sender.isSelected) {
         //  停止播放  
         [self.livePlayer stop];
+        sender.selected = !sender.isSelected;
     } else {
-        //  开始播放  
-        [self.livePlayer play];
+        self.infoLabel.text = NSLocalizedString(@"Generate_Pull_Url_Tip", nil);
+        self.view.userInteractionEnabled = NO;
+        [VeLiveURLGenerator genPullURLForApp:LIVE_APP_NAME streamName:self.urlTextField.text completion:^(VeLiveURLRootModel<VeLivePullURLModel *> * _Nullable model, NSError * _Nullable error) {
+            self.infoLabel.text = error.localizedDescription;
+            self.view.userInteractionEnabled = YES;
+            if (error != nil) {
+                return;
+            }
+            //  设置播放地址，支持 rtmp、http、https 协议，flv、m3u8 格式的地址  
+            [self.livePlayer setPlayUrl:[model.result getUrlWithProtocol:@"flv"]];
+            // 开始播放 
+            [self.livePlayer play];
+            sender.selected = !sender.isSelected;
+        }];
     }
-    sender.selected = !sender.isSelected;
 }
 
 - (IBAction)fillModeControl:(UIButton *)sender {
@@ -161,10 +153,9 @@
     self.title = NSLocalizedString(@"Pull_Stream", nil);
     self.navigationItem.backBarButtonItem.title = nil;
     self.navigationItem.backButtonTitle = nil;
-    self.urlTextField.text = LIVE_PULL_URL;
+    self.urlLabel.text = NSLocalizedString(@"Pull_Stream_Url_Tip", nil);
     [self.playControlBtn setTitle:NSLocalizedString(@"Pull_Stream_Start_Play", nil) forState:(UIControlStateNormal)];
     [self.playControlBtn setTitle:NSLocalizedString(@"Pull_Stream_Stop_Play", nil) forState:(UIControlStateSelected)];
-    self.playControlBtn.selected = YES;
     
     [self.muteControlBtn setTitle:NSLocalizedString(@"Pull_Mute", nil) forState:((UIControlStateNormal))];
     [self.muteControlBtn setTitle:NSLocalizedString(@"Pull_UnMute", nil) forState:((UIControlStateSelected))];

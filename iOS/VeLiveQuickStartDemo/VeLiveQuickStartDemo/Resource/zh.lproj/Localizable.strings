@@ -47,11 +47,13 @@
 
 "Home_Picture_In_Picture" = "画中画";
 
-"Home_Pull_Feed" = "Feed 流";
+"Home_Pull_RTM" = "RTM 拉流";
 
 "Home_Push_Streaming_Bitrate_Adaptive" = "推流码率自适应";
 
 "Home_RTM_Push_Streaming" = "RTM 超低延迟推流";
+
+"Home_RTM_Pull_Streaming" = "RTM 超低延迟拉流";
 
 "Interact_Link" = "观众连麦";
 
@@ -127,7 +129,7 @@
 
 "Pull_Stream_Stop_Play" = "停止播放";
 
-"Pull_Stream_Url_Tip" = "拉流地址";
+"Pull_Stream_Url_Tip" = "流名";
 
 "Pull_UnMute" = "取消静音";
 
@@ -165,7 +167,7 @@
 
 "Push_UnMute" = "取消静音";
 
-"Push_Url_Tip" = "推流地址";
+"Push_Url_Tip" = "流名";
 
 "Start_Picture_In_Picture" = "开启画中画";
 
@@ -175,7 +177,7 @@
 
 "input_url_list" = "请输入多个 URL 地址，用换行符分割";
 
-"other_room_id" = "Other Room ID";
+"other_room_id" = "对方主播房间 ID";
 
 "other_token" = "Other Token";
 
@@ -192,3 +194,9 @@
 "token" = "Token";
 
 "user_id" = "用户 ID";
+
+"Generate_Push_Url_Tip" = "正在生成推流地址...";
+
+"Generate_Pull_Url_Tip" = "正在生成拉流地址...";
+
+"config_stream_name_tip" = "请配置流名";

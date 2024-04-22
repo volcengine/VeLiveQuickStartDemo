@@ -6,7 +6,7 @@
  */
 package com.ttsdk.quickstart.features.interact.link;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.ss.bytertc.engine.live.MixedStreamConfig;
@@ -27,6 +28,10 @@ import com.pandora.common.env.Env;
 import com.ss.bytertc.engine.RTCVideo;
 import com.ss.bytertc.engine.type.MediaStreamType;
 import com.ss.bytertc.engine.type.StreamRemoveReason;
+import com.ttsdk.quickstart.helper.sign.VeLiveURLGenerator;
+import com.ttsdk.quickstart.helper.sign.model.VeLivePushURLModel;
+import com.ttsdk.quickstart.helper.sign.model.VeLiveURLError;
+import com.ttsdk.quickstart.helper.sign.model.VeLiveURLRootModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,12 +39,14 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class LinkAnchorActivity extends AppCompatActivity {
+    private final String TAG = "LinkAnchorActivity";
     public static final String ROOM_ID = "LinkAnchorActivity_ROOM_ID";
     public static final String USER_ID = "LinkAnchorActivity_USER_ID";
     public static final String TOKEN = "LinkAnchorActivity_TOKEN";
 
     private LinearLayout mRemoteLinearLayout;
     private EditText mUrlText;
+    private TextView mInfoView;
     private String mRoomID;
     private String mUserID;
     private String mToken;
@@ -59,7 +66,7 @@ public class LinkAnchorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_link_anchor);
         mRemoteLinearLayout = findViewById(R.id.guest_linear_layout);
         mUrlText = findViewById(R.id.url_input_view);
-        mUrlText.setText(VeLiveSDKHelper.LIVE_PUSH_URL);
+        mInfoView = findViewById(R.id.push_info_text_view);
         mRoomID = getIntent().getStringExtra(ROOM_ID);
         mUserID = getIntent().getStringExtra(USER_ID);
         mToken = getIntent().getStringExtra(TOKEN);
@@ -88,17 +95,15 @@ public class LinkAnchorActivity extends AppCompatActivity {
         mAnchorManager.startVideoCapture();
         //  开启音频采集  
         mAnchorManager.startAudioCapture();
-        //  开始推流  
-        startPush();
     }
 
-    private void startPush() {
-        if (mUrlText.getText().toString().isEmpty()) {
-            Log.e("VeLiveQuickStartDemo", "Please config push url");
+    private void startPush(String url) {
+        if (url == null || url.isEmpty()) {
+            Log.e(TAG, "Please config push url");
             return;
         }
         //  开始推流  
-        mAnchorManager.startPush(mUrlText.getText().toString());
+        mAnchorManager.startPush(url);
     }
     private void stopPush() {
         mAnchorManager.stopPush();
@@ -129,10 +134,32 @@ public class LinkAnchorActivity extends AppCompatActivity {
 
 
     public void pushControl(View view) {
-        ToggleButton toggleButton = (ToggleButton) view;
+        ToggleButton toggleButton = (ToggleButton)view;
+        if (mUrlText.getText().toString().isEmpty()) {
+            toggleButton.setChecked(false);
+            mInfoView.setText(R.string.config_stream_name_tip);
+            return;
+        }
         if (toggleButton.isChecked()) {
-            startPush();
+            view.setEnabled(false);
+            mInfoView.setText(R.string.Generate_Push_Url_Tip);
+            VeLiveURLGenerator.genPushUrl(VeLiveSDKHelper.LIVE_APP_NAME, mUrlText.getText().toString(), new VeLiveURLGenerator.VeLiveURLCallback<VeLivePushURLModel>() {
+                @Override
+                public void onSuccess(VeLiveURLRootModel<VeLivePushURLModel> model) {
+                    view.setEnabled(true);
+                    mInfoView.setText("");
+                    startPush(model.result.getRtmpPushUrl());
+                }
+
+                @Override
+                public void onFailed(VeLiveURLError error) {
+                    view.setEnabled(true);
+                    mInfoView.setText(error.message);
+                    toggleButton.setChecked(false);
+                }
+            });
         } else {
+            //  停止推流  
             stopPush();
         }
     }
@@ -165,7 +192,7 @@ public class LinkAnchorActivity extends AppCompatActivity {
         effect.initCVResource(licPath, algoModePath);
 
         if (effect.enableVideoEffect() != 0) {
-            Log.e("VeLiveQuickStartDemo", "enable effect error");
+            Log.e(TAG, "enable effect error");
         }
     }
 
@@ -300,7 +327,7 @@ public class LinkAnchorActivity extends AppCompatActivity {
                 //  更新混流布局  
                 mAnchorManager.updatePushMixedStreamToCDN(getTranscodingLayout());
             } catch (Exception e) {
-                Log.e("VeLiveQuickStartDemo", e.toString());
+                Log.e(TAG, e.toString());
             }
         }
 

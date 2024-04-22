@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.ttsdk.quickstart.R;
 import com.ttsdk.quickstart.helper.VeLiveDeviceCapture;
@@ -27,9 +27,13 @@ import com.ss.avframework.live.VeLivePusherDef;
 import com.ss.avframework.live.VeLivePusherObserver;
 import com.ss.avframework.live.VeLiveVideoFrame;
 import com.ss.avframework.utils.TimeUtils;
+import com.ttsdk.quickstart.helper.sign.VeLiveURLGenerator;
+import com.ttsdk.quickstart.helper.sign.model.VeLivePushURLModel;
+import com.ttsdk.quickstart.helper.sign.model.VeLiveURLError;
+import com.ttsdk.quickstart.helper.sign.model.VeLiveURLRootModel;
 
 public class PushCustomActivity extends AppCompatActivity {
-
+    private final String TAG = "PushCustomActivity";
     private VeLiveDeviceCapture mDeviceCapture;
     private VeLivePusher mLivePusher;
     private EditText mUrlText;
@@ -42,7 +46,6 @@ public class PushCustomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_push_custom);
         mInfoView = findViewById(R.id.push_info_text_view);
         mUrlText = findViewById(R.id.url_input_view);
-        mUrlText.setText(VeLiveSDKHelper.LIVE_PUSH_URL);
         setupLivePusher();
         setupCustomCamera();
     }
@@ -93,12 +96,29 @@ public class PushCustomActivity extends AppCompatActivity {
     public void pushControl(View view) {
         ToggleButton toggleButton = (ToggleButton)view;
         if (mUrlText.getText().toString().isEmpty()) {
-            Log.e("VeLiveQuickStartDemo", "Please Config Url");
+            toggleButton.setChecked(false);
+            mInfoView.setText(R.string.config_stream_name_tip);
             return;
         }
         if (toggleButton.isChecked()) {
-            //  开始推流，推流地址支持： rtmp 协议，http 协议（RTM）  
-            mLivePusher.startPush(mUrlText.getText().toString());
+            view.setEnabled(false);
+            mInfoView.setText(R.string.Generate_Push_Url_Tip);
+            VeLiveURLGenerator.genPushUrl(VeLiveSDKHelper.LIVE_APP_NAME, mUrlText.getText().toString(), new VeLiveURLGenerator.VeLiveURLCallback<VeLivePushURLModel>() {
+                @Override
+                public void onSuccess(VeLiveURLRootModel<VeLivePushURLModel> model) {
+                    view.setEnabled(true);
+                    mInfoView.setText("");
+                    //  开始推流，推流地址支持： rtmp 协议，http 协议（RTM）  
+                    mLivePusher.startPush(model.result.getRtmpPushUrl());
+                }
+
+                @Override
+                public void onFailed(VeLiveURLError error) {
+                    view.setEnabled(true);
+                    mInfoView.setText(error.message);
+                    toggleButton.setChecked(false);
+                }
+            });
         } else {
             //  停止推流  
             mLivePusher.stopPush();
@@ -108,12 +128,12 @@ public class PushCustomActivity extends AppCompatActivity {
     private final VeLivePusherObserver pusherObserver = new VeLivePusherObserver() {
         @Override
         public void onError(int code, int subCode, String msg) {
-            Log.d("VeLiveQuickStartDemo", "Error" + code + subCode + msg);
+            Log.e(TAG, "Error" + code + subCode + msg);
         }
 
         @Override
         public void onStatusChange(VeLivePusherDef.VeLivePusherStatus status) {
-            Log.d("VeLiveQuickStartDemo", "Status" + status);
+            Log.d(TAG, "Status" + status);
         }
     };
 

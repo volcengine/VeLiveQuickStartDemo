@@ -15,6 +15,7 @@ import static com.ss.avframework.live.VeLivePusherDef.VeLiveAudioSampleRate.VeLi
 import static com.ss.avframework.live.VeLivePusherDef.VeLiveVideoCaptureType.VeLiveVideoCaptureExternal;
 import static com.ss.avframework.live.VeLivePusherDef.VeLiveVideoResolution.VeLiveVideoResolution720P;
 import static com.ss.bytertc.engine.VideoCanvas.RENDER_MODE_HIDDEN;
+import static com.ss.bytertc.engine.data.AudioFrameType.FRAME_TYPE_PCM16;
 import static com.ss.bytertc.engine.live.ByteRTCStreamMixingEvent.STREAM_MIXING_START_FAILED;
 import static com.ss.bytertc.engine.live.ByteRTCStreamMixingType.STREAM_MIXING_BY_SERVER;
 
@@ -284,7 +285,7 @@ public class VeLiveAnchorManager {
             startPushMixedStreamToCDN("", layout);
         } else {
             mMixedStreamConfig.setLayout(layout);
-            mRTCVideo.updatePushMixedStreamToCDN("",mMixedStreamConfig);
+            mRTCVideo.updatePushMixedStreamToCDN("", mMixedStreamConfig);
         }
     }
 
@@ -486,14 +487,22 @@ public class VeLiveAnchorManager {
         mRTCVideo.setLocalVideoSink(StreamIndex.STREAM_INDEX_MAIN, null, IVideoSink.PixelFormat.I420);
     }
 
+    private long timestamp = 0;
     private void registerAudioListener() {
         mAudioFrameListener = new IAudioFrameObserver() {
             @Override
             public void onRecordAudioFrame(IAudioFrame audioFrame) {
                 if (!mIsTranscoding) {
+                    if (timestamp == 0) {
+                        timestamp = System.currentTimeMillis() * 1000;
+                    } else {
+                        int bitWidth = (audioFrame.frame_type() == FRAME_TYPE_PCM16 ? 16 : 0);
+                        int time = audioFrame.getDataBuffer().limit() * 1000 / audioFrame.channel().value() / (bitWidth / 8) / audioFrame.sample_rate().value();
+                        timestamp = timestamp + time * 1000;
+                    }
                     pushAudioFrameToLivePusher(
                             audioFrame.getDataBuffer(), audioFrame.sample_rate().value(), audioFrame.channel().value(),
-                            16, audioFrame.data_size() / 2, TimeUtils.nanoTime() / 1000);
+                            16, audioFrame.data_size() / 2, timestamp);
                 }
                 audioFrame.release();
             }

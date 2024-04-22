@@ -15,25 +15,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
-
-import androidx.annotation.RequiresApi;
 
 import com.ttsdk.quickstart.R;
 
-public class KeepLiveService extends Service {
+public class VeLiveKeepLiveService extends Service {
     public class Binder extends android.os.Binder {
-        public KeepLiveService getService() {
-            return KeepLiveService.this;
+        public VeLiveKeepLiveService getService() {
+            return VeLiveKeepLiveService.this;
         }
     }
     private Binder mBinder = new Binder();
 
-    public KeepLiveService() {
+    public VeLiveKeepLiveService() {
     }
     private NotificationManager notificationManager;
     private String notificationId   = "keep_app_live";
-    private String notificationName = "APP后台运行中";
+    private String notificationName = "Running In Background";
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public IBinder onBind(Intent intent) {
@@ -44,6 +43,7 @@ public class KeepLiveService extends Service {
     public void onCreate() {
         super.onCreate();
         Log.d("TAG", "===MyService  onCreate()");
+        notificationName = getResources().getString(R.string.pip_running_in_background);
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         //创建NotificationChannel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -62,35 +62,25 @@ public class KeepLiveService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    /**
-     * 获取通知(Android8.0后需要)
-     * @return
-     */
     private Notification getNotification() {
         Notification.Builder builder = new Notification.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle("TTSDK")
                 .setContentIntent(getIntent())
-                .setContentText("后台运行中");
+                .setContentText(getResources().getString(R.string.pip_running_in_background));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             builder.setChannelId(notificationId);
         }
         return builder.build();
     }
 
-    /**
-     * 点击后,直接打开app(之前的页面),不跳转特定activity
-     * @return
-     */
     private PendingIntent getIntent() {
         Intent msgIntent = getApplicationContext().getPackageManager().getLaunchIntentForPackage(getPackageName());//获取启动Activity
-        PendingIntent pendingIntent = PendingIntent.getActivity(
+        return PendingIntent.getActivity(
                 getApplicationContext(),
                 1,
                 msgIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-
-        return pendingIntent;
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
     @Override

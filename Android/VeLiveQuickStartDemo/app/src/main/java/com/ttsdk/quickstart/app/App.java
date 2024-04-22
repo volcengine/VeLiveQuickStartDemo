@@ -7,13 +7,14 @@
 package com.ttsdk.quickstart.app;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 
-import androidx.annotation.NonNull;
-import androidx.multidex.MultiDex;
-
+import com.bytedance.ttnet.TTNetInit;
 import com.ttsdk.quickstart.helper.VeLiveSDKHelper;
 
-public class App extends androidx.multidex.MultiDexApplication implements Thread.UncaughtExceptionHandler {
+public class App extends MultiDexApplication implements Thread.UncaughtExceptionHandler {
     public static App sAppContext;
     @Override
     protected void attachBaseContext(Context base) {
@@ -25,6 +26,7 @@ public class App extends androidx.multidex.MultiDexApplication implements Thread
     @Override
     public void onCreate() {
         super.onCreate();
+        TTNetInit.tryInitBizTTNet(App.sAppContext, this);
         VeLiveSDKHelper.initTTSDK(App.sAppContext);
     }
 

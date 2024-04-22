@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -50,7 +50,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/push_info_text_view"
+        android:id="@+id/pull_info_text_view"
         app:layout_constraintTop_toBottomOf="@+id/url_input_layout"
         android:layout_width="match_parent"
         android:textColor="@color/whiteColor"
@@ -75,7 +75,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:checked="true"
                 android:textOn="@string/Pull_Stream_Stop_Play"
                 android:textOff="@string/Pull_Stream_Start_Play"/>
             <ToggleButton
@@ -126,4 +125,4 @@
                 android:text="@string/Push_Beauty_Sticker"/>
         </LinearLayout>
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
