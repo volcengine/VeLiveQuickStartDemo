@@ -38,8 +38,8 @@ public class VeLiveURLSignTool {
     private static final String contentType = "application/json; charset=utf-8";
     private static final String signHeader = "content-type;host;x-content-sha256;x-date";
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    public static String accessKey = "";
-    public static String secretKey = "";
+    public static String accessKey = VeLiveSDKHelper.ACCESS_KEY_ID;
+    public static String secretKey = VeLiveSDKHelper.SECRET_ACCESS_KEY;
 
     public static void setup(String ak, String sk) {
         accessKey = ak;
