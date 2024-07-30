@@ -46,8 +46,9 @@ android {
     }
 
     packagingOptions {
-        pickFirst 'lib/arm64-v8a/libc++_shared.so'
-        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+        pickFirst '**/libc++_shared.so'
+        pickFirst '**/libh265enc.so'
+        pickFirst '**/libbytenn.so'
     }
 //    ndkVersion '16.1.4479499'
 }
@@ -69,7 +70,8 @@ dependencies {
 
     // 添加 TTSDK 在线集成地址，推荐使用最新稳定版，获取方式请参考[SDK 下载]章节 
 
-    implementation 'com.bytedanceapi:ttsdk-ttlivepush_rtc:1.41.2.10'
-    implementation 'com.bytedanceapi:ttsdk-ttlivepull_rtc:1.41.2.10'
+    implementation 'com.bytedanceapi:ttsdk-ttlivepush_rtc:1.42.3.8'
+    implementation 'com.bytedanceapi:ttsdk-ttlivepull_rtc:1.42.3.8'
+    implementation ("com.volcengine:VolcEngineRTC:3.58.1.20700")
 
 }

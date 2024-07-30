@@ -66,6 +66,7 @@
         NSLog(@"VeLiveQuickStartDemo: Please config pull url");
         return;
     }
+    NSLog(@"VeLiveQuickStartDemo: start play %@", self.urlTextField.text);
     [self.audienceManager startPlay:self.urlTextField.text];
 }
 

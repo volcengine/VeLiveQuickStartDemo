@@ -58,6 +58,7 @@ public class LinkAnchorActivity extends AppCompatActivity {
     private HashMap<String, TextureView> mRemoteUserViews;
     //  主播+连麦管理器  
     private VeLiveAnchorManager mAnchorManager;
+    private final VeLiveAnchorManager.Config mAnchorConfig = new VeLiveAnchorManager.Config();
 
 
     @Override
@@ -88,7 +89,7 @@ public class LinkAnchorActivity extends AppCompatActivity {
         mRemoteUserViews = new HashMap<>();
         mAnchorManager = VeLiveAnchorManager.create(VeLiveSDKHelper.RTC_APPID, mUserID);
         //  设置推流配置  
-        mAnchorManager.setConfig(new VeLiveAnchorManager.Config());
+        mAnchorManager.setConfig(mAnchorConfig);
         //  配置本地预览视图  
         mAnchorManager.setLocalVideoView(mLocalView);
         //  开启视频采集  
@@ -253,18 +254,19 @@ public class LinkAnchorActivity extends AppCompatActivity {
             region.setRenderMode(MixedStreamConfig.MixedStreamRenderMode.MIXED_STREAM_RENDER_MODE_HIDDEN);
             region.setIsLocalUser(Objects.equals(uid, mUserID));
             if (region.getIsLocalUser()) { // 当前主播位置，仅供参考 
-                region.setLocationX(0.0);
-                region.setLocationY(0.0);
-                region.setWidthProportion(1);
-                region.setHeightProportion(1);
+                region.setLocationX(0);
+                region.setLocationY(0);
+                region.setWidth(mAnchorConfig.mVideoEncoderWidth);
+                region.setHeight(mAnchorConfig.mVideoEncoderHeight);
                 region.setZOrder(0);
                 region.setAlpha(1);
             } else { //  远端用户位置，仅供参考  
                 //  130 是小窗的宽高， 8 是小窗的间距  
-                region.setLocationX(guestX);
-                region.setLocationY(guestStartY - (130.0 * (guestIndex + 1) + guestIndex * 8) / viewHeight);
-                region.setWidthProportion((130.0 / viewWidth));
-                region.setHeightProportion((130.0 / viewHeight));
+                region.setLocationX((int)(guestX * mAnchorConfig.mVideoEncoderWidth));
+                double yScale = guestStartY - (130.0 * (guestIndex + 1) + guestIndex * 8) / viewHeight;
+                region.setLocationY((int)(yScale * mAnchorConfig.mVideoEncoderHeight));
+                region.setWidth((int)(130.0 / viewWidth * mAnchorConfig.mVideoEncoderWidth));
+                region.setHeight((int)(130.0 / viewHeight * mAnchorConfig.mVideoEncoderHeight));
                 region.setZOrder(1);
                 region.setAlpha(1);
                 guestIndex ++;

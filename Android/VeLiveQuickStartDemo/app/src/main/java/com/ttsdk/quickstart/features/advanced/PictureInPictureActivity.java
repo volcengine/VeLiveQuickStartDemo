@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Surface;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.ss.videoarch.liveplayer.VeLivePayerAudioLoudnessInfo;
+import com.ss.videoarch.liveplayer.VeLivePayerAudioVolume;
 import com.ss.videoarch.liveplayer.VeLivePlayer;
 import com.ss.videoarch.liveplayer.VeLivePlayerAudioFrame;
 import com.ss.videoarch.liveplayer.VeLivePlayerConfiguration;
@@ -47,6 +50,10 @@ import com.ttsdk.quickstart.helper.sign.VeLiveURLGenerator;
 import com.ttsdk.quickstart.helper.sign.model.VeLivePullURLModel;
 import com.ttsdk.quickstart.helper.sign.model.VeLiveURLError;
 import com.ttsdk.quickstart.helper.sign.model.VeLiveURLRootModel;
+
+import org.json.JSONObject;
+
+import java.nio.ByteBuffer;
 
 public class PictureInPictureActivity extends AppCompatActivity {
     private final String TAG = "PictureInPicture";
@@ -297,6 +304,76 @@ public class PictureInPictureActivity extends AppCompatActivity {
 
         @Override
         public void onStreamFailedOpenSuperResolution(VeLivePlayer veLivePlayer, VeLivePlayerError veLivePlayerError) {
+
+        }
+
+        @Override
+        public void onAudioDeviceOpen(VeLivePlayer veLivePlayer, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onAudioDeviceClose(VeLivePlayer veLivePlayer) {
+
+        }
+
+        @Override
+        public void onAudioDeviceRelease(VeLivePlayer veLivePlayer) {
+
+        }
+
+        @Override
+        public void onBinarySeiUpdate(VeLivePlayer veLivePlayer, ByteBuffer byteBuffer) {
+
+        }
+
+        @Override
+        public void onMonitorLog(VeLivePlayer veLivePlayer, JSONObject jsonObject, String s) {
+
+        }
+
+        @Override
+        public void onReportALog(VeLivePlayer veLivePlayer, int i, String s) {
+
+        }
+
+        @Override
+        public void onResolutionDegrade(VeLivePlayer veLivePlayer, VeLivePlayerDef.VeLivePlayerResolution veLivePlayerResolution) {
+
+        }
+
+        @Override
+        public void onTextureRenderDrawFrame(VeLivePlayer veLivePlayer, Surface surface) {
+
+        }
+
+        @Override
+        public void onHeadPoseUpdate(VeLivePlayer veLivePlayer, float v, float v1, float v2, float v3, float v4, float v5, float v6) {
+
+        }
+
+        @Override
+        public void onResponseSmoothSwitch(VeLivePlayer veLivePlayer, boolean b, int i) {
+
+        }
+
+        @Override
+        public void onNetworkQualityChanged(VeLivePlayer veLivePlayer, int i, String s) {
+
+        }
+
+        @Override
+        public void onAudioVolume(VeLivePlayer veLivePlayer, VeLivePayerAudioVolume veLivePayerAudioVolume) {
+
+        }
+
+        @Override
+        public void onLoudness(VeLivePlayer veLivePlayer, VeLivePayerAudioLoudnessInfo veLivePayerAudioLoudnessInfo) {
+
+        }
+
+        @Override
+        public void onStreamFailedOpenSharpen(VeLivePlayer veLivePlayer, VeLivePlayerError veLivePlayerError) {
 
         }
     };

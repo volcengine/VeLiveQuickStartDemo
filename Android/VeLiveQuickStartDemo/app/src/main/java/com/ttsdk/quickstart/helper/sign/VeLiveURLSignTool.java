@@ -8,6 +8,8 @@ package com.ttsdk.quickstart.helper.sign;
 
 import android.util.Log;
 
+import com.ttsdk.quickstart.helper.VeLiveSDKHelper;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

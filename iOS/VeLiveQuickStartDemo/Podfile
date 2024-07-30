@@ -10,7 +10,7 @@ inhibit_all_warnings!
 
 target 'VeLiveQuickStartDemo' do
   # 集成推拉流功能 
-  pod 'TTSDKFramework', '1.41.2.8-premium', :subspecs => %w[LivePull-RTS LivePush-RTS]
+  pod 'TTSDKFramework', '1.42.3.7-premium', :subspecs => %w[LivePull-RTS LivePush-RTS VolcEngineRTC]
 end
 
 post_install do |installer|

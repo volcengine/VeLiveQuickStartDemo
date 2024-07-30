@@ -72,6 +72,7 @@
         NSLog(@"VeLiveQuickStartDemo: Please config push url");
         return;
     }
+    NSLog(@"VeLiveQuickStartDemo: start push %@", url);
     //  开始推流  
     [self.liveAnchorManager startPush:url];
     [self.view sendSubviewToBack:self.previewView];
@@ -84,7 +85,7 @@
 //  开始跨房间转推  
 - (void)startForward {
     //  跨房间转推  
-    ForwardStreamConfiguration *cfg = [[ForwardStreamConfiguration alloc] init];
+    ByteRTCForwardStreamConfiguration *cfg = [[ByteRTCForwardStreamConfiguration alloc] init];
     cfg.roomId = self.otherRoomID;
     cfg.token = self.otherRoomToken;
     [self.liveAnchorManager startForwardStream:@[cfg]];
@@ -295,16 +296,16 @@
         region.roomID       = self.roomID;
         region.isLocalUser    = [uid isEqualToString:self.userID]; //  判断是否为当前主播  
         region.renderMode   = ByteRTCMixedStreamRenderModeHidden;
-        region.locationY        = pkViewY;
-        region.widthProportion    = pkViewWidth;
-        region.heightProportion   = pkViewHeight;
+        region.locationY        = pkViewY * self.liveAnchorManager.config.videoEncoderHeight;
+        region.width    = pkViewWidth * self.liveAnchorManager.config.videoEncoderWith;
+        region.height   = pkViewHeight * self.liveAnchorManager.config.videoEncoderHeight;
         region.alpha    = 1.0;
         
         if (region.isLocalUser) { // 当前主播位置，仅供参考 
             region.locationX = 0.0;
             region.zOrder   = 0;
         } else { //  远端用户位置，仅供参考  
-            region.locationX = (viewWidth * 0.5 + 8) / viewWidth;
+            region.locationX = (viewWidth * 0.5 + 8) / viewWidth * self.liveAnchorManager.config.videoEncoderWith;
             region.zOrder   = 1;
         }
         [regions addObject:region];

@@ -135,7 +135,7 @@
     [self.rtcVideo sendSEIMessage:(ByteRTCStreamIndexMain)
                        andMessage:[message dataUsingEncoding:NSUTF8StringEncoding]
                    andRepeatCount:repeat
-                 andCountPerFrame:(kSingleSEIPerFrame)];
+                 andCountPerFrame:(ByteRTCSEICountPerFrameSingle)];
 }
 
 - (void)destory {

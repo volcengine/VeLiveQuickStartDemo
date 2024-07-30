@@ -72,6 +72,7 @@
         self.infoLabel.text = NSLocalizedString(@"config_stream_name_tip", nil);
         return;
     }
+    NSLog(@"VeLiveQuickStartDemo: start push %@", url);
     //  开始推流  
     [self.liveAnchorManager startPush:url];
 }
@@ -277,16 +278,17 @@
         if (region.isLocalUser) { // 当前主播位置，仅供参考 
             region.locationX        = 0.0;
             region.locationY        = 0.0;
-            region.widthProportion    = 1;
-            region.heightProportion   = 1;
+            region.width    = self.liveAnchorManager.config.videoEncoderWith;
+            region.height   = self.liveAnchorManager.config.videoEncoderHeight;
             region.zOrder   = 0;
             region.alpha    = 1.0;
         } else { //  远端用户位置，仅供参考  
-            region.locationX        = guestX;
+            region.locationX        = guestX * self.liveAnchorManager.config.videoEncoderWith;
             //  130 是小窗的宽高， 8 是小窗的间距  
-            region.locationY        = guestStartY - (130.0 * (guestIndex + 1) + guestIndex * 8) / viewHeight;
-            region.widthProportion    = (130.0 / viewWidth);
-            region.heightProportion   = (130.0 / viewHeight);
+            CGFloat scale = guestStartY - (130.0 * (guestIndex + 1) + guestIndex * 8) / viewHeight;
+            region.locationY        = scale * self.liveAnchorManager.config.videoEncoderHeight;
+            region.width    = (130.0 / viewWidth) * self.liveAnchorManager.config.videoEncoderWith;
+            region.height   = (130.0 / viewHeight) * self.liveAnchorManager.config.videoEncoderHeight;
             region.zOrder   = 1;
             region.alpha    = 1;
             guestIndex ++;

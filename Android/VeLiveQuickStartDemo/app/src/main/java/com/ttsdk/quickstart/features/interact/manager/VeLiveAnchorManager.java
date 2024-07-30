@@ -210,7 +210,7 @@ public class VeLiveAnchorManager {
             //  设置镜像  
             mRTCVideo.setLocalVideoMirrorType(MirrorType.MIRROR_TYPE_RENDER_AND_ENCODER);
             //  设置视频方向  
-            mRTCVideo.setVideoOrientation(VideoOrientation.Portrait);
+            mRTCVideo.setVideoOrientation(VideoOrientation.PORTRAIT);
 
             //  使用后置摄像头参考代码  
             // mRTCVideo.switchCamera(CameraId.CAMERA_ID_BACK);

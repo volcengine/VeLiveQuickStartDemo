@@ -8,9 +8,9 @@
 // VeLiveURLModel.m
 // VeLiveLiveDemo
 // 
-//  Created by Volcano Engine Team on 2024/04/22.
+//  Created by Volcano Engine Team on 2024/07/30.
 //
-//  Copyright (c) 2024/04/22 Beijing Volcano Engine Technology Ltd.
+//  Copyright (c) 2024/07/30 Beijing Volcano Engine Technology Ltd.
 //
 //
 

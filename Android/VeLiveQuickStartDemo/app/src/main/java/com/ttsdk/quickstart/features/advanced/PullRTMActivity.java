@@ -14,6 +14,7 @@ import static com.ss.videoarch.liveplayer.VeLivePlayerDef.VeLivePlayerFormat.VeL
 import static com.ss.videoarch.liveplayer.VeLivePlayerDef.VeLivePlayerFormat.VeLivePlayerFormatRTM;
 import static com.ss.videoarch.liveplayer.VeLivePlayerDef.VeLivePlayerProtocol.VeLivePlayerProtocolTCP;
 import static com.ss.videoarch.liveplayer.VeLivePlayerDef.VeLivePlayerProtocol.VeLivePlayerProtocolTLS;
+import static com.ss.videoarch.liveplayer.VeLivePlayerDef.VeLivePlayerResolution;
 import static com.ss.videoarch.liveplayer.VeLivePlayerDef.VeLivePlayerResolution.VeLivePlayerResolutionOrigin;
 import static com.ss.videoarch.liveplayer.VeLivePlayerDef.VeLivePlayerStreamType.VeLivePlayerStreamTypeMain;
 
@@ -22,12 +23,15 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Surface;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.ss.videoarch.liveplayer.VeLivePayerAudioLoudnessInfo;
+import com.ss.videoarch.liveplayer.VeLivePayerAudioVolume;
 import com.ss.videoarch.liveplayer.VeLivePlayerStreamData;
 import com.ttsdk.quickstart.R;
 import com.ttsdk.quickstart.helper.VeLiveSDKHelper;
@@ -46,6 +50,9 @@ import com.ttsdk.quickstart.helper.sign.model.VeLivePullURLModel;
 import com.ttsdk.quickstart.helper.sign.model.VeLiveURLError;
 import com.ttsdk.quickstart.helper.sign.model.VeLiveURLRootModel;
 
+import org.json.JSONObject;
+
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -136,14 +143,14 @@ public class PullRTMActivity extends AppCompatActivity {
                     VeLivePlayerStreamData.VeLivePlayerStream playStreamRTM = new VeLivePlayerStreamData.VeLivePlayerStream();
                     playStreamRTM.url = model.result.getUrl("udp");
                     playStreamRTM.format = VeLivePlayerFormatRTM;
-                    playStreamRTM.resolution = VeLivePlayerResolutionOrigin;
+                    playStreamRTM.resolution = new VeLivePlayerResolution(VeLivePlayerResolutionOrigin);;
                     playStreamRTM.streamType = VeLivePlayerStreamTypeMain;
 
                     // 配置 Flv 降级地址 
                     VeLivePlayerStreamData.VeLivePlayerStream playStreamFLV = new VeLivePlayerStreamData.VeLivePlayerStream();
                     playStreamFLV.url =  model.result.getUrl("flv");
                     playStreamFLV.format = VeLivePlayerFormatFLV;
-                    playStreamFLV.resolution = VeLivePlayerResolutionOrigin;
+                    playStreamFLV.resolution = new VeLivePlayerResolution(VeLivePlayerResolutionOrigin);
                     playStreamFLV.streamType = VeLivePlayerStreamTypeMain;
 
                     // 创建 VeLivePlayerStreamData 
@@ -274,6 +281,76 @@ public class PullRTMActivity extends AppCompatActivity {
 
         @Override
         public void onStreamFailedOpenSuperResolution(VeLivePlayer veLivePlayer, VeLivePlayerError veLivePlayerError) {
+
+        }
+
+        @Override
+        public void onAudioDeviceOpen(VeLivePlayer veLivePlayer, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onAudioDeviceClose(VeLivePlayer veLivePlayer) {
+
+        }
+
+        @Override
+        public void onAudioDeviceRelease(VeLivePlayer veLivePlayer) {
+
+        }
+
+        @Override
+        public void onBinarySeiUpdate(VeLivePlayer veLivePlayer, ByteBuffer byteBuffer) {
+
+        }
+
+        @Override
+        public void onMonitorLog(VeLivePlayer veLivePlayer, JSONObject jsonObject, String s) {
+
+        }
+
+        @Override
+        public void onReportALog(VeLivePlayer veLivePlayer, int i, String s) {
+
+        }
+
+        @Override
+        public void onResolutionDegrade(VeLivePlayer veLivePlayer, VeLivePlayerDef.VeLivePlayerResolution veLivePlayerResolution) {
+
+        }
+
+        @Override
+        public void onTextureRenderDrawFrame(VeLivePlayer veLivePlayer, Surface surface) {
+
+        }
+
+        @Override
+        public void onHeadPoseUpdate(VeLivePlayer veLivePlayer, float v, float v1, float v2, float v3, float v4, float v5, float v6) {
+
+        }
+
+        @Override
+        public void onResponseSmoothSwitch(VeLivePlayer veLivePlayer, boolean b, int i) {
+
+        }
+
+        @Override
+        public void onNetworkQualityChanged(VeLivePlayer veLivePlayer, int i, String s) {
+
+        }
+
+        @Override
+        public void onAudioVolume(VeLivePlayer veLivePlayer, VeLivePayerAudioVolume veLivePayerAudioVolume) {
+
+        }
+
+        @Override
+        public void onLoudness(VeLivePlayer veLivePlayer, VeLivePayerAudioLoudnessInfo veLivePayerAudioLoudnessInfo) {
+
+        }
+
+        @Override
+        public void onStreamFailedOpenSharpen(VeLivePlayer veLivePlayer, VeLivePlayerError veLivePlayerError) {
 
         }
     };

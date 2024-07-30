@@ -99,7 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateLiveTranscodingLayout:(ByteRTCMixedStreamLayoutConfig *)layout;
 
 //  开始跨房间转推  
-- (void)startForwardStream:(NSArray <ForwardStreamConfiguration *> *)forwardStreamInfos;
+- (void)startForwardStream:(NSArray <ByteRTCForwardStreamConfiguration *> *)forwardStreamInfos;
 
 //  停止跨房间转推  
 - (void)stopForwardStream;

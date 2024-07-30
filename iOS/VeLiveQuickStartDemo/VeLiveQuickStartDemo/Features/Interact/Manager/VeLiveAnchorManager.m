@@ -181,7 +181,7 @@
         [self.rtcVideo sendSEIMessage:(ByteRTCStreamIndexMain)
                            andMessage:[message dataUsingEncoding:NSUTF8StringEncoding]
                        andRepeatCount:repeat
-                     andCountPerFrame:kSingleSEIPerFrame];
+                     andCountPerFrame:ByteRTCSEICountPerFrameSingle];
     }
 }
 
@@ -348,7 +348,7 @@
     [self.livePusher stopPush];
 }
 
-- (void)startForwardStream:(NSArray<ForwardStreamConfiguration *> *)forwardStreamInfos {
+- (void)startForwardStream:(NSArray<ByteRTCForwardStreamConfiguration *> *)forwardStreamInfos {
     [self stopPush];
     [self.rtcRoom startForwardStreamToRooms:forwardStreamInfos];
 }

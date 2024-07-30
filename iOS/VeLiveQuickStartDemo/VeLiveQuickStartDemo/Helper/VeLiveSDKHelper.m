@@ -32,9 +32,10 @@
     //  配置当前用户的唯一ID，一般传业务侧用户ID，如果在初始的时候获取不到，可以在获取到用户ID时配置  
     [TTSDKManager setCurrentUserUniqueID:@"VeLiveQuickStartDemo"];
     //  是否上报埋点日志  
-    [TTSDKManager setShouldReportToAppLog:YES];
+    [VeLiveCommon enableReportApplog:YES];
+    
     //  日志自定义字段，用于故障排查  
-    [TTSDKManager setAppLogCustomData:@{
+    [VeLiveCommon setAppLogCustomData:@{
         @"CustomKey" : @"CustomValue"
     }];
     //  日志配置  
