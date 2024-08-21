@@ -77,6 +77,10 @@
                     @"target" : @"VeLivePush265CodecViewController"
                 },
                 @{
+                    @"title" : NSLocalizedString(@"Home_Screen_Push", nil),
+                    @"target" : @"VeLiveScreenCaptureViewController"
+                },
+                @{
                     @"title" : NSLocalizedString(@"Home_Picture_In_Picture", nil),
                     @"target" : @"VeLivePictureInPictureViewController"
                 },

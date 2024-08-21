@@ -5,20 +5,14 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
 //
-// VeLiveRTCTokenMaker.h
-// VeLiveSolution
+//  SampleHandler.h
+//  VeLiveQuickStartSCExtension
 //
-//  Created by Volcano Engine Team on 2024/07/30.
+//  Created by Volcano Engine Team on 2024/8/5.
 //
 
-#import <Foundation/Foundation.h>
-/**
-不要在生产环境使用，生产环境的 Token 请在服务端生成
-*/
-NS_ASSUME_NONNULL_BEGIN
-@interface VeLiveRTCTokenMaker : NSObject
-+ (instancetype)shareMaker;
-- (void)setupWithAppID:(NSString *)appid appKey:(NSString *)appKey;
-- (NSString *)genDefaultTokenWithRoomID:(NSString *)roomId userId:(NSString *)userId;
+#import <ReplayKit/ReplayKit.h>
+
+@interface SampleHandler : RPBroadcastSampleHandler
+
 @end
-NS_ASSUME_NONNULL_END

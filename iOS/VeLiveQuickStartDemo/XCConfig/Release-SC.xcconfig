@@ -1,0 +1,4 @@
+#include "../Pods/Target Support Files/Pods-VeLiveQuickStartSCExtension/Pods-VeLiveQuickStartSCExtension.release.xcconfig"
+#include "Common.xcconfig"
+CODE_SIGN_ENTITLEMENTS = VeLiveQuickStartSCExtension/VeLiveQuickStartSCExtension.entitlements
+PRODUCT_BUNDLE_IDENTIFIER = ${SC_PRODUCT_BUNDLE_IDENTIFIER}

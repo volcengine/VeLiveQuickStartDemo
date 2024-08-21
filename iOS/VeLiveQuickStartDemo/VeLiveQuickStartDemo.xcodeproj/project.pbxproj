@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1CDB2FCB37919E6E2F4C2CCD /* libPods-VeLiveQuickStartSCExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7FFFB057DF5D8D993930AFB /* libPods-VeLiveQuickStartSCExtension.a */; };
 		2B162B122A4FD0A2001452BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B162B102A4FD0A2001452BC /* Main.storyboard */; };
 		2B162B132A4FD0A2001452BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B162B112A4FD0A2001452BC /* LaunchScreen.storyboard */; };
 		2B2B0F562BC823070037BCC2 /* VeLiveRTCTokenMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B0F4E2BC823070037BCC2 /* VeLiveRTCTokenMaker.m */; };
@@ -22,6 +23,11 @@
 		2B471D302A4AC88B0035AB71 /* VeLiveAnchorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B471D1E2A4AC88A0035AB71 /* VeLiveAnchorManager.m */; };
 		2B471D322A4AC88B0035AB71 /* VeLiveAudienceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B471D222A4AC88A0035AB71 /* VeLiveAudienceManager.m */; };
 		2B471D352A4AC88B0035AB71 /* VeLiveConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B471D2C2A4AC88B0035AB71 /* VeLiveConfig.m */; };
+		2B5140C22C60BC220047EF26 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5140C12C60BC220047EF26 /* ReplayKit.framework */; };
+		2B5140C62C60BC220047EF26 /* SampleHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5140C52C60BC220047EF26 /* SampleHandler.m */; };
+		2B5140CA2C60BC220047EF26 /* VeLiveQuickStartSCExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2B5140C02C60BC220047EF26 /* VeLiveQuickStartSCExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2B5140D52C60BD8A0047EF26 /* VeLiveScreenCaptureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B5140D42C60BD8A0047EF26 /* VeLiveScreenCaptureViewController.xib */; };
+		2B5140D62C60BD8A0047EF26 /* VeLiveScreenCaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5140D32C60BD8A0047EF26 /* VeLiveScreenCaptureViewController.m */; };
 		2B8E23FD2B90329C00D5C8A0 /* VeLivePullRTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B8E23FB2B90329C00D5C8A0 /* VeLivePullRTMViewController.m */; };
 		2B8E23FE2B90329C00D5C8A0 /* VeLivePullRTMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B8E23FC2B90329C00D5C8A0 /* VeLivePullRTMViewController.xib */; };
 		2BE62B642A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62B5D2A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.m */; };
@@ -60,6 +66,30 @@
 		CE6247ABF51FDB3A7B0620CD /* libPods-VeLiveQuickStartDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3149E926C3C9F63213B4BEBB /* libPods-VeLiveQuickStartDemo.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2B5140C82C60BC220047EF26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2B471CF22A4AC7A10035AB71 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2B5140BF2C60BC220047EF26;
+			remoteInfo = VeLiveQuickStartSCExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2B5140CB2C60BC220047EF26 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				2B5140CA2C60BC220047EF26 /* VeLiveQuickStartSCExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		2B162B102A4FD0A2001452BC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = VeLiveQuickStartDemo/App/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		2B162B112A4FD0A2001452BC /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = VeLiveQuickStartDemo/App/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
@@ -92,6 +122,19 @@
 		2B471D222A4AC88A0035AB71 /* VeLiveAudienceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VeLiveAudienceManager.m; sourceTree = "<group>"; };
 		2B471D2C2A4AC88B0035AB71 /* VeLiveConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VeLiveConfig.m; sourceTree = "<group>"; };
 		2B471D2D2A4AC88B0035AB71 /* VeLiveConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VeLiveConfig.h; sourceTree = "<group>"; };
+		2B5140C02C60BC220047EF26 /* VeLiveQuickStartSCExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VeLiveQuickStartSCExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B5140C12C60BC220047EF26 /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
+		2B5140C42C60BC220047EF26 /* SampleHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SampleHandler.h; sourceTree = "<group>"; };
+		2B5140C52C60BC220047EF26 /* SampleHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SampleHandler.m; sourceTree = "<group>"; };
+		2B5140C72C60BC220047EF26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B5140CF2C60BC6E0047EF26 /* VeLiveQuickStartDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VeLiveQuickStartDemo.entitlements; sourceTree = "<group>"; };
+		2B5140D02C60BC7F0047EF26 /* VeLiveQuickStartSCExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VeLiveQuickStartSCExtension.entitlements; sourceTree = "<group>"; };
+		2B5140D22C60BD8A0047EF26 /* VeLiveScreenCaptureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLiveScreenCaptureViewController.h; sourceTree = "<group>"; };
+		2B5140D32C60BD8A0047EF26 /* VeLiveScreenCaptureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLiveScreenCaptureViewController.m; sourceTree = "<group>"; };
+		2B5140D42C60BD8A0047EF26 /* VeLiveScreenCaptureViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLiveScreenCaptureViewController.xib; sourceTree = "<group>"; };
+		2B5140D72C61F9CA0047EF26 /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		2B5140DA2C61F9E00047EF26 /* Debug-SC.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug-SC.xcconfig"; sourceTree = "<group>"; };
+		2B5140DB2C61F9F00047EF26 /* Release-SC.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release-SC.xcconfig"; sourceTree = "<group>"; };
 		2B8E23FA2B90329C00D5C8A0 /* VeLivePullRTMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePullRTMViewController.h; sourceTree = "<group>"; };
 		2B8E23FB2B90329C00D5C8A0 /* VeLivePullRTMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePullRTMViewController.m; sourceTree = "<group>"; };
 		2B8E23FC2B90329C00D5C8A0 /* VeLivePullRTMViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLivePullRTMViewController.xib; sourceTree = "<group>"; };
@@ -144,10 +187,13 @@
 		2BEF7F132A81F22D00C5814F /* VeLivePictureInPictureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePictureInPictureViewController.m; sourceTree = "<group>"; };
 		2BEF7F142A81F22D00C5814F /* VeLivePictureInPictureViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLivePictureInPictureViewController.xib; sourceTree = "<group>"; };
 		3149E926C3C9F63213B4BEBB /* libPods-VeLiveQuickStartDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VeLiveQuickStartDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		64788804D404605F768F3045 /* Pods-VeLiveQuickStartSCExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeLiveQuickStartSCExtension.release.xcconfig"; path = "Target Support Files/Pods-VeLiveQuickStartSCExtension/Pods-VeLiveQuickStartSCExtension.release.xcconfig"; sourceTree = "<group>"; };
 		9B31797463269B27C2AFCCDF /* Pods-VeLiveQuickStartDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeLiveQuickStartDemo.release.xcconfig"; path = "Target Support Files/Pods-VeLiveQuickStartDemo/Pods-VeLiveQuickStartDemo.release.xcconfig"; sourceTree = "<group>"; };
 		BA54A9DE8E1315CA8F6F7B8E /* Pods-VeLiveQuickStartDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeLiveQuickStartDemo.debug.xcconfig"; path = "Target Support Files/Pods-VeLiveQuickStartDemo/Pods-VeLiveQuickStartDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		BAA3229E8CCAC9BA718A9BBF /* Pods-VeLiveQuickStartDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeLiveQuickStartDemo.release.xcconfig"; path = "Target Support Files/Pods-VeLiveQuickStartDemo/Pods-VeLiveQuickStartDemo.release.xcconfig"; sourceTree = "<group>"; };
 		DB1829D69D31B4526C4E65DC /* Pods-VeLiveQuickStartDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeLiveQuickStartDemo.debug.xcconfig"; path = "Target Support Files/Pods-VeLiveQuickStartDemo/Pods-VeLiveQuickStartDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		E7FFFB057DF5D8D993930AFB /* libPods-VeLiveQuickStartSCExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VeLiveQuickStartSCExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6E05AC902798B994D83212A /* Pods-VeLiveQuickStartSCExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeLiveQuickStartSCExtension.debug.xcconfig"; path = "Target Support Files/Pods-VeLiveQuickStartSCExtension/Pods-VeLiveQuickStartSCExtension.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +205,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2B5140BD2C60BC220047EF26 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B5140C22C60BC220047EF26 /* ReplayKit.framework in Frameworks */,
+				1CDB2FCB37919E6E2F4C2CCD /* libPods-VeLiveQuickStartSCExtension.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -166,6 +221,8 @@
 			isa = PBXGroup;
 			children = (
 				3149E926C3C9F63213B4BEBB /* libPods-VeLiveQuickStartDemo.a */,
+				2B5140C12C60BC220047EF26 /* ReplayKit.framework */,
+				E7FFFB057DF5D8D993930AFB /* libPods-VeLiveQuickStartSCExtension.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -173,8 +230,11 @@
 		2B24DD9E2A6FA34C008E11F9 /* XCConfig */ = {
 			isa = PBXGroup;
 			children = (
+				2B5140D72C61F9CA0047EF26 /* Common.xcconfig */,
 				2B24DD9F2A6FA34C008E11F9 /* Debug.xcconfig */,
 				2B24DDA02A6FA34C008E11F9 /* Release.xcconfig */,
+				2B5140DA2C61F9E00047EF26 /* Debug-SC.xcconfig */,
+				2B5140DB2C61F9F00047EF26 /* Release-SC.xcconfig */,
 			);
 			path = XCConfig;
 			sourceTree = SOURCE_ROOT;
@@ -198,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				2B471CFC2A4AC7A10035AB71 /* VeLiveQuickStartDemo */,
+				2B5140C32C60BC220047EF26 /* VeLiveQuickStartSCExtension */,
 				2B471CFB2A4AC7A10035AB71 /* Products */,
 				B4747D6A3019AF019D76A89E /* Pods */,
 				1F222B2F2DD1F36AD21E5716 /* Frameworks */,
@@ -208,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				2B471CFA2A4AC7A10035AB71 /* VeLiveQuickStartDemo.app */,
+				2B5140C02C60BC220047EF26 /* VeLiveQuickStartSCExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -215,6 +277,7 @@
 		2B471CFC2A4AC7A10035AB71 /* VeLiveQuickStartDemo */ = {
 			isa = PBXGroup;
 			children = (
+				2B5140CF2C60BC6E0047EF26 /* VeLiveQuickStartDemo.entitlements */,
 				2BE62B772A4C1096002EEEF0 /* App */,
 				2BE62B862A4C1726002EEEF0 /* Helper */,
 				2B471D182A4AC88A0035AB71 /* Features */,
@@ -247,6 +310,27 @@
 				2B471D222A4AC88A0035AB71 /* VeLiveAudienceManager.m */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		2B5140C32C60BC220047EF26 /* VeLiveQuickStartSCExtension */ = {
+			isa = PBXGroup;
+			children = (
+				2B5140D02C60BC7F0047EF26 /* VeLiveQuickStartSCExtension.entitlements */,
+				2B5140C42C60BC220047EF26 /* SampleHandler.h */,
+				2B5140C52C60BC220047EF26 /* SampleHandler.m */,
+				2B5140C72C60BC220047EF26 /* Info.plist */,
+			);
+			path = VeLiveQuickStartSCExtension;
+			sourceTree = "<group>";
+		};
+		2B5140D12C60BD600047EF26 /* ScreenCapture */ = {
+			isa = PBXGroup;
+			children = (
+				2B5140D22C60BD8A0047EF26 /* VeLiveScreenCaptureViewController.h */,
+				2B5140D32C60BD8A0047EF26 /* VeLiveScreenCaptureViewController.m */,
+				2B5140D42C60BD8A0047EF26 /* VeLiveScreenCaptureViewController.xib */,
+			);
+			path = ScreenCapture;
 			sourceTree = "<group>";
 		};
 		2B8E23F92B90328200D5C8A0 /* PullRTM */ = {
@@ -350,6 +434,7 @@
 		2BE62B982A4C1896002EEEF0 /* Advanced */ = {
 			isa = PBXGroup;
 			children = (
+				2B5140D12C60BD600047EF26 /* ScreenCapture */,
 				2B8E23F92B90328200D5C8A0 /* PullRTM */,
 				2BEF7F112A81F20500C5814F /* PictureInPicture */,
 				2BE62B992A4C189E002EEEF0 /* PushBeauty */,
@@ -467,6 +552,8 @@
 				9B31797463269B27C2AFCCDF /* Pods-VeLiveQuickStartDemo.release.xcconfig */,
 				DB1829D69D31B4526C4E65DC /* Pods-VeLiveQuickStartDemo.debug.xcconfig */,
 				BAA3229E8CCAC9BA718A9BBF /* Pods-VeLiveQuickStartDemo.release.xcconfig */,
+				F6E05AC902798B994D83212A /* Pods-VeLiveQuickStartSCExtension.debug.xcconfig */,
+				64788804D404605F768F3045 /* Pods-VeLiveQuickStartSCExtension.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -484,15 +571,35 @@
 				2B471CF82A4AC7A10035AB71 /* Resources */,
 				F86FD6A608DCBE77D6F1894D /* [CP] Embed Pods Frameworks */,
 				CBB5C5DA113B57F513B10D0C /* [CP] Copy Pods Resources */,
+				2B5140CB2C60BC220047EF26 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2B5140C92C60BC220047EF26 /* PBXTargetDependency */,
 			);
 			name = VeLiveQuickStartDemo;
 			productName = VeLiveQuickStartDemo;
 			productReference = 2B471CFA2A4AC7A10035AB71 /* VeLiveQuickStartDemo.app */;
 			productType = "com.apple.product-type.application";
+		};
+		2B5140BF2C60BC220047EF26 /* VeLiveQuickStartSCExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B5140CE2C60BC220047EF26 /* Build configuration list for PBXNativeTarget "VeLiveQuickStartSCExtension" */;
+			buildPhases = (
+				D76EA1F61F337B1A6FC45030 /* [CP] Check Pods Manifest.lock */,
+				2B5140BC2C60BC220047EF26 /* Sources */,
+				2B5140BD2C60BC220047EF26 /* Frameworks */,
+				2B5140BE2C60BC220047EF26 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VeLiveQuickStartSCExtension;
+			productName = VeLiveQuickStartSCExtension;
+			productReference = 2B5140C02C60BC220047EF26 /* VeLiveQuickStartSCExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -505,6 +612,9 @@
 				TargetAttributes = {
 					2B471CF92A4AC7A10035AB71 = {
 						CreatedOnToolsVersion = 14.3.1;
+					};
+					2B5140BF2C60BC220047EF26 = {
+						CreatedOnToolsVersion = 15.4;
 					};
 				};
 			};
@@ -523,6 +633,7 @@
 			projectRoot = "";
 			targets = (
 				2B471CF92A4AC7A10035AB71 /* VeLiveQuickStartDemo */,
+				2B5140BF2C60BC220047EF26 /* VeLiveQuickStartSCExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -544,6 +655,7 @@
 				2BE62C042A4D95B4002EEEF0 /* VeLivePushBeautyViewController.xib in Resources */,
 				2BE62BC82A4C1DB3002EEEF0 /* VeLiveLinkAnchorViewController.xib in Resources */,
 				2BE62C102A4E8959002EEEF0 /* VeLivePKViewController.xib in Resources */,
+				2B5140D52C60BD8A0047EF26 /* VeLiveScreenCaptureViewController.xib in Resources */,
 				2BE62BCD2A4C1DCE002EEEF0 /* VeLiveLinkAudienceViewController.xib in Resources */,
 				2B471D0A2A4AC7A20035AB71 /* Assets.xcassets in Resources */,
 				2BE62C022A4D9406002EEEF0 /* VeLivePullStreamViewController.xib in Resources */,
@@ -553,6 +665,13 @@
 				2BE62BD22A4C1DE1002EEEF0 /* VeLivePKAnchorViewController.xib in Resources */,
 				2BE62B652A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.xib in Resources */,
 				2B8E23FE2B90329C00D5C8A0 /* VeLivePullRTMViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2B5140BE2C60BC220047EF26 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,6 +713,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VeLiveQuickStartDemo/Pods-VeLiveQuickStartDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D76EA1F61F337B1A6FC45030 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VeLiveQuickStartSCExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F86FD6A608DCBE77D6F1894D /* [CP] Embed Pods Frameworks */ = {
@@ -640,6 +781,7 @@
 				2BE62B962A4C1878002EEEF0 /* VeLivePullStreamViewController.m in Sources */,
 				2BE62B642A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.m in Sources */,
 				2BE62BD12A4C1DE1002EEEF0 /* VeLivePKAnchorViewController.m in Sources */,
+				2B5140D62C60BD8A0047EF26 /* VeLiveScreenCaptureViewController.m in Sources */,
 				2BE62C0F2A4E8959002EEEF0 /* VeLivePKViewController.m in Sources */,
 				2B2B0F572BC823070037BCC2 /* VeLiveURLGenerator.m in Sources */,
 				2B471D022A4AC7A10035AB71 /* SceneDelegate.m in Sources */,
@@ -650,7 +792,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2B5140BC2C60BC220047EF26 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B5140C62C60BC220047EF26 /* SampleHandler.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2B5140C92C60BC220047EF26 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2B5140BF2C60BC220047EF26 /* VeLiveQuickStartSCExtension */;
+			targetProxy = 2B5140C82C60BC220047EF26 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2BE62B752A4C0B03002EEEF0 /* Localizable.strings */ = {
@@ -791,11 +949,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VeLiveQuickStartDemo/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "使用相机开启直播";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "使用麦克风开启直播";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Use camera to start live broadcast";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Use microphone to start live broadcast";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -807,7 +964,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.volcengine.ttsdk.quickstart.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -826,8 +982,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VeLiveQuickStartDemo/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "使用相机开启直播";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "使用麦克风开启直播";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Use camera to start live broadcast";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Use microphone to start live broadcast";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -839,11 +995,62 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.volcengine.ttsdk.quickstart.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2B5140CC2C60BC220047EF26 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B5140DA2C61F9E00047EF26 /* Debug-SC.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VeLiveQuickStartSCExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VeLiveQuickStartSCExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2B5140CD2C60BC220047EF26 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B5140DB2C61F9F00047EF26 /* Release-SC.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VeLiveQuickStartSCExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VeLiveQuickStartSCExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -866,6 +1073,15 @@
 			buildConfigurations = (
 				2B471D142A4AC7A20035AB71 /* Debug */,
 				2B471D152A4AC7A20035AB71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2B5140CE2C60BC220047EF26 /* Build configuration list for PBXNativeTarget "VeLiveQuickStartSCExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B5140CC2C60BC220047EF26 /* Debug */,
+				2B5140CD2C60BC220047EF26 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

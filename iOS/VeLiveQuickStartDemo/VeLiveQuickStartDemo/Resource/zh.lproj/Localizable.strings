@@ -55,6 +55,8 @@
 
 "Home_RTM_Pull_Streaming" = "RTM 超低延迟拉流";
 
+"Home_Screen_Push" = "屏幕采集推流";
+
 "Interact_Link" = "观众连麦";
 
 "Interact_Link_Anchor" = "我是主播";
@@ -142,6 +144,8 @@
 "Push_Beauty_Filter" = "滤镜";
 
 "Push_Beauty_Sticker" = "贴纸";
+
+"Push_Screen_Capture" = "录屏推流";
 
 "Push_Camera_Back" = "摄像头(后)";
 

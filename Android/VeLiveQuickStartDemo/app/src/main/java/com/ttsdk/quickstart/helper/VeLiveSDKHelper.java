@@ -6,7 +6,7 @@
  */
 package com.ttsdk.quickstart.helper;
 /*
- 本文件存放 SDK 基础配置信息，不分信息在进入相应页面是可以在界面上进行修改
+ 本文件存放 SDK 基础配置信息，部分信息在进入相应页面是可以在界面上进行修改
  本文件存放SDK基础配置信息，包含 SDK AppID， License 文件名，推拉流地址，连麦互动房间ID、主播/观众 UID及临时Token
  SDK 配置信息申请：https://console.volcengine.com/live/main/sdk
  推拉流地址生成参考文档：https://console.volcengine.com/live/main/locationGenerate
