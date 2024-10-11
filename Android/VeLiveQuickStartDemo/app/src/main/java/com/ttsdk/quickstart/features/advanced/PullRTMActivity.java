@@ -353,6 +353,17 @@ public class PullRTMActivity extends AppCompatActivity {
         public void onStreamFailedOpenSharpen(VeLivePlayer veLivePlayer, VeLivePlayerError veLivePlayerError) {
 
         }
+
+        @Override
+        public SwitchPermissionRequestResult shouldAutomaticallySwitch(VeLivePlayer veLivePlayer, VeLivePlayerResolution veLivePlayerResolution, VeLivePlayerResolution veLivePlayerResolution1, JSONObject jsonObject) {
+            return SwitchPermissionRequestResult.APPROVED;
+        }
+
+        @Override
+        public void didAutomaticallySwitch(VeLivePlayer veLivePlayer, VeLivePlayerResolution veLivePlayerResolution, VeLivePlayerResolution veLivePlayerResolution1, JSONObject jsonObject) {
+
+        }
+
     };
 
     private void showFillModeDialog() {
