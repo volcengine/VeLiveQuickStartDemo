@@ -84,6 +84,10 @@
                     @"title" : NSLocalizedString(@"Home_Picture_In_Picture", nil),
                     @"target" : @"VeLivePictureInPictureViewController"
                 },
+                @{
+                    @"title" : NSLocalizedString(@"Home_Live_Push_With_Mixed_Stream", nil),
+                    @"target" : @"VeLivePushMixStreamViewController"
+                },
             ]
         },
         @{

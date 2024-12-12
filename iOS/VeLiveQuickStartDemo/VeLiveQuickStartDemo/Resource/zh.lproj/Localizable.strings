@@ -47,6 +47,8 @@
 
 "Home_Picture_In_Picture" = "画中画";
 
+"Home_Live_Push_With_Mixed_Stream" = "音视频混流";
+
 "Home_Pull_RTM" = "RTM 拉流";
 
 "Home_Push_Streaming_Bitrate_Adaptive" = "推流码率自适应";
@@ -144,6 +146,14 @@
 "Push_Beauty_Filter" = "滤镜";
 
 "Push_Beauty_Sticker" = "贴纸";
+
+"Push_Mix_Stream" = "音视频混流";
+
+"Push_Mix_Stream_Audio" = "音频混流";
+
+"Push_Mix_Stream_Video" = "视频混流";
+
+"Push_Screen_Capture" = "Screen Capture";
 
 "Push_Screen_Capture" = "录屏推流";
 

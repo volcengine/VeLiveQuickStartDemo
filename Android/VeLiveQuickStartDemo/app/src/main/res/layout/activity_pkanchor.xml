@@ -18,17 +18,18 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="260dp">
-<TextureView
-    android:id="@+id/render_local_view"
-    android:layout_width="0dp"
-    android:layout_height="match_parent"
-    android:layout_weight="1"/>
+        <TextureView
+            android:id="@+id/render_local_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
         <TextureView
             android:id="@+id/render_other_view"
             android:layout_marginStart="8dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:visibility="invisible"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/url_input_layout"

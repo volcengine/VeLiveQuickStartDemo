@@ -45,12 +45,12 @@ public class VeLiveKeepLiveService extends Service {
         Log.d("TAG", "===MyService  onCreate()");
         notificationName = getResources().getString(R.string.pip_running_in_background);
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        //创建NotificationChannel
+        // 创建NotificationChannel 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(notificationId, notificationName, NotificationManager.IMPORTANCE_HIGH);
-            //不震动
+            // 不震动 
             channel.enableVibration(false);
-            //静音
+            // 静音 
             channel.setSound(null, null);
             notificationManager.createNotificationChannel(channel);
         }
@@ -75,7 +75,7 @@ public class VeLiveKeepLiveService extends Service {
     }
 
     private PendingIntent getIntent() {
-        Intent msgIntent = getApplicationContext().getPackageManager().getLaunchIntentForPackage(getPackageName());//获取启动Activity
+        Intent msgIntent = getApplicationContext().getPackageManager().getLaunchIntentForPackage(getPackageName());// 获取启动Activity 
         return PendingIntent.getActivity(
                 getApplicationContext(),
                 1,
@@ -86,7 +86,7 @@ public class VeLiveKeepLiveService extends Service {
     @Override
     public void onDestroy() {
         Log.d("TAG", "===MyService  onDestroy()");
-        stopForeground(true);// 停止前台服务--参数：表示是否移除之前的通知
+        stopForeground(true);//  停止前台服务--参数：表示是否移除之前的通知  
         super.onDestroy();
 
     }

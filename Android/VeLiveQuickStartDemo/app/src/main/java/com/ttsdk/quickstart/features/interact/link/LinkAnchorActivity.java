@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -64,6 +65,7 @@ public class LinkAnchorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_link_anchor);
         mRemoteLinearLayout = findViewById(R.id.guest_linear_layout);
         mUrlText = findViewById(R.id.url_input_view);
@@ -294,18 +296,21 @@ public class LinkAnchorActivity extends AppCompatActivity {
     private VeLiveAnchorManager.IListener anchorListener = new VeLiveAnchorManager.IListener() {
         @Override
         public void onUserJoined(String uid) {
+            Log.d(TAG, "onUserJoined, uid: " + uid);
             mUsersInRoom.add(uid);
             mAnchorManager.updatePushMixedStreamToCDN(getTranscodingLayout());
         }
 
         @Override
         public void onUserLeave(String uid) {
+            Log.d(TAG, "onUserLeave, uid: " + uid);
             mUsersInRoom.remove(uid);
             mAnchorManager.updatePushMixedStreamToCDN(getTranscodingLayout());
         }
 
         @Override
         public void onJoinRoom(String uid, int state) {
+            Log.d(TAG, "onJoinRoom, uid: " + uid + ", state: " + state);
             if (state != 0) { //  加入房间失败  
                 runOnUiThread(() -> stopInteractive());
                 return;
@@ -316,6 +321,7 @@ public class LinkAnchorActivity extends AppCompatActivity {
 
         @Override
         public void onUserPublishStream(String uid, MediaStreamType type) {
+            Log.d(TAG, "onUserPublishStream, uid: " + uid + ", type: " + type);
             if (type == MediaStreamType.RTC_MEDIA_STREAM_TYPE_AUDIO) {
                 return;
             }
@@ -335,13 +341,18 @@ public class LinkAnchorActivity extends AppCompatActivity {
 
         @Override
         public void onUserUnPublishStream(String uid, MediaStreamType type, StreamRemoveReason reason) {
+            Log.d(TAG, "onUserUnPublishStream, uid: " + uid + ", type: " + type + ", reason: " + reason);
             if (type == MediaStreamType.RTC_MEDIA_STREAM_TYPE_AUDIO) {
                 return;
             }
             mUsersInRoom.remove(uid);
-            TextureView textureView = mRemoteUserViews.get(uid);
-            mRemoteLinearLayout.removeView(textureView);
-            mRemoteUserViews.remove(uid);
+            runOnUiThread(() -> {
+                TextureView textureView = mRemoteUserViews.get(uid);
+                if (textureView != null) {
+                    mRemoteLinearLayout.removeView(textureView);
+                    mRemoteUserViews.remove(uid);
+                }
+            });
             //  移除远端视图  
             mAnchorManager.setRemoteVideoView(uid, null);
             //  更新混流布局  

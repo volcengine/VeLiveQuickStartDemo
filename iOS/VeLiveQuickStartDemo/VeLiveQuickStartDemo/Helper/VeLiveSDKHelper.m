@@ -38,28 +38,6 @@
     [VeLiveCommon setAppLogCustomData:@{
         @"CustomKey" : @"CustomValue"
     }];
-    //  日志配置  
-    TTSDKLogConfiguration *logConfig = [[TTSDKLogConfiguration alloc] init];
-    //  是否输出日志到控制台  
-    logConfig.enableConsole = YES;
-    //  是否写入日志到文件  
-    logConfig.enableLogFile = YES;
-    //  当前设备唯一ID  
-    logConfig.deviceID = UIDevice.currentDevice.identifierForVendor.UUIDString;
-    //  文件最大大小，单位MB  
-    logConfig.maxLogSizeM = 10;
-    //  单个文件大小，单位MB  
-    logConfig.singleLogSizeM = 1;
-    //  文件过期时间，单位秒  
-    logConfig.logExpireTimeS = 24 * 60 * 60;
-    //  日志输出级别  
-#if DEBUG
-    logConfig.logLevel = TTSDKLogLevelDebug;
-#else
-    logConfig.logLevel = TTSDKLogLevelInfo;
-#endif
-    //  配置日志  
-    cfg.logConfiguration = logConfig;
     //  启动 TTSDK  
     [TTSDKManager startWithConfiguration:cfg];
 }

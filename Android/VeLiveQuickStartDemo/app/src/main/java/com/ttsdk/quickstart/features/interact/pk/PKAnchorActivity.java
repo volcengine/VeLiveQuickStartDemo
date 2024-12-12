@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -69,6 +70,7 @@ public class PKAnchorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_pkanchor);
         mUrlText = findViewById(R.id.url_input_view);
         mInfoView = findViewById(R.id.push_info_text_view);
@@ -320,6 +322,12 @@ public class PKAnchorActivity extends AppCompatActivity {
             }
             try {
                 mUsersInRoom.add(uid);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPKOtherView.setVisibility(View.VISIBLE);
+                    }
+                });
                 //  配置远端视图  
                 mAnchorManager.setRemoteVideoView(uid, mPKOtherView);
                 //  更新混流布局  
@@ -335,6 +343,12 @@ public class PKAnchorActivity extends AppCompatActivity {
                 return;
             }
             mUsersInRoom.remove(uid);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mPKOtherView.setVisibility(View.INVISIBLE);
+                }
+            });
             //  移除远端视图  
             mAnchorManager.setRemoteVideoView(uid, null);
             //  更新混流布局  

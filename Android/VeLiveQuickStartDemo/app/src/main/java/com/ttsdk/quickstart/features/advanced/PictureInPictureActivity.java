@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -88,6 +89,7 @@ public class PictureInPictureActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_picture_in_picture);
 
         mInfoView = findViewById(R.id.pull_info_text_view);
@@ -102,7 +104,7 @@ public class PictureInPictureActivity extends AppCompatActivity {
 
     private void requestSettingCanDrawOverlays() {
         int sdkInt = Build.VERSION.SDK_INT;
-        if (sdkInt >= Build.VERSION_CODES.O) { // 8.0以上
+        if (sdkInt >= Build.VERSION_CODES.O) { //  8.0以上  
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
             startActivityForResult(intent, mOverlayRequestCode);
         } else if (sdkInt >= Build.VERSION_CODES.M) {

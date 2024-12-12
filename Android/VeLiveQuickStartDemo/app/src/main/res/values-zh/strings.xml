@@ -25,6 +25,7 @@
     <string name="Home_Live_Beauty_Filter">美颜滤镜</string>
     <string name="Home_Live_Pull_Streaming">直播拉流</string>
     <string name="Home_Picture_In_Picture">画中画</string>
+    <string name="Home_Live_Push_With_Mixed_Stream">音视频混流</string>
     <string name="Home_Push_Streaming_Bitrate_Adaptive">推流码率自适应</string>
     <string name="Home_RTM_Push_Streaming">RTM 超低延迟推流</string>
     <string name="Home_RTM_Pull_Streaming">RTM 超低延迟拉流</string>
@@ -72,6 +73,9 @@
     <string name="Push_Beauty_Compose">美颜、美型</string>
     <string name="Push_Beauty_Filter">滤镜</string>
     <string name="Push_Beauty_Sticker">贴纸</string>
+    <string name="Push_Mix_Stream">音视频混流</string>
+    <string name="Push_Mix_Stream_Audio">音频混流</string>
+    <string name="Push_Mix_Stream_Video">视频混流</string>
     <string name="Push_Camera_Back">摄像头(后)</string>
     <string name="Push_Camera_Front">摄像头(前)</string>
     <string name="Push_Capture_Mirror">采集镜像</string>
@@ -105,4 +109,5 @@
     <string name="pip_running_in_background">后台运行中</string>
     <string name="pip_not_support">不支持画中画</string>
     <string name="config_stream_name_tip">请配置流名</string>
+    <string name="preparing">准备中...</string>
 </resources>

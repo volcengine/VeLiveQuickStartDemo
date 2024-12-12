@@ -105,21 +105,6 @@ public class VeLiveSDKHelper {
     public static void initTTSDK(final Context context) {
         sAppContext = context;
 
-        LogConfig.Builder logBuilder = new LogConfig.Builder(context);
-        //  是否输出日志到控制台  
-        logBuilder.setEnableConsole(true);
-        //  是否写入日志到文件  
-        logBuilder.setEnableLogFile(true);
-        //  当前设备唯一ID  
-        logBuilder.setDeviceID(Settings.System.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID));
-        //  文件最大大小，单位MB  
-        logBuilder.setMaxLogSizeM(10);
-        //  单个文件大小，单位MB  
-        logBuilder.setSingleLogSizeM(1);
-        //  文件过期时间，单位秒  
-        logBuilder.setLogExpireTimeS(24 * 60 * 60);
-        //  日志输出级别  
-        logBuilder.setLogLevel(LogConfig.LogLevel.Debug);
 
         Config.Builder configBuilder = new Config.Builder();
         //  配置 App 上下文  
@@ -133,8 +118,6 @@ public class VeLiveSDKHelper {
 
         //  版本号  
         configBuilder.setAppVersion(getVersionName(context));
-        //  配置日志  
-        configBuilder.setLogConfig(logBuilder.build());
         //  配置 TTSDK AppID  
         configBuilder.setAppID(TTSDK_APP_ID);
         //  配置 License 路径  

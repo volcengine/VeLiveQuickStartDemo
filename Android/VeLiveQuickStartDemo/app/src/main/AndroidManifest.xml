@@ -84,6 +84,10 @@
             android:exported="false"
             android:label="@string/Push_Beauty" />
         <activity
+            android:name=".features.advanced.PushMixStreamActivity"
+            android:exported="false"
+            android:label="@string/Push_Beauty" />
+        <activity
             android:name=".features.basic.PullStreamActivity"
             android:exported="false"
             android:label="@string/Pull_Stream" />

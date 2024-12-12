@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -68,6 +69,7 @@ public class PullStreamActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_pull_stream);
         mInfoView = findViewById(R.id.pull_info_text_view);
         mUrlText = findViewById(R.id.url_input_view);

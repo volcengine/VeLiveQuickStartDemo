@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(new HomeItem(getResources().getString(R.string.Home_H265_Hardcoded), advancedPackage + "PushH265CodecActivity"));
         list.add(new HomeItem(getResources().getString(R.string.Home_Screen_Push), advancedPackage + "PushScreenActivity"));
         list.add(new HomeItem(getResources().getString(R.string.Home_Picture_In_Picture), advancedPackage + "PictureInPictureActivity"));
+        list.add(new HomeItem(getResources().getString(R.string.Home_Live_Push_With_Mixed_Stream), advancedPackage + "PushMixStreamActivity"));
         list.add(new HomeItem(getResources().getString(R.string.Home_Interactive_Features)));
         String interactPackage = "com.ttsdk.quickstart.features.interact.";
         list.add(new HomeItem(getResources().getString(R.string.Home_Anchor_And_Audience_Mic), interactPackage + "link.LinkActivity"));

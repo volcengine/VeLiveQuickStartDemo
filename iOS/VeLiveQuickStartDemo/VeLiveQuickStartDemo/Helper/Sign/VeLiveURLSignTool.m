@@ -98,7 +98,7 @@
 
 
 - (NSMutableURLRequest *)signReuqest {
-    // 构建请求
+    //  构建请求  
     NSMutableDictionary *queryParams = [NSMutableDictionary dictionaryWithDictionary:self.queryParams ?:@{}];
     NSMutableDictionary *bodyDict = [NSMutableDictionary dictionaryWithDictionary:self.body ?:@{}];
     if ([self.queryParams objectForKey:@"Version"] == nil) {
