@@ -74,7 +74,7 @@
 - (BOOL)prepareFileRead {
     if (!self.fileConfig.isValid) {
         if (self.completionBlock) {
-            self.completionBlock(VEL_ERROR(-1, @"文件格式错误或者不存在"), NO);
+            self.completionBlock(VEL_ERROR(-1, @"file config is not valid"), NO);
         }
         return NO;
     }

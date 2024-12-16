@@ -17,13 +17,13 @@
 @property (nonatomic, strong) dispatch_queue_t sessionQueue;
 @property (nonatomic, strong) dispatch_queue_t captureQueue;
 @property (atomic, strong) AVCaptureSession *captureSession;
-@property (atomic, strong) AVCaptureDevice *inputCamera;
+@property (atomic, strong) AVCaptureDevice *inputDevice;
 
-@property (atomic, strong) AVCaptureDeviceInput *videoInput;
+@property (atomic, strong) AVCaptureDeviceInput *deviceInput;
 @property (atomic, strong) AVCaptureVideoDataOutput *videoOutput;
-@property (atomic, strong) AVCaptureConnection *videoConnection;
+@property (atomic, strong) AVCaptureConnection *captureConnection;
 
-@property (atomic, strong) AVCaptureDeviceInput *audioInput;
+@property (atomic, strong) AVCaptureDeviceInput *audioDeviceInput;
 @property (atomic, strong) AVCaptureAudioDataOutput *audioOutput;
 
 @property (atomic, assign) BOOL cameraGranted;
@@ -46,79 +46,11 @@
     });
 }
 
-// Call this on the session queue.
+
 - (void)configureSession {
     self.captureSession = [[AVCaptureSession alloc] init];
-    NSError *error = nil;
-    [self.captureSession beginConfiguration];
-    
-    if (self.cameraGranted) {
-        self.captureSession.sessionPreset = AVCaptureSessionPreset1280x720;
-        
-        // Add video input.
-        AVCaptureDevice* videoDevice = [AVCaptureDevice defaultDeviceWithDeviceType:AVCaptureDeviceTypeBuiltInWideAngleCamera
-                                                                          mediaType:AVMediaTypeVideo
-                                                                           position:AVCaptureDevicePositionFront];
-        if (!videoDevice) {
-            videoDevice = [AVCaptureDevice defaultDeviceWithDeviceType:AVCaptureDeviceTypeBuiltInWideAngleCamera
-                                                             mediaType:AVMediaTypeVideo
-                                                              position:AVCaptureDevicePositionBack];
-        }
-        AVCaptureDeviceInput* videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
-        if (!videoDeviceInput) {
-            NSLog(@"VeLiveQuickStartDemo: Could not create video device input: %@", error);
-            [self.captureSession commitConfiguration];
-            return;
-        }
-        
-        if ([self.captureSession canAddInput:videoDeviceInput]) {
-            [self.captureSession addInput:videoDeviceInput];
-            self.videoInput = videoDeviceInput;
-            self.videoOutput = [[AVCaptureVideoDataOutput alloc] init];
-            [self.videoOutput setSampleBufferDelegate:self queue:self.captureQueue];
-            NSDictionary *captureSettings = @{(NSString *) kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)};
-            self.videoOutput.videoSettings = captureSettings;
-            self.videoOutput.alwaysDiscardsLateVideoFrames = YES;
-            if ([self.captureSession canAddOutput:self.videoOutput]) {
-                [self.captureSession addOutput:self.videoOutput];
-            }
-        } else {
-            NSLog(@"VeLiveQuickStartDemo: Could not add video device input to the session");
-            [self.captureSession commitConfiguration];
-            return;
-        }
-        
-        self.videoConnection = [self.videoOutput connectionWithMediaType:AVMediaTypeVideo];
-        if ([self.videoConnection isVideoOrientationSupported]) {
-            self.videoConnection.videoOrientation = AVCaptureVideoOrientationPortrait;
-        }
-    }
-    if (self.microGranted) {
-        // Add Audio Input
-        AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
-        AVCaptureDeviceInput *audioDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
-        if (!audioDeviceInput) {
-            NSLog(@"VeLiveQuickStartDemo: Could not create audio device input: %@", error);
-            [self.captureSession commitConfiguration];
-            return;
-        }
-        
-        if ([self.captureSession canAddInput:audioDeviceInput]) {
-            [self.captureSession addInput:audioDeviceInput];
-            self.audioInput = audioDeviceInput;
-            
-            self.audioOutput = [[AVCaptureAudioDataOutput alloc] init];
-            [self.audioOutput setSampleBufferDelegate:self queue:self.captureQueue];
-            if ([self.captureSession canAddOutput:self.audioOutput]) {
-                [self.captureSession addOutput:self.audioOutput];
-            }
-        } else {
-            NSLog(@"VeLiveQuickStartDemo: Could not add audio device input to the session");
-            [self.captureSession commitConfiguration];
-            return;
-        }
-    }
-    [self.captureSession commitConfiguration];
+    [self addVideoOutput];
+    [self addAudioOutput];
 }
 
 - (void)startCapture {
@@ -145,6 +77,95 @@
     });
 }
 
+- (BOOL)addVideoOutput {
+    if (self.cameraGranted && self.captureSession != nil && self.videoOutput == nil) {
+        self.captureSession.sessionPreset = AVCaptureSessionPreset1280x720;
+        AVCaptureDevice* videoDevice = [self createCaptureDevice];
+        if (videoDevice == nil) {
+            NSLog(@"VeLiveQuickStartDemo: Could not create video device");
+            return NO;
+        }
+        NSError *error = nil;
+        AVCaptureDeviceInput* videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
+        if (!videoDeviceInput) {
+            NSLog(@"VeLiveQuickStartDemo: Could not create video device input: %@", error);
+            return NO;
+        }
+        
+        if ([self.captureSession canAddInput:videoDeviceInput]) {
+            [self.captureSession addInput:videoDeviceInput];
+            self.deviceInput = videoDeviceInput;
+            self.videoOutput = [self createCaptureVideoOutput];
+            if ([self.captureSession canAddOutput:self.videoOutput]) {
+                [self.captureSession addOutput:self.videoOutput];
+            }
+        } else {
+            NSLog(@"VeLiveQuickStartDemo: Could not add video device input to the session");
+            return NO;
+        }
+        
+        self.captureConnection = [self.videoOutput connectionWithMediaType:AVMediaTypeVideo];
+        if ([self.captureConnection isVideoOrientationSupported]) {
+            self.captureConnection.videoOrientation = AVCaptureVideoOrientationPortrait;
+        }
+    } else {
+        NSLog(@"VeLiveQuickStartDemo: Micro not Granted");
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)addAudioOutput {
+    if (self.microGranted && self.captureSession != nil && self.audioOutput == nil) {
+        NSError *error = nil;
+        AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+        AVCaptureDeviceInput *audioDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
+        if (!audioDeviceInput) {
+            NSLog(@"VeLiveQuickStartDemo: Could not create audio device input: %@", error);
+            return NO;
+        }
+        
+        if ([self.captureSession canAddInput:audioDeviceInput]) {
+            [self.captureSession addInput:audioDeviceInput];
+            self.audioDeviceInput = audioDeviceInput;
+            
+            self.audioOutput = [[AVCaptureAudioDataOutput alloc] init];
+            [self.audioOutput setSampleBufferDelegate:self queue:self.captureQueue];
+            if ([self.captureSession canAddOutput:self.audioOutput]) {
+                [self.captureSession addOutput:self.audioOutput];
+            }
+        } else {
+            NSLog(@"VeLiveQuickStartDemo: Could not add audio device input to the session");
+            return NO;
+        }
+    } else {
+        NSLog(@"VeLiveQuickStartDemo: Camera not Granted");
+        return NO;
+    }
+    return YES;
+}
+
+
+- (AVCaptureDevice *)createCaptureDevice {
+    AVCaptureDevice* captureDevice = [AVCaptureDevice defaultDeviceWithDeviceType:AVCaptureDeviceTypeBuiltInWideAngleCamera
+                                                                      mediaType:AVMediaTypeVideo
+                                                                       position:AVCaptureDevicePositionFront];
+    if (!captureDevice) {
+        captureDevice = [AVCaptureDevice defaultDeviceWithDeviceType:AVCaptureDeviceTypeBuiltInWideAngleCamera
+                                                         mediaType:AVMediaTypeVideo
+                                                          position:AVCaptureDevicePositionBack];
+    }
+    return captureDevice;
+}
+
+- (AVCaptureVideoDataOutput *)createCaptureVideoOutput {
+    AVCaptureVideoDataOutput *videoOutput = [[AVCaptureVideoDataOutput alloc] init];
+    [videoOutput setSampleBufferDelegate:self queue:self.captureQueue];
+    videoOutput.videoSettings = @{(NSString *) kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)};
+    videoOutput.alwaysDiscardsLateVideoFrames = YES;
+    return videoOutput;
+}
+
 
 #pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate
 - (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
@@ -162,21 +183,21 @@
 
 + (void)requestCameraAndMicroAuthorization:(void (^)(BOOL cameraGranted, BOOL microGranted))handler {
     dispatch_group_t group = dispatch_group_create();
-    __block BOOL cg = NO;
-    __block BOOL mg = NO;
+    __block BOOL cameraGranted = NO;
+    __block BOOL microGranted = NO;
     dispatch_group_enter(group);
     [self requestCameraAuthorization:^(BOOL granted) {
-        cg = granted;
+        cameraGranted = granted;
         dispatch_group_leave(group);
     }];
     dispatch_group_enter(group);
     [self requestMicrophoneAuthorization:^(BOOL granted) {
-        mg = granted;
+        microGranted = granted;
         dispatch_group_leave(group);
     }];
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         if (handler) {
-            handler(cg, mg);
+            handler(cameraGranted, microGranted);
         }
     });
 }
