@@ -70,8 +70,8 @@ dependencies {
 
     // 添加 TTSDK 在线集成地址，推荐使用最新稳定版，获取方式请参考[SDK 下载]章节 
 
-    implementation 'com.bytedanceapi:ttsdk-ttlivepush_rtc:1.44.3.4'
-    implementation 'com.bytedanceapi:ttsdk-ttlivepull_rtc:1.44.3.4'
+    implementation 'com.bytedanceapi:ttsdk-ttlivepush_rtc:1.45.1.9'
+    implementation 'com.bytedanceapi:ttsdk-ttlivepull_rtc:1.45.1.9'
     implementation ("com.volcengine:VolcEngineRTC:3.58.1.20700")
 
 }

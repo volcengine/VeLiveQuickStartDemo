@@ -41,8 +41,6 @@
 		2BE62B902A4C1839002EEEF0 /* VeLivePushCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62B8E2A4C1839002EEEF0 /* VeLivePushCameraViewController.m */; };
 		2BE62B962A4C1878002EEEF0 /* VeLivePullStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62B942A4C1878002EEEF0 /* VeLivePullStreamViewController.m */; };
 		2BE62B9D2A4C18B7002EEEF0 /* VeLivePushBeautyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62B9B2A4C18B7002EEEF0 /* VeLivePushBeautyViewController.m */; };
-		2BE62BA32A4C18D3002EEEF0 /* VeLivePushRTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62BA12A4C18D3002EEEF0 /* VeLivePushRTMViewController.m */; };
-		2BE62BA42A4C18D3002EEEF0 /* VeLivePushRTMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62BA22A4C18D3002EEEF0 /* VeLivePushRTMViewController.xib */; };
 		2BE62BA92A4C18F5002EEEF0 /* VeLivePushCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62BA72A4C18F5002EEEF0 /* VeLivePushCustomViewController.m */; };
 		2BE62BAA2A4C18F5002EEEF0 /* VeLivePushCustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE62BA82A4C18F5002EEEF0 /* VeLivePushCustomViewController.xib */; };
 		2BE62BAF2A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE62BAD2A4C1A5B002EEEF0 /* VeLivePushAutoBitrateViewController.m */; };
@@ -160,9 +158,6 @@
 		2BE62B942A4C1878002EEEF0 /* VeLivePullStreamViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePullStreamViewController.m; sourceTree = "<group>"; };
 		2BE62B9A2A4C18B7002EEEF0 /* VeLivePushBeautyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePushBeautyViewController.h; sourceTree = "<group>"; };
 		2BE62B9B2A4C18B7002EEEF0 /* VeLivePushBeautyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePushBeautyViewController.m; sourceTree = "<group>"; };
-		2BE62BA02A4C18D3002EEEF0 /* VeLivePushRTMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePushRTMViewController.h; sourceTree = "<group>"; };
-		2BE62BA12A4C18D3002EEEF0 /* VeLivePushRTMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePushRTMViewController.m; sourceTree = "<group>"; };
-		2BE62BA22A4C18D3002EEEF0 /* VeLivePushRTMViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLivePushRTMViewController.xib; sourceTree = "<group>"; };
 		2BE62BA62A4C18F5002EEEF0 /* VeLivePushCustomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VeLivePushCustomViewController.h; sourceTree = "<group>"; };
 		2BE62BA72A4C18F5002EEEF0 /* VeLivePushCustomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeLivePushCustomViewController.m; sourceTree = "<group>"; };
 		2BE62BA82A4C18F5002EEEF0 /* VeLivePushCustomViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VeLivePushCustomViewController.xib; sourceTree = "<group>"; };
@@ -467,7 +462,6 @@
 				2B8E23F92B90328200D5C8A0 /* PullRTM */,
 				2BEF7F112A81F20500C5814F /* PictureInPicture */,
 				2BE62B992A4C189E002EEEF0 /* PushBeauty */,
-				2BE62B9F2A4C18BD002EEEF0 /* PushRTM */,
 				2BE62BA52A4C18DA002EEEF0 /* PushCustom */,
 				2BE62BAB2A4C1915002EEEF0 /* PushAutoBitrate */,
 				2BE62BB12A4C1CA4002EEEF0 /* PushH265Codec */,
@@ -483,16 +477,6 @@
 				2BE62C032A4D95B4002EEEF0 /* VeLivePushBeautyViewController.xib */,
 			);
 			path = PushBeauty;
-			sourceTree = "<group>";
-		};
-		2BE62B9F2A4C18BD002EEEF0 /* PushRTM */ = {
-			isa = PBXGroup;
-			children = (
-				2BE62BA02A4C18D3002EEEF0 /* VeLivePushRTMViewController.h */,
-				2BE62BA12A4C18D3002EEEF0 /* VeLivePushRTMViewController.m */,
-				2BE62BA22A4C18D3002EEEF0 /* VeLivePushRTMViewController.xib */,
-			);
-			path = PushRTM;
 			sourceTree = "<group>";
 		};
 		2BE62BA52A4C18DA002EEEF0 /* PushCustom */ = {
@@ -703,7 +687,6 @@
 				2B471D0A2A4AC7A20035AB71 /* Assets.xcassets in Resources */,
 				2BE62C022A4D9406002EEEF0 /* VeLivePullStreamViewController.xib in Resources */,
 				2BE62BAA2A4C18F5002EEEF0 /* VeLivePushCustomViewController.xib in Resources */,
-				2BE62BA42A4C18D3002EEEF0 /* VeLivePushRTMViewController.xib in Resources */,
 				2B162B122A4FD0A2001452BC /* Main.storyboard in Resources */,
 				2BE62BD22A4C1DE1002EEEF0 /* VeLivePKAnchorViewController.xib in Resources */,
 				2BE62B652A4BE59F002EEEF0 /* VeLiveHomeTableHeaderView.xib in Resources */,
@@ -815,7 +798,6 @@
 				2BE62B902A4C1839002EEEF0 /* VeLivePushCameraViewController.m in Sources */,
 				2BE62B9D2A4C18B7002EEEF0 /* VeLivePushBeautyViewController.m in Sources */,
 				2BF32B352CEEEC800039E987 /* VeLiveFileReader.m in Sources */,
-				2BE62BA32A4C18D3002EEEF0 /* VeLivePushRTMViewController.m in Sources */,
 				2B471D102A4AC7A20035AB71 /* main.m in Sources */,
 				2BE62C0A2A4E88F5002EEEF0 /* VeLiveLinkViewController.m in Sources */,
 				2BEF7F152A81F22D00C5814F /* VeLivePictureInPictureViewController.m in Sources */,

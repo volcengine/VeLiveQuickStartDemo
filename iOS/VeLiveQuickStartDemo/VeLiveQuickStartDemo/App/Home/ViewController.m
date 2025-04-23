@@ -57,10 +57,6 @@
                     @"target" : @"VeLivePushBeautyViewController"
                 },
                 @{
-                    @"title" : NSLocalizedString(@"Home_RTM_Push_Streaming", nil),
-                    @"target" : @"VeLivePushRTMViewController"
-                },
-                @{
                     @"title" : NSLocalizedString(@"Home_RTM_Pull_Streaming", nil),
                     @"target" : @"VeLivePullRTMViewController"
                 },

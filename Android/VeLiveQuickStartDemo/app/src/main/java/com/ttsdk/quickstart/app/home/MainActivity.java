@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         list.add(new HomeItem(getResources().getString(R.string.Home_Advanced_Features)));
         String advancedPackage = "com.ttsdk.quickstart.features.advanced.";
         list.add(new HomeItem(getResources().getString(R.string.Home_Live_Beauty_Filter), advancedPackage + "PushBeautyActivity"));
-        list.add(new HomeItem(getResources().getString(R.string.Home_RTM_Push_Streaming), advancedPackage + "PushRTMActivity"));
         list.add(new HomeItem(getResources().getString(R.string.Home_RTM_Pull_Streaming), advancedPackage + "PullRTMActivity"));
         list.add(new HomeItem(getResources().getString(R.string.Home_Custom_Push_Stream), advancedPackage + "PushCustomActivity"));
         list.add(new HomeItem(getResources().getString(R.string.Home_Push_Streaming_Bitrate_Adaptive), advancedPackage + "PushAutoBitrateActivity"));
