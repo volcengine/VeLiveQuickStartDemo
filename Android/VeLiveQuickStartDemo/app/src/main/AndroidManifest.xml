@@ -18,7 +18,10 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-
+    <!--    Android 8.0（API 级别 26）以上需要声明此权限-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!--    Android 12（API 级别 31）以上屏幕采集需要声明此权限-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -75,10 +78,6 @@
             android:name=".features.advanced.PushCustomActivity"
             android:exported="false"
             android:label="@string/Push_Custom" />
-        <activity
-            android:name=".features.advanced.PushRTMActivity"
-            android:exported="false"
-            android:label="@string/Push_RTM" />
         <activity
             android:name=".features.advanced.PushBeautyActivity"
             android:exported="false"

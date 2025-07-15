@@ -6,18 +6,15 @@
  */
 package com.ttsdk.quickstart.features.advanced;
 
-import static com.ss.avframework.live.VeLivePusherDef.VeLiveAudioCaptureType.VeLiveAudioCaptureVoiceCommunication;
+import static com.ss.avframework.live.VeLivePusherDef.VeLiveAudioCaptureType.VeLiveAudioCaptureMicrophone;
 import static com.ss.avframework.live.VeLivePusherDef.VeLiveVideoCaptureType.VeLiveVideoCaptureScreen;
 
 
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.media.projection.MediaProjectionManager;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -44,17 +41,8 @@ public class PushScreenActivity extends AppCompatActivity {
     private EditText mUrlText;
     private TextView mInfoView;
 
-    private Intent mScreenIntent = null;
     public static int REQUEST_CODE_FROM_PROJECTION_SERVICE = 1001;
-    private ServiceConnection mKeepLiveServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            startCapture();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {}
-    };
+    private ServiceConnection mKeepLiveServiceConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +58,9 @@ public class PushScreenActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         //  停止前台服务  
-        unbindService(mKeepLiveServiceConnection);
+        if (mKeepLiveServiceConnection != null) {
+            unbindService(mKeepLiveServiceConnection);
+        }
         //  销毁推流器  
         //  业务处理时，尽量不要放到此处释放，推荐放到退出直播间时释放。  
         mLivePusher.release();
@@ -93,15 +83,21 @@ public class PushScreenActivity extends AppCompatActivity {
     }
 
     private void startCapture() {
-        //  请求 MediaProjection 权限  
-        if (!checkPermission()) {
-            return;
-        }
-        mLivePusher.startScreenRecording(true, mScreenIntent);
-        //  开始视频采集  
-        mLivePusher.startVideoCapture(VeLiveVideoCaptureScreen);
         //  开始音频采集  
-        mLivePusher.startAudioCapture(VeLiveAudioCaptureVoiceCommunication);
+        mLivePusher.startAudioCapture(VeLiveAudioCaptureMicrophone);
+
+        Intent intent = new Intent(this, VeLiveKeepLiveService.class);
+        bindService(intent, mKeepLiveServiceConnection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                //  开始视频采集  
+                mLivePusher.startVideoCapture(VeLiveVideoCaptureScreen);
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName componentName) {
+            }
+        }, BIND_AUTO_CREATE);
     }
 
     public void pushControl(View view) {
@@ -146,6 +142,14 @@ public class PushScreenActivity extends AppCompatActivity {
         public void onStatusChange(VeLivePusherDef.VeLivePusherStatus status) {
             Log.d(TAG, "Status" + status);
         }
+
+        @Override
+        public void onScreenRecording(boolean open) {
+            if (open) {
+                //  开始系统音频混流  
+                mLivePusher.startMixSystemAudio();
+            }
+        }
     };
 
     private VeLivePusherDef.VeLivePusherStatisticsObserver statisticsObserver = new VeLivePusherDef.VeLivePusherStatisticsObserver() {
@@ -154,33 +158,4 @@ public class PushScreenActivity extends AppCompatActivity {
             runOnUiThread(() -> mInfoView.setText(VeLiveSDKHelper.getPushInfoString(statistics)));
         }
     };
-
-    private boolean checkPermission() {
-        if (mScreenIntent == null) {
-            if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.LOLLIPOP) {
-                MediaProjectionManager mgr = (MediaProjectionManager) getApplicationContext().getSystemService(Context.MEDIA_PROJECTION_SERVICE);
-                if (mgr != null) {
-                    Intent intent = mgr.createScreenCaptureIntent();
-                    startActivityForResult(intent, REQUEST_CODE_FROM_PROJECTION_SERVICE);
-                }
-            }
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_FROM_PROJECTION_SERVICE) {
-            mScreenIntent = data;
-            //  使用 MediaProjection 时，需要同时启动一个前台服务  
-            startKeepLive();
-        }
-    }
-
-    private void startKeepLive() {
-        Intent intent = new Intent(this, VeLiveKeepLiveService.class);
-        bindService(intent, mKeepLiveServiceConnection, BIND_AUTO_CREATE);
-    }
 }

@@ -21,19 +21,14 @@ import android.util.Log;
 import com.ttsdk.quickstart.R;
 
 public class VeLiveKeepLiveService extends Service {
-    public class Binder extends android.os.Binder {
-        public VeLiveKeepLiveService getService() {
-            return VeLiveKeepLiveService.this;
-        }
-    }
     private Binder mBinder = new Binder();
+    private static final String NOTIFICATION_ID   = "VeLive_NotificationId";
+    private static final String NOTIFICATION_NAME = "VeLive_NotificationName";
+    private static final String TAG = VeLiveKeepLiveService.class.getSimpleName();
 
     public VeLiveKeepLiveService() {
     }
-    private NotificationManager notificationManager;
-    private String notificationId   = "keep_app_live";
-    private String notificationName = "Running In Background";
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     @Override
     public IBinder onBind(Intent intent) {
         return mBinder;
@@ -42,52 +37,30 @@ public class VeLiveKeepLiveService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d("TAG", "===MyService  onCreate()");
-        notificationName = getResources().getString(R.string.pip_running_in_background);
-        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        // 创建NotificationChannel 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(notificationId, notificationName, NotificationManager.IMPORTANCE_HIGH);
-            // 不震动 
-            channel.enableVibration(false);
-            // 静音 
-            channel.setSound(null, null);
-            notificationManager.createNotificationChannel(channel);
-        }
-        startForeground(1, getNotification());
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
+        startForeground(0x01, getNotification());
     }
 
     private Notification getNotification() {
-        Notification.Builder builder = new Notification.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher_round)
-                .setContentTitle("TTSDK")
-                .setContentIntent(getIntent())
-                .setContentText(getResources().getString(R.string.pip_running_in_background));
+        Notification.Builder builder = new Notification.Builder(this).setDefaults(1);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            builder.setChannelId(notificationId);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationChannel channel = new NotificationChannel(NOTIFICATION_ID, NOTIFICATION_NAME, NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(channel);
+
+            builder.setChannelId(NOTIFICATION_ID);
         }
         return builder.build();
     }
 
-    private PendingIntent getIntent() {
-        Intent msgIntent = getApplicationContext().getPackageManager().getLaunchIntentForPackage(getPackageName());// 获取启动Activity 
-        return PendingIntent.getActivity(
-                getApplicationContext(),
-                1,
-                msgIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-    }
-
     @Override
     public void onDestroy() {
-        Log.d("TAG", "===MyService  onDestroy()");
-        stopForeground(true);//  停止前台服务--参数：表示是否移除之前的通知  
+        stopForeground(true);
         super.onDestroy();
+    }
 
+    public class Binder extends android.os.Binder {
+        public VeLiveKeepLiveService getService() {
+            return VeLiveKeepLiveService.this;
+        }
     }
 }
