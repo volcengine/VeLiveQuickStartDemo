@@ -147,7 +147,6 @@
     
     //  加入房间，开始连麦  
     ByteRTCRoomConfig *config = [ByteRTCRoomConfig new];
-    config.isAutoPublish = YES;
     config.isAutoSubscribeAudio = YES;
     config.isAutoSubscribeVideo = YES;
     
@@ -247,21 +246,30 @@
     });
 }
 
-- (void)rtcRoom:(ByteRTCRoom *)rtcRoom onUserPublishStream:(NSString *)userId type:(ByteRTCMediaStreamType)type {
+- (void)rtcRoom:(ByteRTCRoom *)rtcRoom onUserPublishStreamAudio:(NSString *)roomId uid:(NSString *)uid isPublish:(BOOL)isPublish {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.delegate && [self.delegate respondsToSelector:@selector(manager:onUserPublishStream:type:)]) {
-            [self.delegate manager:self onUserPublishStream:userId type:type];
+            if (isPublish) {
+                [self.delegate manager:self onUserPublishStream:uid type:ByteRTCMediaStreamTypeAudio];
+            } else {
+                [self.delegate manager:self onUserUnPublishStream:uid type:ByteRTCMediaStreamTypeAudio reason:(ByteRTCStreamRemoveReasonUnpublish)];
+            }
         }
     });
 }
 
-- (void)rtcRoom:(ByteRTCRoom *)rtcRoom onUserUnpublishStream:(NSString * _Nonnull)userId type:(ByteRTCMediaStreamType)type reason:(ByteRTCStreamRemoveReason)reason {
+- (void)rtcRoom:(ByteRTCRoom *)rtcRoom onUserPublishStreamVideo:(NSString *)roomId uid:(NSString *)uid isPublish:(BOOL)isPublish {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.delegate && [self.delegate respondsToSelector:@selector(manager:onUserUnPublishStream:type:reason:)]) {
-            [self.delegate manager:self onUserUnPublishStream:userId type:type reason:reason];
+            if (isPublish) {
+                [self.delegate manager:self onUserPublishStream:uid type:ByteRTCMediaStreamTypeVideo];
+            } else {
+                [self.delegate manager:self onUserUnPublishStream:uid type:ByteRTCMediaStreamTypeVideo reason:(ByteRTCStreamRemoveReasonUnpublish)];
+            }
         }
     });
 }
+
 
 // MARK: - Private
 - (void)createRTCVideoIfNeed {

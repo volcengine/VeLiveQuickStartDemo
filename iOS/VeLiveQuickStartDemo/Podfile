@@ -16,12 +16,12 @@ velive_enable_extension("#{Pathname.new(__FILE__).dirname}/XCConfig")
 
 target 'VeLiveQuickStartDemo' do
   # 集成推拉流功能 
-  pod 'TTSDKFramework', '1.46.2.13-premium', :subspecs => %w[LivePull-RTS LivePush-RTS RTCSDK]
-  pod 'TTSDKFramework/ScreenCaptureExtension', '1.46.2.13-premium' if velive_screen_capture_enable?
+  pod 'TTSDKFramework', '1.46.3.10-premium', :subspecs => %w[LivePull-RTS LivePush-RTS RTCSDK]
+  pod 'TTSDKFramework/ScreenCaptureExtension', '1.46.3.10-premium' if velive_screen_capture_enable?
 end
 
 target 'VeLiveQuickStartSCExtension' do
-  pod 'TTSDKFramework/ScreenCaptureExtension', '1.46.2.13-premium'
+  pod 'TTSDKFramework/ScreenCaptureExtension', '1.46.3.10-premium'
 end if velive_screen_capture_enable?
 
 post_install do |installer|
