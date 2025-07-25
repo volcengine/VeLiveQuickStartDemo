@@ -8,6 +8,9 @@ package com.ttsdk.quickstart.features.interact.manager;
 
 
 import static com.ss.bytertc.engine.VideoCanvas.RENDER_MODE_HIDDEN;
+import static com.ss.bytertc.engine.type.MediaStreamType.RTC_MEDIA_STREAM_TYPE_AUDIO;
+import static com.ss.bytertc.engine.type.MediaStreamType.RTC_MEDIA_STREAM_TYPE_VIDEO;
+import static com.ss.bytertc.engine.type.StreamRemoveReason.STREAM_REMOVE_REASON_UNPUBLISH;
 import static com.ss.videoarch.liveplayer.VeLivePlayerDef.VeLivePlayerFillMode.VeLivePlayerFillModeAspectFill;
 import static com.ss.videoarch.liveplayer.VeLivePlayerDef.VeLivePlayerStatus.VeLivePlayerStatusError;
 import static com.ss.videoarch.liveplayer.VeLivePlayerDef.VeLivePlayerStatus.VeLivePlayerStatusPaused;
@@ -322,13 +325,21 @@ public class VeLiveAudienceManager {
         }
 
         @Override
-        public void onUserPublishStream(String uid, MediaStreamType type) {
-            mRoomListener.onUserPublishStream(uid, type);
+        public void onUserPublishStreamVideo(String roomId, String uid, boolean isPublish) {
+            if (isPublish) {
+                mRoomListener.onUserPublishStream(uid, RTC_MEDIA_STREAM_TYPE_VIDEO);
+            } else {
+                mRoomListener.onUserUnPublishStream(uid, RTC_MEDIA_STREAM_TYPE_VIDEO, STREAM_REMOVE_REASON_UNPUBLISH);
+            }
         }
 
         @Override
-        public void onUserUnpublishStream(String uid, MediaStreamType type, StreamRemoveReason reason) {
-            mRoomListener.onUserUnPublishStream(uid, type, reason);
+        public void onUserPublishStreamAudio(String roomId, String uid, boolean isPublish) {
+            if (isPublish) {
+                mRoomListener.onUserPublishStream(uid, RTC_MEDIA_STREAM_TYPE_AUDIO);
+            } else {
+                mRoomListener.onUserUnPublishStream(uid, RTC_MEDIA_STREAM_TYPE_AUDIO, STREAM_REMOVE_REASON_UNPUBLISH);
+            }
         }
     };
 
@@ -344,7 +355,7 @@ public class VeLiveAudienceManager {
         mRoomId = roomId;
         UserInfo userInfo = new UserInfo(userId, null);
         RTCRoomConfig roomConfig = new RTCRoomConfig(ChannelProfile.CHANNEL_PROFILE_COMMUNICATION,
-                true, true, true);
+                true, true, true, true);
         mRTCRoom.joinRoom(token, userInfo, roomConfig);
     }
 
