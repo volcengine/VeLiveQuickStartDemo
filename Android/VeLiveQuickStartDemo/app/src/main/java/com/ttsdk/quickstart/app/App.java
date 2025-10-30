@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
-import com.bytedance.ttnet.TTNetInit;
 import com.ttsdk.quickstart.helper.VeLiveSDKHelper;
 
 public class App extends MultiDexApplication implements Thread.UncaughtExceptionHandler {
@@ -26,7 +25,6 @@ public class App extends MultiDexApplication implements Thread.UncaughtException
     @Override
     public void onCreate() {
         super.onCreate();
-        TTNetInit.tryInitBizTTNet(App.sAppContext, this);
         VeLiveSDKHelper.initTTSDK(App.sAppContext);
     }
 

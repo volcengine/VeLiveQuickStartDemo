@@ -34,7 +34,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.ss.videoarch.liveplayer.VeLivePayerAudioLoudnessInfo;
-import com.ss.videoarch.liveplayer.VeLivePayerAudioVolume;
+import com.ss.videoarch.liveplayer.VeLivePlayerAudioVolume;
 import com.ss.videoarch.liveplayer.VeLivePlayer;
 import com.ss.videoarch.liveplayer.VeLivePlayerAudioFrame;
 import com.ss.videoarch.liveplayer.VeLivePlayerConfiguration;
@@ -365,7 +365,7 @@ public class PictureInPictureActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onAudioVolume(VeLivePlayer veLivePlayer, VeLivePayerAudioVolume veLivePayerAudioVolume) {
+        public void onAudioVolume(VeLivePlayer veLivePlayer, VeLivePlayerAudioVolume veLivePayerAudioVolume) {
 
         }
 

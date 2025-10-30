@@ -1,0 +1,20 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFFFF"
+    },
+    {
+      "name": "view_background",
+      "value": "#FFEBEBEB"
+    },
+    {
+      "name": "white_color",
+      "value": "#FFFFFFFF"
+    },
+    {
+      "name": "input_background",
+      "value": "#FF3F3F3F"
+    }
+  ]
+}

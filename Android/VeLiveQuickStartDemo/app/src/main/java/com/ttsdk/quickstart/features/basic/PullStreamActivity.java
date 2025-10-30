@@ -25,7 +25,7 @@ import android.widget.ToggleButton;
 
 
 import com.ss.videoarch.liveplayer.VeLivePayerAudioLoudnessInfo;
-import com.ss.videoarch.liveplayer.VeLivePayerAudioVolume;
+import com.ss.videoarch.liveplayer.VeLivePlayerAudioVolume;
 import com.ttsdk.quickstart.R;
 import com.ttsdk.quickstart.helper.VeLiveSDKHelper;
 import com.ss.videoarch.liveplayer.VeLivePlayer;
@@ -302,7 +302,7 @@ public class PullStreamActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onAudioVolume(VeLivePlayer veLivePlayer, VeLivePayerAudioVolume veLivePayerAudioVolume) {
+        public void onAudioVolume(VeLivePlayer veLivePlayer, VeLivePlayerAudioVolume veLivePayerAudioVolume) {
 
         }
 

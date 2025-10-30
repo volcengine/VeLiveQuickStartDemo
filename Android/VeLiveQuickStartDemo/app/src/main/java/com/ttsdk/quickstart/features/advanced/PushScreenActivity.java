@@ -7,24 +7,23 @@
 package com.ttsdk.quickstart.features.advanced;
 
 import static com.ss.avframework.live.VeLivePusherDef.VeLiveAudioCaptureType.VeLiveAudioCaptureMicrophone;
+import static com.ss.avframework.live.VeLivePusherDef.VeLivePusherErrorCode.VeLivePusherScreenCaptureInterruptedError;
+import static com.ss.avframework.live.VeLivePusherDef.VeLivePusherErrorCode.VeLivePusherScreenCaptureNotSupportError;
+import static com.ss.avframework.live.VeLivePusherDef.VeLivePusherErrorCode.VeLivePusherScreenCaptureStartError;
 import static com.ss.avframework.live.VeLivePusherDef.VeLiveVideoCaptureType.VeLiveVideoCaptureScreen;
 
 
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.ttsdk.quickstart.R;
-import com.ttsdk.quickstart.helper.VeLiveKeepLiveService;
 import com.ttsdk.quickstart.helper.VeLiveSDKHelper;
 import com.ss.avframework.live.VeLivePusher;
 import com.ss.avframework.live.VeLivePusherConfiguration;
@@ -41,9 +40,6 @@ public class PushScreenActivity extends AppCompatActivity {
     private EditText mUrlText;
     private TextView mInfoView;
 
-    public static int REQUEST_CODE_FROM_PROJECTION_SERVICE = 1001;
-    private ServiceConnection mKeepLiveServiceConnection;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +53,6 @@ public class PushScreenActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //  停止前台服务  
-        if (mKeepLiveServiceConnection != null) {
-            unbindService(mKeepLiveServiceConnection);
-        }
         //  销毁推流器  
         //  业务处理时，尽量不要放到此处释放，推荐放到退出直播间时释放。  
         mLivePusher.release();
@@ -85,19 +77,8 @@ public class PushScreenActivity extends AppCompatActivity {
     private void startCapture() {
         //  开始音频采集  
         mLivePusher.startAudioCapture(VeLiveAudioCaptureMicrophone);
-
-        Intent intent = new Intent(this, VeLiveKeepLiveService.class);
-        bindService(intent, mKeepLiveServiceConnection = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                //  开始视频采集  
-                mLivePusher.startVideoCapture(VeLiveVideoCaptureScreen);
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName componentName) {
-            }
-        }, BIND_AUTO_CREATE);
+        //  开始视频采集  
+        mLivePusher.startVideoCapture(VeLiveVideoCaptureScreen);
     }
 
     public void pushControl(View view) {
@@ -132,10 +113,17 @@ public class PushScreenActivity extends AppCompatActivity {
         }
     }
 
-    private VeLivePusherObserver pusherObserver = new VeLivePusherObserver() {
+    private final VeLivePusherObserver pusherObserver = new VeLivePusherObserver() {
         @Override
         public void onError(int code, int subCode, String msg) {
             Log.d(TAG, "Error" + code + subCode + msg);
+            if (code == VeLivePusherScreenCaptureNotSupportError.value()) {
+                Toast.makeText(PushScreenActivity.this, R.string.Screen_Capture_Not_Support_Error, Toast.LENGTH_SHORT).show();
+            } else if (code == VeLivePusherScreenCaptureStartError.value()) {
+                Toast.makeText(PushScreenActivity.this, R.string.Screen_Capture_Start_Error, Toast.LENGTH_SHORT).show();
+            } else if (code == VeLivePusherScreenCaptureInterruptedError.value()) {
+                Toast.makeText(PushScreenActivity.this, R.string.Screen_Capture_Interrupted_Error, Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
@@ -148,6 +136,8 @@ public class PushScreenActivity extends AppCompatActivity {
             if (open) {
                 //  开始系统音频混流  
                 mLivePusher.startMixSystemAudio();
+            } else {
+                mLivePusher.stopMixSystemAudio();
             }
         }
     };

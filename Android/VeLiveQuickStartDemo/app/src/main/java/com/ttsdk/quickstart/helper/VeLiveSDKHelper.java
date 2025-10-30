@@ -24,7 +24,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
-import com.bytedance.ttnet.TTNetInit;
 import com.pandora.common.env.Env;
 import com.pandora.common.env.config.Config;
 import com.pandora.common.env.config.LogConfig;

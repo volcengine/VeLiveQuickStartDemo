@@ -310,7 +310,7 @@ public class VeLiveAnchorManager {
         //  推流配置  
         VeLivePusherConfiguration config = new VeLivePusherConfiguration();
         //  配置上下文  
-        config.setContext(Env.getApplicationContext());
+        config.setContext(Env.getConfig().getApplicationContext());
         //  失败重连次数  
         config.setReconnectCount(10);
         //  创建推流器  
@@ -455,7 +455,7 @@ public class VeLiveAnchorManager {
     };
 
     private void initRtcEngine() {
-        mRTCVideo = RTCVideo.createRTCVideo(Env.getApplicationContext(), mAppId, mRTCVideoEventHandler, null, null);
+        mRTCVideo = RTCVideo.createRTCVideo(Env.getConfig().getApplicationContext(), mAppId, mRTCVideoEventHandler, null, null);
         mRTCVideo.setLocalVideoMirrorType(MirrorType.MIRROR_TYPE_RENDER_AND_ENCODER);
     }
 

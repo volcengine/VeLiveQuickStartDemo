@@ -24,7 +24,7 @@ public class VeLiveEffectHelper {
      * 获取证书文件路径
      */
     public static String getLicensePath(String name) {
-        return Env.getApplicationContext().getExternalFilesDir("assets").getAbsolutePath()
+        return Env.getConfig().getApplicationContext().getExternalFilesDir("assets").getAbsolutePath()
                 + "/resource/LicenseBag.bundle/" + name;
     }
 
@@ -32,7 +32,7 @@ public class VeLiveEffectHelper {
      * 获取模型文件路径
      */
     public static String getModelPath() {
-        return Env.getApplicationContext().getExternalFilesDir("assets").getAbsolutePath()
+        return Env.getConfig().getApplicationContext().getExternalFilesDir("assets").getAbsolutePath()
                 + "/resource/ModelResource.bundle";
     }
 
@@ -40,7 +40,7 @@ public class VeLiveEffectHelper {
      * 获取美颜文件路径
      */
     public static String getBeautyPathByName(String subPath) {
-        return Env.getApplicationContext().getExternalFilesDir("assets").getAbsolutePath()
+        return Env.getConfig().getApplicationContext().getExternalFilesDir("assets").getAbsolutePath()
                 + "/resource/ComposeMakeup.bundle/ComposeMakeup/" + subPath;
     }
 
@@ -49,7 +49,7 @@ public class VeLiveEffectHelper {
      * @param name 贴纸文件名称
      */
     public static String getStickerPathByName(String name) {
-        return Env.getApplicationContext().getExternalFilesDir("assets").getAbsolutePath()
+        return Env.getConfig().getApplicationContext().getExternalFilesDir("assets").getAbsolutePath()
                 + "/resource/StickerResource.bundle/stickers/" + name;
     }
 
@@ -58,7 +58,7 @@ public class VeLiveEffectHelper {
      * @param name 滤镜文件名称
      */
     public static String getFilterPathByName(String name) {
-        return Env.getApplicationContext().getExternalFilesDir("assets").getAbsolutePath()
+        return Env.getConfig().getApplicationContext().getExternalFilesDir("assets").getAbsolutePath()
                 + "/resource/FilterResource.bundle/Filter/" + name;
     }
 
@@ -67,7 +67,7 @@ public class VeLiveEffectHelper {
      * 将安装包内的资源文件拷贝到外部存储上
      */
     public static void initVideoEffectResource() {
-        Context context = Env.getApplicationContext();
+        Context context = Env.getConfig().getApplicationContext();
         File versionFile = new File(getExternalResourcePath(), "version");
         if (versionFile.exists()) {
             String oldVer = readVersion(versionFile.getAbsolutePath());
@@ -150,7 +150,7 @@ public class VeLiveEffectHelper {
     }
 
     public static String getExternalResourcePath() {
-        return Env.getApplicationContext().getExternalFilesDir("assets").getAbsolutePath() + "/resource/";
+        return Env.getConfig().getApplicationContext().getExternalFilesDir("assets").getAbsolutePath() + "/resource/";
     }
 
     public static boolean copyAssetFolder(Context context, String srcName, String dstName) {

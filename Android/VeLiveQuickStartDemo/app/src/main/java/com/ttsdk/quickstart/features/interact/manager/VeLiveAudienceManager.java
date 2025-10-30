@@ -43,7 +43,7 @@ import com.ss.bytertc.engine.type.RTCRoomStats;
 import com.ss.bytertc.engine.type.StreamRemoveReason;
 import com.ss.bytertc.engine.video.VideoCaptureConfig;
 import com.ss.videoarch.liveplayer.VeLivePayerAudioLoudnessInfo;
-import com.ss.videoarch.liveplayer.VeLivePayerAudioVolume;
+import com.ss.videoarch.liveplayer.VeLivePlayerAudioVolume;
 import com.ss.videoarch.liveplayer.VeLivePlayer;
 import com.ss.videoarch.liveplayer.VeLivePlayerAudioFrame;
 import com.ss.videoarch.liveplayer.VeLivePlayerConfiguration;
@@ -235,7 +235,7 @@ public class VeLiveAudienceManager {
 
     private void initLivePlayer() {
         //  创建播放器  
-        mLivePlayer = new VideoLiveManager(Env.getApplicationContext());
+        mLivePlayer = new VideoLiveManager(Env.getConfig().getApplicationContext());
 
         //  设置播放器回调  
         mLivePlayer.setObserver(mLivePlayerObserver);
@@ -282,7 +282,7 @@ public class VeLiveAudienceManager {
     };
 
     private void initRtcEngine() {
-        mRTCVideo = RTCVideo.createRTCVideo(Env.getApplicationContext(), mAppId, mRTCVideoEventHandler, null, null);
+        mRTCVideo = RTCVideo.createRTCVideo(Env.getConfig().getApplicationContext(), mAppId, mRTCVideoEventHandler, null, null);
         mRTCVideo.setLocalVideoMirrorType(MirrorType.MIRROR_TYPE_RENDER_AND_ENCODER);
         VideoCaptureConfig captureConfig = new VideoCaptureConfig();
         captureConfig.width = mConfig.mVideoCaptureWidth;
@@ -525,7 +525,7 @@ public class VeLiveAudienceManager {
         }
 
         @Override
-        public void onAudioVolume(VeLivePlayer veLivePlayer, VeLivePayerAudioVolume veLivePayerAudioVolume) {
+        public void onAudioVolume(VeLivePlayer veLivePlayer, VeLivePlayerAudioVolume veLivePayerAudioVolume) {
 
         }
 

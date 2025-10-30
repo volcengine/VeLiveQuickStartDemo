@@ -1,0 +1,14 @@
+{
+  "routerMap": [
+    {
+      "name" : "pull/basic/stream",
+      "pageSourceFile": "src/main/ets/features/basic/pullstream/VeLivePullStream.ets",
+      "buildFunction": "VeLivePullStreamBuilder"
+    },
+    {
+      "name" : "pull/advance/pip",
+      "pageSourceFile": "src/main/ets/features/advanced/pictureinpicture/VeLivePullPictureInPicture.ets",
+      "buildFunction": "VeLivePullPictureInPictureBuilder"
+    }
+  ]
+}

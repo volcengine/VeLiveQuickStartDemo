@@ -110,4 +110,7 @@
     <string name="pip_not_support">不支持画中画</string>
     <string name="config_stream_name_tip">请配置流名</string>
     <string name="preparing">准备中...</string>
+    <string name="Screen_Capture_Interrupted_Error">屏幕采集被中断</string>
+    <string name="Screen_Capture_Not_Support_Error">不支持屏幕采集</string>
+    <string name="Screen_Capture_Start_Error">屏幕采集启动失败</string>
 </resources>

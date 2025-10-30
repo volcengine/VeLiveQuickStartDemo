@@ -1,0 +1,184 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "VeLiveQuickStartDemo"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "VeLiveQuickStartDemo"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "VeLiveQuickStartDemo"
+    },
+    {
+      "name": "home_title",
+      "value": "视频直播"
+    },
+    {
+      "name": "home_item_pull_title",
+      "value": "直播拉流"
+    },
+    {
+      "name": "home_des",
+      "value": "低延迟、高画质、更流畅的直播服务"
+    },
+    {
+      "name": "use_net_permission",
+      "value": "允许使用手机网络"
+    },
+    {
+      "name": "get_net_info_permission",
+      "value": "允许获取手机网络信息"
+    },
+    {
+      "name": "audio_setting_permission",
+      "value": "允许修改音频路由"
+    },
+    {
+      "name": "vibrate_permission",
+      "value": "允许震动反馈"
+    },
+    {
+      "name": "camera_permission",
+      "value": "允许应用使用相机扫码"
+    },
+    {
+      "name": "location_permission",
+      "value": "允许应用获取设备位置信息"
+    },
+    {
+      "name": "background_permission",
+      "value": "允许应用在后台运行时播放音频"
+    },
+    {
+      "name": "read_permission",
+      "value": "允许应用读取用户外部存储中的媒体文件信息"
+    },
+    {
+      "name": "write_permission",
+      "value": "允许应用读写用户外部存储中的媒体文件信息"
+    },
+    {
+      "name": "media_location_permission",
+      "value": "允许应用访问用户媒体文件中的地理位置信息"
+    },
+    {
+      "name": "home_basic_features",
+      "value": "基础功能"
+    },
+    {
+      "name": "home_advanced_features",
+      "value": "高级功能"
+    },
+    {
+      "name": "home_live_pull_streaming",
+      "value": "直播拉流"
+    },
+    {
+      "name": "home_picture_in_picture",
+      "value": "画中画"
+    },
+    {
+      "name": "stream_name",
+      "value": "流名"
+    },
+    {
+      "name": "input_stream_name_placeholder",
+      "value": "请输入流名"
+    },
+    {
+      "name": "start_play",
+      "value": "开始播放"
+    },
+    {
+      "name": "stop_play",
+      "value": "停止播放"
+    },
+    {
+      "name": "mute",
+      "value": "静音"
+    },
+    {
+      "name": "un_mute",
+      "value": "取消静音"
+    },
+    {
+      "name": "play_fill_mode",
+      "value": "填充模式"
+    },
+    {
+      "name": "fill_mode_aspect_fill",
+      "value": "裁剪"
+    },
+    {
+      "name": "fill_mode_aspect_fit",
+      "value": "黑边"
+    },
+    {
+      "name": "fill_mode_full_fill",
+      "value": "缩放"
+    },
+    {
+      "name": "generated_pull_url",
+      "value": "正在生成拉流地址…"
+    },
+    {
+      "name": "pull_info_url",
+      "value": "播放地址"
+    },
+    {
+      "name": "pull_info_video_size",
+      "value": "视频大小"
+    },
+    {
+      "name": "pull_info_video_fps",
+      "value": "视频帧率"
+    },
+    {
+      "name": "pull_info_video_bitrate",
+      "value": "视频码率"
+    },
+    {
+      "name": "pull_info_video_buffer_time",
+      "value": "视频缓存时长"
+    },
+    {
+      "name": "pull_info_audio_buffer_time",
+      "value": "音频缓存时长"
+    },
+    {
+      "name": "pull_info_stream_format",
+      "value": "直播流格式"
+    },
+    {
+      "name": "pull_info_stream_protocol",
+      "value": "直播流协议"
+    },
+    {
+      "name": "pull_info_video_codec",
+      "value": "视频编码格式"
+    },
+    {
+      "name": "pull_info_delay_time",
+      "value": "端到端延时"
+    },
+    {
+      "name": "pull_info_stall_time",
+      "value": "总卡顿时长"
+    },
+    {
+      "name": "pull_info_is_hardware",
+      "value": "是否硬件解码"
+    },
+    {
+      "name": "pull_start_pip",
+      "value": "开启画中画"
+    },
+    {
+      "name": "pull_stop_pip",
+      "value": "停止画中画"
+    }
+  ]
+}
