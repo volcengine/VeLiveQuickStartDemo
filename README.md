@@ -38,3 +38,7 @@
 
 ### 许可证
 VeLiveQuickStartDemo 使用 [MIT 许可证](LICENSE)
+
+## Security and privacy
+This project takes security seriously. 
+For vulnerability reporting and supported versions, see [SECURITY.md](SECURITY.md)
