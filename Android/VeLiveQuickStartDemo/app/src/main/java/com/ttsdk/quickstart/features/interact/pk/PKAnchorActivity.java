@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.ss.bytertc.engine.live.MixedStreamConfig;
 import com.ss.bytertc.engine.video.IVideoEffect;

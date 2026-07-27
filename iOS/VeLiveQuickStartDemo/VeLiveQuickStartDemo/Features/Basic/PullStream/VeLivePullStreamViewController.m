@@ -48,7 +48,7 @@
 
 - (void)setupLivePlayer {
     //  创建直播播放器  
-    self.livePlayer = [[TVLManager alloc] initWithOwnPlayer:YES];
+    self.livePlayer = [[TVLManager alloc] init];
     
     //  设置播放器回调  
     [self.livePlayer setObserver:self];

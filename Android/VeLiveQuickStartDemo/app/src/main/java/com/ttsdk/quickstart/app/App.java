@@ -7,9 +7,9 @@
 package com.ttsdk.quickstart.app;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
+import androidx.annotation.NonNull;
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 
 import com.ttsdk.quickstart.helper.VeLiveSDKHelper;
 

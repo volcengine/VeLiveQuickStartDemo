@@ -43,6 +43,9 @@
             android:name=".features.advanced.PictureInPictureActivity"
             android:exported="false" />
         <activity
+            android:name=".features.advanced.pullsmallwindow.FloatingWindowActivity"
+            android:exported="false" />
+        <activity
             android:name=".features.interact.pk.PKAnchorActivity"
             android:exported="false"
             android:label="@string/Interact_PK" />
@@ -106,6 +109,8 @@
         </activity>
 
         <service android:name=".features.advanced.pip.FloatingVideoService" />
+        <service android:name=".solution.FloatingWindow.FloatingWindowService" />
+        <activity android:name=".solution.FloatingWindow.FloatingWindowHelper$AssistantActivity" />
         <service
             android:name="com.ss.avframework.live.capture.video.VeLiveScreenRecorder$ForegroundService"
             android:foregroundServiceType="mediaProjection"

@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.ttsdk.quickstart.R;
 import com.ttsdk.quickstart.helper.VeLiveSDKHelper;

@@ -1,2 +1,5 @@
 include ':app'
 rootProject.name = "VeLiveQuickStartDemo"
+
+include ':vepicutureinpicture:live'
+include ':vepicutureinpicture:base'

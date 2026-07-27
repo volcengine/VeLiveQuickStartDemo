@@ -8,7 +8,7 @@ package com.ttsdk.quickstart.features.interact.link;
 
 import static com.ss.bytertc.engine.type.MediaStreamType.RTC_MEDIA_STREAM_TYPE_AUDIO;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.PixelFormat;
 import android.os.Bundle;

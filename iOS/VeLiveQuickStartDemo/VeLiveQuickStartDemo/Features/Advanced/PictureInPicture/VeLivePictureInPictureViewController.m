@@ -13,6 +13,9 @@
 
 #import "VeLivePictureInPictureViewController.h"
 #import "VeLiveSDKHelper.h"
+#if __has_include("VeLivePlayer+PictureInPicture.h")
+#import "VeLivePlayer+PictureInPicture.h"
+#endif
 #import <UIKit/UIKit.h>
 #import <AVKit/AVKit.h>
 @interface VeLivePictureInPictureViewController ()<
@@ -51,7 +54,7 @@ AVPictureInPictureSampleBufferPlaybackDelegate>
 
 - (void)setupLivePlayer {
     //  创建直播播放器  
-    self.livePlayer = [[TVLManager alloc] initWithOwnPlayer:YES];
+    self.livePlayer = [[TVLManager alloc] init];
     
     //  设置播放器回调  
     [self.livePlayer setObserver:self];
@@ -80,24 +83,7 @@ AVPictureInPictureSampleBufferPlaybackDelegate>
     
     
     //  准备画中画  
-    [self setupPictureInPicture];
-}
-
-- (void)setupPictureInPicture {
-    if (@available(iOS 15.0, *)) {
-        if ([AVPictureInPictureController isPictureInPictureSupported]) {
-            [self setupSampleBufferDisplayLayer];
-            [self.view.layer insertSublayer:self.sampleBufferDisplayLayer atIndex:0];
-            AVPictureInPictureControllerContentSource *contentSource = [[AVPictureInPictureControllerContentSource alloc]
-                                                                        initWithSampleBufferDisplayLayer:self.sampleBufferDisplayLayer
-                                                                        playbackDelegate:self];
-            self.pipController = [[AVPictureInPictureController alloc] initWithContentSource:contentSource];
-            self.pipController.delegate = self;
-            self.pipController.canStartPictureInPictureAutomaticallyFromInline = YES;
-        } else {
-            NSLog(@"pip only support iOS 15.0");
-        }
-    }
+    self.livePlayer.enablePictureInPicture = YES;
 }
 
 - (IBAction)playControl:(UIButton *)sender {
@@ -134,152 +120,17 @@ AVPictureInPictureSampleBufferPlaybackDelegate>
 - (IBAction)pictureInPictureControl:(UIButton *)sender {
     if (@available(iOS 15.0, *)) {
         if (sender.isSelected) {
-            if (self.pipController.isPictureInPictureActive) {
-                [self.pipController stopPictureInPicture];
-            }
+            [self.livePlayer stopPictureInPicture];
         } else {
-            if (self.pipController.isPictureInPicturePossible) {
-                [self.pipController startPictureInPicture];
-            }
+            [self.livePlayer startPictureInPicture];
         }
         sender.selected = !sender.isSelected;
-    }
-}
-
-- (void)enqueuePixelBuffer:(CVPixelBufferRef)pixelBuffer {
-    if (!pixelBuffer) {
-        return;
-    }
-    CMSampleTimingInfo timing = {kCMTimeInvalid, kCMTimeInvalid, kCMTimeInvalid};
-    CMVideoFormatDescriptionRef videoInfo = NULL;
-    OSStatus result = CMVideoFormatDescriptionCreateForImageBuffer(NULL, pixelBuffer, &videoInfo);
-    NSParameterAssert(result == 0 && videoInfo != NULL);
-    
-    CMSampleBufferRef sampleBuffer = NULL;
-    result = CMSampleBufferCreateForImageBuffer(kCFAllocatorDefault,pixelBuffer, true, NULL, NULL, videoInfo, &timing, &sampleBuffer);
-    NSParameterAssert(result == 0 && sampleBuffer != NULL);
-    CFRelease(videoInfo);
-    CFArrayRef attachments = CMSampleBufferGetSampleAttachmentsArray(sampleBuffer, YES);
-    CFMutableDictionaryRef dict = (CFMutableDictionaryRef)CFArrayGetValueAtIndex(attachments, 0);
-    CFDictionarySetValue(dict, kCMSampleAttachmentKey_DisplayImmediately, kCFBooleanTrue);
-    [self enqueueSampleBuffer:sampleBuffer];
-    CFRelease(sampleBuffer);
-}
-
-- (void)enqueueSampleBuffer:(CMSampleBufferRef)sampleBuffer {
-    if (sampleBuffer) {
-        CFRetain(sampleBuffer);
-        [self.sampleBufferDisplayLayer enqueueSampleBuffer:sampleBuffer];
-        CFRelease(sampleBuffer);
-        if (self.sampleBufferDisplayLayer.status == AVQueuedSampleBufferRenderingStatusFailed) {
-            [self.sampleBufferDisplayLayer flush];
-            if (-11847 == self.sampleBufferDisplayLayer.error.code) {
-                [self rebuildSampleBufferDisplayLayer];
-            }
-        }
-    }
-}
-
-- (void)rebuildSampleBufferDisplayLayer {
-    @synchronized(self) {
-        [self teardownSampleBufferDisplayLayer];
-        [self setupSampleBufferDisplayLayer];
-    }
-}
-  
-- (void)teardownSampleBufferDisplayLayer {
-    if (self.sampleBufferDisplayLayer) {
-        [self.sampleBufferDisplayLayer stopRequestingMediaData];
-        [self.sampleBufferDisplayLayer removeFromSuperlayer];
-        self.sampleBufferDisplayLayer = nil;
-    }
-}
-  
-- (void)setupSampleBufferDisplayLayer {
-    if (!self.sampleBufferDisplayLayer) {
-        self.sampleBufferDisplayLayer = [[AVSampleBufferDisplayLayer alloc] init];
-        self.sampleBufferDisplayLayer.frame = UIApplication.sharedApplication.keyWindow.bounds;
-        self.sampleBufferDisplayLayer.position = CGPointMake(CGRectGetMidX(self.sampleBufferDisplayLayer.bounds),
-                                                             CGRectGetMidY(self.sampleBufferDisplayLayer.bounds));
-        self.sampleBufferDisplayLayer.videoGravity = AVLayerVideoGravityResizeAspect;
-        self.sampleBufferDisplayLayer.opaque = YES;
-        [self.view.layer addSublayer:self.sampleBufferDisplayLayer];
-    } else {
-        [CATransaction begin];
-        [CATransaction setDisableActions:YES];
-        self.sampleBufferDisplayLayer.frame = self.view.bounds;
-        self.sampleBufferDisplayLayer.position = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
-        [CATransaction commit];
     }
 }
 
 
 // MARK: - VeLiveVideoFrameListener
 - (void)onRenderVideoFrame:(TVLManager *)player videoFrame:(VeLivePlayerVideoFrame *)videoFrame {
-    if (videoFrame.pixelBuffer) {
-        [self enqueuePixelBuffer:videoFrame.pixelBuffer];
-    }
-}
-
-// MARK: - VeLivePictureInPictureDelegate
-- (void)pictureInPictureControllerWillStartPictureInPicture:(AVPictureInPictureController *)pictureInPictureController {
-    NSLog(@"pictureInPictureControllerWillStartPictureInPicture");
-}
-
-- (void)pictureInPictureControllerDidStartPictureInPicture:(AVPictureInPictureController *)pictureInPictureController {
-    [self.pipontrolBtn setSelected:YES];
-    self.livePlayer.playerView.hidden = YES;
-    NSLog(@"pictureInPictureControllerDidStartPictureInPicture");
-}
-
-- (void)pictureInPictureController:(AVPictureInPictureController *)pictureInPictureController
-failedToStartPictureInPictureWithError:(NSError *)error {
-    NSLog(@"failedToStartPictureInPictureWithError");
-    self.livePlayer.playerView.hidden = NO;
-}
-
-- (void)pictureInPictureController:(AVPictureInPictureController *)pictureInPictureController
-restoreUserInterfaceForPictureInPictureStopWithCompletionHandler:(void (^)(BOOL))completionHandler {
-    NSLog(@"restoreUserInterfaceForPictureInPictureStopWithCompletionHandler");
-    completionHandler(true);
-    self.livePlayer.playerView.hidden = NO;
-}
-
-- (void)pictureInPictureControllerWillStopPictureInPicture:(AVPictureInPictureController *)pictureInPictureController {
-    NSLog(@"pictureInPictureControllerWillStopPictureInPicture");
-}
-
-- (void)pictureInPictureControllerDidStopPictureInPicture:(AVPictureInPictureController *)pictureInPictureController {
-    [self.pipontrolBtn setSelected:NO];
-    NSLog(@"pictureInPictureControllerDidStopPictureInPicture");
-    self.livePlayer.playerView.hidden = NO;
-}
-
-
-#pragma mark - AVPictureInPictureSampleBufferPlaybackDelegate
-- (BOOL)pictureInPictureControllerIsPlaybackPaused:(nonnull AVPictureInPictureController *)pictureInPictureController {
-    NSLog(@"pictureInPictureControllerIsPlaybackPaused");
-    return NO;
-}
-
-- (CMTimeRange)pictureInPictureControllerTimeRangeForPlayback:(AVPictureInPictureController *)pictureInPictureController {
-    NSLog(@"pictureInPictureControllerTimeRangeForPlayback");
-    return  CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity); // for live streaming
-}
-
-- (void)pictureInPictureController:(AVPictureInPictureController *)pictureInPictureController
-         didTransitionToRenderSize:(CMVideoDimensions)newRenderSize {
-    NSLog(@"didTransitionToRenderSize");
-}
-
-- (void)pictureInPictureController:(AVPictureInPictureController *)pictureInPictureController setPlaying:(BOOL)playing {
-    NSLog(@"setPlaying");
-}
-
-- (void)pictureInPictureController:(AVPictureInPictureController *)pictureInPictureController
-                    skipByInterval:(CMTime)skipInterval
-                 completionHandler:(void (^)(void))completionHandler {
-    NSLog(@"skipByInterval");
 }
 
 // MARK: - VeLivePlayerObserver

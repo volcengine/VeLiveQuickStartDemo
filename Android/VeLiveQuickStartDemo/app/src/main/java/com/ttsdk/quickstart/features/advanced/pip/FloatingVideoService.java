@@ -21,7 +21,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.ttsdk.quickstart.R;
 

@@ -9,7 +9,7 @@ package com.ttsdk.quickstart.helper.sign;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.UiThread;
+import androidx.annotation.UiThread;
 
 import com.google.gson.Gson;
 import com.ttsdk.quickstart.helper.VeLiveSDKHelper;

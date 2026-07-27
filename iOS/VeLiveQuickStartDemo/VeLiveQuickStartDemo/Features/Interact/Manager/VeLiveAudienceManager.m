@@ -302,7 +302,7 @@
 - (void)setupPlayerIfNeed {
     if (self.livePlayer == nil) {
         //  创建播放器  
-        TVLManager *livePlayer =  [[TVLManager alloc] initWithOwnPlayer:YES];
+        TVLManager *livePlayer =  [[TVLManager alloc] init];
         self.livePlayer = livePlayer;
         //  设置播放器回调  
         [self.livePlayer setObserver:self];
